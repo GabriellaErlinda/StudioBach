@@ -5,6 +5,10 @@ struct Song: Identifiable {
     let imageName: String
     let title: String
     let artist: String
+    let emotion: [String]
+    let emotionIcon: [String]
+    let chords: [String]
+    let chordImage: [String]
 }
 
 struct RecordHistoryEntry: Identifiable {
@@ -16,8 +20,8 @@ struct RecordHistoryEntry: Identifiable {
 
 struct SampleData {
     static let songs: [Song] = [
-        Song(imageName: "laufey", title: "Promises", artist: "Laufey"),
-        Song(imageName: "taylor", title: "You Belong With Me", artist: "Taylor Swift")
+        Song(imageName: "laufey", title: "Promises", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"], chords: ["Am", "F", "C"], chordImage: ["chord", "chord", "chord"]),
+        Song(imageName: "taylor", title: "You Belong With Me", artist: "Taylor Swift", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"], chords: ["Am", "F", "C"], chordImage: ["chord", "chord", "chord"])
     ]
     
     static let recordHistory: [RecordHistoryEntry] = [

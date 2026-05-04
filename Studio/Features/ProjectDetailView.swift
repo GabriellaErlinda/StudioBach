@@ -27,22 +27,6 @@ struct ProjectDetailView: View {
             Color(red: 0.04, green: 0.03, blue: 0.05).ignoresSafeArea()
             
             VStack(alignment: .leading, spacing: 0) {
-                // Top Bar
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 18, weight: .semibold))
-                    Spacer()
-                    Text("STUDIO")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(Color(red: 0.4, green: 0.5, blue: 0.9))
-                    Spacer()
-                    Image(systemName: "info")
-                        .font(.system(size: 18, weight: .regular))
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                .padding(.top, 8)
-                .padding(.bottom, 24)
                 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 32) {
