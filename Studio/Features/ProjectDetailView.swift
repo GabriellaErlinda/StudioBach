@@ -13,6 +13,7 @@ struct ProjectDetailView: View {
         RecordHistoryCardModel(title: "Vocal Take_03 (Main)", subtitle: "Yesterday • 18:05 • 3:42"),
         RecordHistoryCardModel(title: "Scratch Track_02", subtitle: "Oct 22 • 09:12 • 2:10")
     ]
+    let project:ProjectCardModel
     
     @State private var sortOrder: SortOrder = .latest
 
@@ -194,8 +195,4 @@ struct ProjectDetailView: View {
             }
         }
     }
-}
-
-#Preview {
-    ProjectDetailView()
 }

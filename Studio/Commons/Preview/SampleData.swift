@@ -24,4 +24,11 @@ struct SampleData {
         RecordHistoryEntry(recordName: "Take 1", date: "13.04.2026", length: "01:30:05"),
         RecordHistoryEntry(recordName: "Take 2", date: "13.04.2026", length: "01:30:05")
     ]
+    
+    static let recentSongs: [RecentSongModel] = [
+        .init(imageName: "laufey", dateSaved: .init(timeIntervalSince1970: 0), emotion: .joyful),
+        .init(imageName: "taylor", dateSaved: .init(timeIntervalSince1970: 0), emotion: .sadness)
+    ]
+    
+    static let songEmotional: [SongEmotion] = [.joyful, .sadness, .nostalgic, .energetic, .calm, .unknown]
 }
