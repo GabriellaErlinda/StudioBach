@@ -89,7 +89,7 @@ struct RecordingSoundView: View {
         .preferredColorScheme(.dark)
     }
     
-
+    
     
     // Header Content
     @ViewBuilder
@@ -130,8 +130,8 @@ struct RecordingSoundView: View {
                     )
                     .animation(
                         recordingState == .recording
-                            ? .easeInOut(duration: 0.15).delay(Double(index) * 0.01)
-                            : .easeInOut(duration: 0.4),
+                        ? .easeInOut(duration: 0.15).delay(Double(index) * 0.01)
+                        : .easeInOut(duration: 0.4),
                         value: waveformAmplitudes[index]
                     )
             }
@@ -359,18 +359,20 @@ struct RecordingSoundView: View {
     private func startWaveformAnimation() {
         // Simulate live waveform by updating amplitudes
         Timer.scheduledTimer(withTimeInterval: 0.12, repeats: true) { animTimer in
-            guard recordingState == .recording else {
-                animTimer.invalidate()
-                return
-            }
-            
-            withAnimation(.easeInOut(duration: 0.12)) {
-                for i in 0..<waveformAmplitudes.count {
-                    // Create a center-weighted distribution for more natural look
-                    let center = CGFloat(waveformAmplitudes.count) / 2
-                    let distance = abs(CGFloat(i) - center) / center
-                    let maxAmp = 1.0 - (distance * 0.5)
-                    waveformAmplitudes[i] = CGFloat.random(in: 0.05...maxAmp)
+            DispatchQueue.main.async {
+                guard recordingState == .recording else {
+                    animTimer.invalidate()
+                    return
+                }
+                
+                withAnimation(.easeInOut(duration: 0.12)) {
+                    for i in 0..<waveformAmplitudes.count {
+                        // Create a center-weighted distribution for more natural look
+                        let center = CGFloat(waveformAmplitudes.count) / 2
+                        let distance = abs(CGFloat(i) - center) / center
+                        let maxAmp = 1.0 - (distance * 0.5)
+                        waveformAmplitudes[i] = CGFloat.random(in: 0.05...maxAmp)
+                    }
                 }
             }
         }
