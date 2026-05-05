@@ -43,18 +43,18 @@ struct SongDetailView: View {
                     }
                 }
                 
-                // Score badge (only show for API results)
-                if let score = entry.score {
-                    VStack(alignment: .leading) {
-                        Text("MATCH CONFIDENCE")
-                            .foregroundStyle(.white)
-                            .fontWeight(.bold)
-                        
-                        Text(String(format: "%.0f%%", score * 100))
-                            .font(.system(size: 28, weight: .bold, design: .monospaced))
-                            .foregroundStyle(Color(red: 0.53, green: 0.6, blue: 0.94))
-                    }
-                }
+                // Score badge (skip dulu)
+//                if let score = entry.score {
+//                    VStack(alignment: .leading) {
+//                        Text("MATCH CONFIDENCE")
+//                            .foregroundStyle(.white)
+//                            .fontWeight(.bold)
+//                        
+//                        Text(String(format: "%.0f%%", score * 100))
+//                            .font(.system(size: 28, weight: .bold, design: .monospaced))
+//                            .foregroundStyle(Color(red: 0.53, green: 0.6, blue: 0.94))
+//                    }
+//                }
                 
                 Button(action: {
                     print("Button tapped!")
