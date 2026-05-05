@@ -3,26 +3,12 @@ import SwiftUI
 struct SongResultsView: View {
     
     @State private var entries = SampleData.songs
-<<<<<<< HEAD
-=======
     @State private var visibleCount = 5
->>>>>>> 5e1d219f49d8f9da26e6e46300cef3b89c49d3bb
     
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color(red: 0.07450980392156863, green: 0.07450980392156863, blue: 0.07450980392156863), Color(red: 0.0196078431372549, green: 0, blue: 0.047058823529411764)], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
-<<<<<<< HEAD
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(entries) { entry in
-                        SongCard(entry: entry)
-                    }
-                }
-            }
-=======
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack (spacing: 10) {
                     ForEach(entries.prefix(visibleCount)) { entry in
@@ -73,7 +59,6 @@ struct ShowMoreCard: View {
                     .stroke(.white.opacity(0.2), lineWidth: 1)
                     .background(Color.white.opacity(0.05))
             )
->>>>>>> 5e1d219f49d8f9da26e6e46300cef3b89c49d3bb
         }
     }
 }

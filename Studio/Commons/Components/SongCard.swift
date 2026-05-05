@@ -27,16 +27,6 @@ struct SongCard: View {
                     .padding(.bottom, 20)
                 
                 NavigationLink("SEE DETAILS") {
-<<<<<<< HEAD
-                    
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                //.foregroundStyle(.white)
-                .fontWeight(.bold)
-                .glassEffect(.regular.interactive())
-                .background(Color(red: 0.050980392156862744, green: 0, blue: 0.3137254901960784).clipShape(RoundedRectangle(cornerRadius: 48)))
-=======
                     SongDetailView(entry: entry)
                 }
                 .padding()
@@ -49,7 +39,6 @@ struct SongCard: View {
                     RoundedRectangle(cornerRadius: 48)
                         .stroke(Color.white, lineWidth: 0.5)
                 )
->>>>>>> 5e1d219f49d8f9da26e6e46300cef3b89c49d3bb
                 .padding(.leading)
                 .padding(.trailing)
             }
@@ -61,9 +50,5 @@ struct SongCard: View {
 }
 
 #Preview {
-<<<<<<< HEAD
-    SongCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey"))
-=======
     SongCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"], chords: ["Am", "F", "C"], chordImage: ["chord", "chord", "chord"]))
->>>>>>> 5e1d219f49d8f9da26e6e46300cef3b89c49d3bb
 }
