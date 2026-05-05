@@ -18,10 +18,10 @@ struct StudioNavbar: ViewModifier {
                     }
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("STUDIO")
-                        .foregroundStyle(Color(red: 0.529, green: 0.6, blue: 0.937))
+                    Image("logo_inline")
+                        .resizable()
                         .fontWeight(.bold)
-                        .font(.system(size: 20))
+                        .frame(width: 120, height: 41)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {}) {
