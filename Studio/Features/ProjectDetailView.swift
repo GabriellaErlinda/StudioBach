@@ -33,7 +33,7 @@ struct ProjectDetailView: View {
                         
                         // Header
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("LIBRARY / PROJECT 1")
+                            Text("LIBRARY / \(project.title)")
                                 .font(.system(size: 10, weight: .bold))
                                 .foregroundColor(.gray)
                             Text("Current Status")
@@ -161,7 +161,7 @@ struct ProjectDetailView: View {
 //                    }
                     
                     NavigationLink {
-                        RecordingNewTakeView()
+                        RecordingNewTakeView(returnCard: project)
                     } label: {
                         HStack {
                             Image(systemName: "mic.fill")

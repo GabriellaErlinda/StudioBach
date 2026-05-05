@@ -8,7 +8,6 @@ struct RecordingNewTakeView: View {
     @State private var timer: Timer?
     @State private var waveformPhase: Double = 0
     @State private var pulseScale: CGFloat = 1.0
-    @StateObject var viewModel = ProjectViewModel()
     @State private var showAddFilePopup = false
     
     // Audio recording
@@ -19,6 +18,8 @@ struct RecordingNewTakeView: View {
     @State private var waveformAmplitudes: [CGFloat] = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }
     
     private let accentBlue = Color(red: 0.38, green: 0.35, blue: 0.87) // color code -> #615ADE
+    
+    let returnCard: ProjectCardModel
     
     var body: some View {
         NavigationStack {
@@ -250,7 +251,7 @@ struct RecordingNewTakeView: View {
                 }
                 
                 // Next Button
-                NavigationLink(destination: EmotionPickerView(recordedAudioURL: recordedAudioURL).studioNavbar()) {
+                NavigationLink(destination: ProjectDetailView(project: returnCard)) {
                     HStack(spacing: 6) {
                         Image(systemName: "play.fill")
                             .font(.system(size: 11, weight: .semibold))
@@ -431,6 +432,6 @@ struct RecordingNewTakeView: View {
     }
 }
 
-#Preview {
-    RecordingNewTakeView()
-}
+//#Preview {
+//    RecordingNewTakeView()
+//}
