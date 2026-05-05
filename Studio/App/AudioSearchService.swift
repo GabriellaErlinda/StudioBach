@@ -116,8 +116,12 @@ class AudioSearchService: ObservableObject {
     
     /// Build a snippet playback URL for a given song and timestamp range.
     func snippetURL(songId: String, start: String, end: String) -> URL? {
-        let urlString = "\(baseURL)/api/v1/audio/\(songId)/snippet?start=\(start)&end=\(end)"
-        return URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString)
+        var components = URLComponents(string: "\(baseURL)/api/v1/audio/\(songId)/snippet")
+        components?.queryItems = [
+            URLQueryItem(name: "start", value: start),
+            URLQueryItem(name: "end", value: end)
+        ]
+        return components?.url
     }
     
     /// Build a full audio URL for a given song.

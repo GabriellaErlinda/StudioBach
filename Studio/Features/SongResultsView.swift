@@ -7,6 +7,8 @@ struct SongResultsView: View {
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var visibleCount = 5
+    @State private var currentIndex: Int = 0
+    @StateObject private var playerManager = SnippetPlayerManager()
     
     private let service = AudioSearchService.shared
     
@@ -27,6 +29,9 @@ struct SongResultsView: View {
             if songs.isEmpty {
                 performSearch()
             }
+        }
+        .onDisappear {
+            playerManager.stop()
         }
     }
     
@@ -98,13 +103,21 @@ struct SongResultsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
-                    ForEach(songs.prefix(visibleCount)) { entry in
+                    ForEach(Array(songs.prefix(visibleCount).enumerated()), id: \.element.id) { index, entry in
                         SongCard(entry: entry)
+                            .id(index)
                             .scrollTransition(.animated) { content, phase in
                                 content
                                     .scaleEffect(phase.isIdentity ? 1.0 : 0.9)
                                     .opacity(phase.isIdentity ? 1.0 : 0.8)
                                     .blur(radius: phase.isIdentity ? 0 : 2)
+                            }
+                            .onAppear {
+                                // When this card scrolls into view, play its snippet
+                                if currentIndex != index {
+                                    currentIndex = index
+                                    playSnippet(for: entry)
+                                }
                             }
                     }
                     
@@ -120,8 +133,46 @@ struct SongResultsView: View {
             }
             .scrollTargetBehavior(.viewAligned)
             .safeAreaPadding(.horizontal, 60)
+            
+            // Now Playing indicator
+            if playerManager.isPlaying, currentIndex < songs.count {
+                HStack(spacing: 8) {
+                    // Animated bars
+                    ForEach(0..<3, id: \.self) { i in
+                        RoundedRectangle(cornerRadius: 1.5)
+                            .fill(Color(red: 0.53, green: 0.6, blue: 0.94))
+                            .frame(width: 3, height: playerManager.isPlaying ? CGFloat.random(in: 8...18) : 6)
+                            .animation(
+                                .easeInOut(duration: 0.4)
+                                    .repeatForever(autoreverses: true)
+                                    .delay(Double(i) * 0.15),
+                                value: playerManager.isPlaying
+                            )
+                    }
+                    
+                    Text("Now Playing: \(songs[currentIndex].title)")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.6))
+                        .lineLimit(1)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(Capsule().fill(Color.white.opacity(0.08)))
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
+            }
         }
         .offset(y: -40)
+    }
+    
+    // MARK: - Playback
+    private func playSnippet(for song: Song) {
+        guard let songId = song.songId,
+              let start = song.timestampStart,
+              let end = song.timestampEnd else { return }
+        
+        guard let url = AudioSearchService.shared.snippetURL(songId: songId, start: start, end: end) else { return }
+        
+        playerManager.play(url: url, songId: songId)
     }
     
     // API call
@@ -141,6 +192,11 @@ struct SongResultsView: View {
                 await MainActor.run {
                     songs = results.map { Song(from: $0) }
                     isLoading = false
+                    
+                    // Auto-play first result
+                    if let firstSong = songs.first {
+                        playSnippet(for: firstSong)
+                    }
                 }
             } catch {
                 await MainActor.run {

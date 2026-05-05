@@ -43,7 +43,8 @@ struct SongDetailCard: View {
                 MusicPlayer(
                     title: entry.title,
                     artist: entry.artist,
-                    audioURL: buildSnippetURL()
+                    audioURL: buildSnippetURL(),
+                    songId: entry.songId
                 )
                 .padding(.vertical, 4)
                 .padding(.horizontal, 20)
