@@ -48,7 +48,7 @@ struct SongResultsView: View {
                             }
                         }
                     }
-//                    .scrollTargetLayout()
+                    .scrollTargetLayout()
                 }
                 .scrollTargetBehavior(.viewAligned)
                 .safeAreaPadding(.horizontal, 60)
