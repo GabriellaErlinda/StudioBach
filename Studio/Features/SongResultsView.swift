@@ -50,7 +50,7 @@ struct SongResultsView: View {
         }
     }
     
-    // MARK: - Error View
+    // view kalo error api call
     private func errorView(_ message: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle")
@@ -77,7 +77,7 @@ struct SongResultsView: View {
         }
     }
     
-    // MARK: - Results View
+    // view result
     private var resultsView: some View {
         VStack(spacing: 16) {
             VStack {
@@ -124,7 +124,7 @@ struct SongResultsView: View {
         .offset(y: -40)
     }
     
-    // MARK: - API Call
+    // API call
     private func performSearch() {
         guard let audioURL = recordedAudioURL else {
             // Fallback to sample data if no recording (e.g. preview)

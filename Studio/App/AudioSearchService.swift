@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-// API Response Model
+// model response API nyax`
 
 struct SearchResponse: Codable {
     let status: String

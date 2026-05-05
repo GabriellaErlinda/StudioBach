@@ -4,9 +4,9 @@ struct Song: Identifiable {
     let id: String
     
     // Display fields
-    let imageName: String        // Local asset name (for previews)
-    let imageURL: String?        // Remote album image URL (from API)
-    let artistImageURL: String?  // Remote artist image URL (from API)
+    let imageName: String
+    let imageURL: String?
+    let artistImageURL: String?
     let title: String
     let artist: String
     let albumName: String?
