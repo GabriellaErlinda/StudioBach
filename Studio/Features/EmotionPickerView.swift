@@ -19,30 +19,6 @@ struct EmotionPickerView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                // Top Navigation Bar
-                HStack {
-                    Spacer()
-                    Text("STUDIO")
-                        .font(.custom("Urbanist", size: 20).weight(.bold))
-                        .foregroundColor(Color(red: 0.53, green: 0.60, blue: 0.94))
-                    Spacer()
-                }
-                .overlay(alignment: .trailing) {
-                    Button(action: {}) {
-                        Text("i")
-                            .font(.custom("SF Pro", size: 17).weight(.medium))
-                            .foregroundColor(Color(red: 0.96, green: 0.96, blue: 0.96))
-                            .frame(width: 44, height: 44)
-                            .background(Color.white.opacity(0.06))
-                            .glassEffect(.clear, in: .circle)
-                            .overlay(
-                                Circle().stroke(Color.white.opacity(0.1), lineWidth: 0.5)
-                            )
-                    }
-                }
-                .padding(.horizontal, 24)
-                .padding(.top, 10)
-                
                 // Content
                 VStack(alignment: .leading, spacing: 0) {
                     // Header Texts
@@ -117,45 +93,6 @@ struct EmotionPickerView: View {
                         Spacer()
                     }
                     .padding(.bottom, 40)
-                    
-                    // Bottom Tab Bar
-                    HStack {
-                        Spacer()
-                        HStack(spacing: 0) {
-                            // Record Tab
-                            VStack(spacing: 4) {
-                                Image(systemName: "mic.fill")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(Color(red: 0.61, green: 0.69, blue: 1))
-                                Text("Record")
-                                    .font(.custom("SF Pro", size: 10).weight(.medium))
-                                    .foregroundColor(Color(red: 0.61, green: 0.69, blue: 1))
-                            }
-                            .frame(width: 100, height: 56)
-                            .background(Color.white.opacity(0.08))
-                            .clipShape(Capsule())
-                            
-                            // Projects Tab
-                            VStack(spacing: 4) {
-                                Image(systemName: "folder.fill")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(Color(red: 0.33, green: 0.38, blue: 0.97))
-                                Text("Projects")
-                                    .font(.custom("SF Pro", size: 10).weight(.medium))
-                                    .foregroundColor(Color(red: 0.33, green: 0.38, blue: 0.97))
-                            }
-                            .frame(width: 100, height: 56)
-                            .opacity(0.6)
-                        }
-                        .padding(4)
-                        .background(Color.white.opacity(0.06))
-                        .glassEffect(.clear, in: .capsule)
-                        .overlay(
-                            Capsule().stroke(Color.white.opacity(0.1), lineWidth: 1)
-                        )
-                        Spacer()
-                    }
-                    .padding(.bottom, 20)
                 }
             }
         }

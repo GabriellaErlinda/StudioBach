@@ -53,5 +53,5 @@ struct SongDetailCard: View {
 }
 
 #Preview {
-    SongDetailCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"], chords: ["Am", "F", "C"], chordImage: ["chord", "chord", "chord"]))
+    SongDetailCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"]))
 }

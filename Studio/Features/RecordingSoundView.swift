@@ -22,7 +22,6 @@ struct RecordingSoundView: View {
     @State private var timer: Timer?
     @State private var waveformPhase: Double = 0
     @State private var pulseScale: CGFloat = 1.0
-    @State private var showInfoSheet: Bool = false
     
     // waveform amplitudes
     @State private var waveformAmplitudes: [CGFloat] = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }
@@ -84,44 +83,10 @@ struct RecordingSoundView: View {
                     }
                     
                     Spacer()
-                    
-                    // Bottom Tab Bar
-                    bottomTabBar
-                        .padding(.bottom, 8)
-                }
-            }
-            // navigation bar liquid glass
-            .navigationTitle("STUDIO")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarColorScheme(.dark, for: .navigationBar)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        // Back action
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.white.opacity(0.9))
-                    }
-                    .glassEffect(.regular.interactive())
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showInfoSheet = true
-                    }) {
-                        Image(systemName: "info.circle")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.white.opacity(0.9))
-                    }
-                    .glassEffect(.regular.interactive())
                 }
             }
         }
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $showInfoSheet) {
-            infoSheet
-        }
     }
     
 
@@ -275,9 +240,7 @@ struct RecordingSoundView: View {
                 }
                 
                 // Next Button
-                Button(action: {
-                    // Navigate to next step (Emotion Picker)
-                }) {
+                NavigationLink(destination: EmotionPickerView()) {
                     HStack(spacing: 6) {
                         Image(systemName: "play.fill")
                             .font(.system(size: 11, weight: .semibold))
@@ -287,10 +250,7 @@ struct RecordingSoundView: View {
                     .foregroundColor(.white)
                     .padding(.horizontal, 22)
                     .padding(.vertical, 10)
-                    .background(
-                        Capsule()
-                            .fill(accentBlue)
-                    )
+                    .background(Capsule().fill(accentBlue))
                 }
             }
             .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -306,94 +266,6 @@ struct RecordingSoundView: View {
                 .font(.system(size: 11, weight: .medium))
                 .foregroundColor(.white.opacity(0.4))
                 .tracking(1)
-        }
-    }
-    
-    // Bottom Tab Bar (Liquid Glass)
-    private var bottomTabBar: some View {
-        HStack(spacing: 0) {
-            // Record Tab
-            tabBarItem(
-                icon: "mic.fill",
-                label: "Record",
-                isSelected: true
-            )
-            
-            // Projects Tab
-            tabBarItem(
-                icon: "square.grid.2x2.fill",
-                label: "Projects",
-                isSelected: false
-            )
-        }
-        .padding(.horizontal, 24)
-        .padding(.vertical, 12)
-        .glassEffect(.regular.interactive(), in: .capsule)
-        .padding(.horizontal, 80)
-    }
-    
-    private func tabBarItem(icon: String, label: String, isSelected: Bool) -> some View {
-        VStack(spacing: 4) {
-            Image(systemName: icon)
-                .font(.system(size: 18, weight: .medium))
-            Text(label)
-                .font(.system(size: 10, weight: .medium))
-        }
-        .foregroundColor(isSelected ? accentBlue : .white.opacity(0.4))
-        .frame(maxWidth: .infinity)
-    }
-    
-    // Info Sheet
-    private var infoSheet: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Image(systemName: "music.note.list")
-                    .font(.system(size: 48))
-                    .foregroundColor(accentBlue)
-                
-                Text("How to use Studio")
-                    .font(.title2.bold())
-                    .foregroundColor(.white)
-                
-                VStack(alignment: .leading, spacing: 12) {
-                    infoRow(number: "1", text: "Tap the microphone to start recording")
-                    infoRow(number: "2", text: "Hum, sing, or play your melody")
-                    infoRow(number: "3", text: "Tap again to stop recording")
-                    infoRow(number: "4", text: "Choose an emotion to match your mood")
-                    infoRow(number: "5", text: "Get AI-powered song suggestions!")
-                }
-                .padding(.horizontal, 24)
-                
-                Spacer()
-            }
-            .padding(.top, 40)
-            .background(Color(red: 0.08, green: 0.06, blue: 0.15))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        showInfoSheet = false
-                    }
-                    .foregroundColor(accentBlue)
-                }
-            }
-        }
-        .presentationDetents([.medium])
-        .preferredColorScheme(.dark)
-    }
-    
-    private func infoRow(number: String, text: String) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            Text(number)
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(accentBlue)
-                .frame(width: 24, height: 24)
-                .background(accentBlue.opacity(0.2))
-                .clipShape(Circle())
-            
-            Text(text)
-                .font(.system(size: 15))
-                .foregroundColor(.white.opacity(0.8))
         }
     }
     
