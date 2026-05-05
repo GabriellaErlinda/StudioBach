@@ -35,7 +35,7 @@ struct RecordingSoundView: View {
     private let accentBlue = Color(red: 0.38, green: 0.35, blue: 0.87) // color code -> #615ADE
     
     var body: some View {
-        NavigationStack {
+        ZStack {
             ZStack {
                 // Background gradient
                 LinearGradient(
