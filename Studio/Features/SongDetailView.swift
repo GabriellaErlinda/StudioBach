@@ -13,26 +13,46 @@ struct SongDetailView: View {
                 SongDetailCard(entry: entry)
                     .padding(.vertical, 32)
                 
-                VStack (alignment: .leading){
-                    Text("EMOTION")
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                    HStack(spacing: 8) {
-                        ForEach(entry.emotion.indices, id: \.self) { index in
-                            EmotionPill(emotion: entry.emotion[index], iconName: entry.emotionIcon[index])
+                // Emotion / Moods section
+                if !entry.emotion.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("EMOTION")
+                            .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                        HStack(spacing: 8) {
+                            ForEach(entry.emotion.indices, id: \.self) { index in
+                                let iconName = index < entry.emotionIcon.count ? entry.emotionIcon[index] : "music.note"
+                                EmotionPill(emotion: entry.emotion[index], iconName: iconName)
+                            }
                         }
                     }
                 }
                 
-                VStack (alignment: .leading) {
-                    Text("MATCHING CHORDS")
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                    
-                    HStack(spacing: 8) {
-                        ForEach(entry.chords.indices, id: \.self) { index in
-                            ChordCard(chord: entry.chords[index], chordImage: entry.chordImage[index])
+                // Chords section (only show if chords exist)
+                if !entry.chords.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("MATCHING CHORDS")
+                            .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                        
+                        HStack(spacing: 8) {
+                            ForEach(entry.chords.indices, id: \.self) { index in
+                                ChordCard(chord: entry.chords[index], chordImage: entry.chordImage[index])
+                            }
                         }
+                    }
+                }
+                
+                // Score badge (only show for API results)
+                if let score = entry.score {
+                    VStack(alignment: .leading) {
+                        Text("MATCH CONFIDENCE")
+                            .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                        
+                        Text(String(format: "%.0f%%", score * 100))
+                            .font(.system(size: 28, weight: .bold, design: .monospaced))
+                            .foregroundStyle(Color(red: 0.53, green: 0.6, blue: 0.94))
                     }
                 }
                 

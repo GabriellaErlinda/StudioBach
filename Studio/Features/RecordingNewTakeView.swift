@@ -11,6 +11,10 @@ struct RecordingNewTakeView: View {
     @StateObject var viewModel = ProjectViewModel()
     @State private var showAddFilePopup = false
     
+    // Audio recording
+    @State private var audioRecorder: AVAudioRecorder?
+    @State private var recordedAudioURL: URL?
+    
     // waveform amplitudes
     @State private var waveformAmplitudes: [CGFloat] = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }
     
@@ -91,7 +95,6 @@ struct RecordingNewTakeView: View {
         }
     }
     
-    // Waveform View
     // Waveform View
     private var waveformView: some View {
         HStack(spacing: 3) {
@@ -247,7 +250,7 @@ struct RecordingNewTakeView: View {
                 }
                 
                 // Next Button
-                NavigationLink(destination: ProjectDetailView(project: viewModel.projects[0]).studioNavbar()) {
+                NavigationLink(destination: EmotionPickerView(recordedAudioURL: recordedAudioURL).studioNavbar()) {
                     HStack(spacing: 6) {
                         Image(systemName: "play.fill")
                             .font(.system(size: 11, weight: .semibold))
@@ -294,6 +297,41 @@ struct RecordingNewTakeView: View {
         return baseHeight + amplitude * maxAdditional
     }
     
+    // MARK: - Audio Recording
+    
+    private func requestMicrophonePermission() {
+        AVAudioApplication.requestRecordPermission { granted in
+            if !granted {
+                print("Microphone permission denied")
+            }
+        }
+    }
+    
+    private func setupRecorder() -> URL? {
+        let tempDir = FileManager.default.temporaryDirectory
+        let fileURL = tempDir.appendingPathComponent("studiobach_newtake_\(UUID().uuidString).m4a")
+        
+        let settings: [String: Any] = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 44100.0,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+        
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+            try session.setActive(true)
+            
+            audioRecorder = try AVAudioRecorder(url: fileURL, settings: settings)
+            audioRecorder?.prepareToRecord()
+            return fileURL
+        } catch {
+            print("Failed to set up recorder: \(error)")
+            return nil
+        }
+    }
+    
     // Actions
     private func handleMicTap() {
         withAnimation(.easeInOut(duration: 0.3)) {
@@ -309,9 +347,18 @@ struct RecordingNewTakeView: View {
     }
     
     private func startRecording() {
+        // Request mic permission first
+        requestMicrophonePermission()
+        
         recordingState = .recording
         elapsedSeconds = 0
         pulseScale = 1.0
+        
+        // Set up and start real recording
+        if let fileURL = setupRecorder() {
+            recordedAudioURL = fileURL
+            audioRecorder?.record()
+        }
         
         // Start pulse animation
         withAnimation(.easeOut(duration: 1.5).repeatForever(autoreverses: false)) {
@@ -333,6 +380,9 @@ struct RecordingNewTakeView: View {
         timer?.invalidate()
         timer = nil
         
+        // Stop real recording
+        audioRecorder?.stop()
+        
         // Freeze waveform
         withAnimation(.easeOut(duration: 0.3)) {
             waveformAmplitudes = waveformAmplitudes.map { $0 * 0.6 }
@@ -345,6 +395,13 @@ struct RecordingNewTakeView: View {
             elapsedSeconds = 0
             timer?.invalidate()
             timer = nil
+            
+            // Clean up old recording
+            audioRecorder?.stop()
+            if let url = recordedAudioURL {
+                try? FileManager.default.removeItem(at: url)
+            }
+            recordedAudioURL = nil
             
             // Reset waveform
             waveformAmplitudes = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }

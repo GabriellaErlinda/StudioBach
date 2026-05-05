@@ -6,22 +6,45 @@ struct SavedSongCard: View {
     var body: some View {
         HStack(spacing: 12) {
             
-            Image(song.imageName)
-                .resizable()
-                .scaledToFill()
+            // Album image: remote or local
+            if let urlStr = song.imageURL, let url = URL(string: urlStr) {
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    case .failure:
+                        songPlaceholder
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 55, height: 55)
+                    @unknown default:
+                        songPlaceholder
+                    }
+                }
                 .frame(width: 55, height: 55)
                 .clipShape(Circle())
+            } else {
+                Image(song.imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 55, height: 55)
+                    .clipShape(Circle())
+            }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(song.title)
                     .font(.headline)
                     .bold()
                     .foregroundColor(.white)
+                    .lineLimit(1)
                 
                 Text(song.artist)
                     .font(.subheadline)
                     .bold()
                     .foregroundColor(.white.opacity(0.5))
+                    .lineLimit(1)
             }
             
             Spacer()
@@ -40,6 +63,17 @@ struct SavedSongCard: View {
             }
         )
         .clipShape(RoundedRectangle(cornerRadius: 24))
+    }
+    
+    private var songPlaceholder: some View {
+        ZStack {
+            Circle()
+                .fill(Color(red: 0.15, green: 0.12, blue: 0.25))
+            Image(systemName: "music.note")
+                .font(.system(size: 20))
+                .foregroundStyle(.white.opacity(0.4))
+        }
+        .frame(width: 55, height: 55)
     }
 }
 

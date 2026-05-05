@@ -11,6 +11,7 @@ import AVFoundation
 struct MusicPlayer: View {
     var title: String = "Midnight City"
     var artist: String = "M83"
+    var audioURL: URL? = nil  // Optional: use API snippet URL if provided
     
     @State private var isPlaying: Bool = false
     @State private var progress: Double = 0.0
@@ -24,9 +25,11 @@ struct MusicPlayer: View {
                 Text(title)
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.white)
+                    .lineLimit(1)
                 Text(artist)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.white.opacity(0.6))
+                    .lineLimit(1)
             }
             
             // Progress Bar
@@ -110,8 +113,16 @@ struct MusicPlayer: View {
     }
     
     private func setupPlayer() {
-        // Use a sample URL since we don't have local audio files in the model yet
-        guard let url = URL(string: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3") else { return }
+        // Use API snippet URL if provided, otherwise fallback
+        let url: URL
+        if let provided = audioURL {
+            url = provided
+        } else if let fallback = URL(string: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3") {
+            url = fallback
+        } else {
+            return
+        }
+        
         player = AVPlayer(url: url)
         
         player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: 600), queue: .main) { time in

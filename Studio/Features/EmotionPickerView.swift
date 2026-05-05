@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EmotionPickerView: View {
+    let recordedAudioURL: URL?
+    
     @State private var selectedIndex = 1
     @State private var selectedEmotionIDs: Set<Int> = []
     let emotions = EmotionModel.all
@@ -77,7 +79,7 @@ struct EmotionPickerView: View {
                     HStack {
                         Spacer()
                         NavigationLink {
-                            SongResultsView().studioNavbar()
+                            SongResultsView(recordedAudioURL: recordedAudioURL).studioNavbar()
                         } label: {
                             Text("Continue")
                                 .font(.custom("SF Pro", size: 17).weight(.medium))
@@ -104,5 +106,5 @@ struct EmotionPickerView: View {
 }
 
 #Preview {
-    EmotionPickerView()
+    EmotionPickerView(recordedAudioURL: nil)
 }
