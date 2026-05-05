@@ -1,39 +1,31 @@
 //
-//  EmotionPill.swift
-//  Studio
+//  EmotionDetailCard.swift
+//  Minty
 //
-//  Created by Gabriella Erlinda on 03/05/26.
+//  Created by Nickson Leviel on 04/05/26.
 //
 
 import SwiftUI
 
 struct EmotionPill: View {
-
+    
+    let emotion: String
+    let iconName: String
+    
     var body: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "drop.degreesign.fill")
-                .foregroundColor(.white)
-            
-            Text("Sad")
-                .bold()
-                .foregroundColor(.white)
-            
+        
+        HStack {
+            Image(systemName: iconName)
+            Text(emotion)
         }
         .padding()
-        .background(
-            ZStack {
-                Color("blue-ribbon-950")
-                    .opacity(0.2)
-                
-                RoundedRectangle(cornerRadius: 24)
-                    .glassEffect(.clear, in: .capsule)
-            }
-        )
+        .foregroundStyle(.white)
+        .fontWeight(.bold)
+        .glassEffect(.clear)
+        .background(Color(red: 0.3333333333333333, green: 0.3764705882352941, blue: 0.9686274509803922, opacity: 0.5)).clipShape(RoundedRectangle(cornerRadius: 48))
     }
 }
 
 #Preview {
-    EmotionPill()
-        .background(Color.black)
+    EmotionPill(emotion: "Happy", iconName: "face.smiling")
 }
-

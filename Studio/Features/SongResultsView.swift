@@ -9,30 +9,50 @@ struct SongResultsView: View {
         ZStack {
             LinearGradient(colors: [Color(red: 0.07450980392156863, green: 0.07450980392156863, blue: 0.07450980392156863), Color(red: 0.0196078431372549, green: 0, blue: 0.047058823529411764)], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack (spacing: 10) {
-                    ForEach(entries.prefix(visibleCount)) { entry in
-                        SongCard(entry: entry)
-                            .scrollTransition(.animated) { content, phase in
-                                content
-                                    .scaleEffect(phase.isIdentity ? 1.0 : 0.9)
-                                    .opacity(phase.isIdentity ? 1.0 : 0.8)
-                                    .blur(radius: phase.isIdentity ? 0 : 2)
-                            }
+            
+            VStack (spacing: 16) {
+                VStack {
+                    HStack {
+                        Image(systemName: "music.note.list")
+                        Text("Your reference songs are here. ")
+                            .fontWeight(.bold)
+                    }
+                    .font(.system(size: 24))
+                    .foregroundStyle(.white)
+                    
+                    VStack {
+                        Text("Select the song that best describes your")
+                        Text("primary emotion right now.")
                     }
                     
-                    if visibleCount < entries.count {
-                        ShowMoreCard {
-                            withAnimation(.spring()) {
-                                visibleCount += 5
+                }
+                .foregroundStyle(.gray)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack (spacing: 10) {
+                        ForEach(entries.prefix(visibleCount)) { entry in
+                            SongCard(entry: entry)
+                                .scrollTransition(.animated) { content, phase in
+                                    content
+                                        .scaleEffect(phase.isIdentity ? 1.0 : 0.9)
+                                        .opacity(phase.isIdentity ? 1.0 : 0.8)
+                                        .blur(radius: phase.isIdentity ? 0 : 2)
+                                }
+                        }
+                        
+                        if visibleCount < entries.count {
+                            ShowMoreCard {
+                                withAnimation(.spring()) {
+                                    visibleCount += 5
+                                }
                             }
                         }
                     }
+//                    .scrollTargetLayout()
                 }
-                .scrollTargetLayout()
+                .scrollTargetBehavior(.viewAligned)
+                .safeAreaPadding(.horizontal, 60)
             }
-            .scrollTargetBehavior(.viewAligned)
-            .safeAreaPadding(.horizontal, 60)
             .offset(y: -40)
         }
     }

@@ -18,7 +18,7 @@ struct SongDetailView: View {
                         .fontWeight(.bold)
                     HStack(spacing: 8) {
                         ForEach(entry.emotion.indices, id: \.self) { index in
-                            EmotionDetailCard(emotion: entry.emotion[index], iconName: entry.emotionIcon[index])
+                            EmotionPill(emotion: entry.emotion[index], iconName: entry.emotionIcon[index])
                         }
                     }
                 }
