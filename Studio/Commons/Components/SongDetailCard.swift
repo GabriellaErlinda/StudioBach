@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SongCard: View {
+struct SongDetailCard: View {
     
     let entry: Song
     
@@ -26,18 +26,11 @@ struct SongCard: View {
                     .foregroundStyle(Color(red: 0.5294117647058824, green: 0.6, blue: 0.9372549019607843))
                     .padding(.bottom, 20)
                 
-                NavigationLink("SEE DETAILS") {
-<<<<<<< HEAD
-                    
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                //.foregroundStyle(.white)
-                .fontWeight(.bold)
-                .glassEffect(.regular.interactive())
-                .background(Color(red: 0.050980392156862744, green: 0, blue: 0.3137254901960784).clipShape(RoundedRectangle(cornerRadius: 48)))
-=======
-                    SongDetailView(entry: entry)
+                HStack(spacing: 10) {
+                    Image("AppleMusic").resizable().frame(width: 25, height: 25)
+                    Link(destination: URL(string: "https://youtu.be/Zu2Spp4nrTM?si=dTqeYNHSM_Jujhvr")!) {
+                        Text("Open in Apple Music")
+                    }
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -49,7 +42,6 @@ struct SongCard: View {
                     RoundedRectangle(cornerRadius: 48)
                         .stroke(Color.white, lineWidth: 0.5)
                 )
->>>>>>> 5e1d219f49d8f9da26e6e46300cef3b89c49d3bb
                 .padding(.leading)
                 .padding(.trailing)
             }
@@ -61,9 +53,5 @@ struct SongCard: View {
 }
 
 #Preview {
-<<<<<<< HEAD
-    SongCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey"))
-=======
-    SongCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"], chords: ["Am", "F", "C"], chordImage: ["chord", "chord", "chord"]))
->>>>>>> 5e1d219f49d8f9da26e6e46300cef3b89c49d3bb
+    SongDetailCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"], chords: ["Am", "F", "C"], chordImage: ["chord", "chord", "chord"]))
 }
