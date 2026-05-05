@@ -9,8 +9,8 @@ struct EmotionModel: Identifiable {
     static let all: [EmotionModel] = [
         EmotionModel(
             id: 0,
-            name: "Joyful",
-            icon: "bolt",
+            name: "Anger",
+            icon: "flame",
             gradientColors: [
                 Color(red: 0.38, green: 0.32, blue: 0.78),
                 Color(red: 0.20, green: 0.16, blue: 0.56),
@@ -19,6 +19,36 @@ struct EmotionModel: Identifiable {
         ),
         EmotionModel(
             id: 1,
+            name: "Disgust",
+            icon: "hand.raised",
+            gradientColors: [
+                Color(red: 0.38, green: 0.32, blue: 0.78),
+                Color(red: 0.20, green: 0.16, blue: 0.56),
+                Color(red: 0.36, green: 0.09, blue: 0.40),
+            ]
+        ),
+        EmotionModel(
+            id: 2,
+            name: "Fear",
+            icon: "eye",
+            gradientColors: [
+                Color(red: 0.38, green: 0.32, blue: 0.78),
+                Color(red: 0.20, green: 0.16, blue: 0.56),
+                Color(red: 0.36, green: 0.09, blue: 0.40),
+            ]
+        ),
+        EmotionModel(
+            id: 3,
+            name: "Happiness",
+            icon: "sun.max",
+            gradientColors: [
+                Color(red: 0.38, green: 0.32, blue: 0.78),
+                Color(red: 0.20, green: 0.16, blue: 0.56),
+                Color(red: 0.36, green: 0.09, blue: 0.40),
+            ]
+        ),
+        EmotionModel(
+            id: 4,
             name: "Sadness",
             icon: "drop",
             gradientColors: [
@@ -28,21 +58,23 @@ struct EmotionModel: Identifiable {
             ]
         ),
         EmotionModel(
-            id: 2,
-            name: "Nostalgia",
-            icon: "opticaldisc",
+            id: 5,
+            name: "Surprise",
+            icon: "sparkles",
             gradientColors: [
                 Color(red: 0.38, green: 0.32, blue: 0.78),
                 Color(red: 0.20, green: 0.16, blue: 0.56),
                 Color(red: 0.36, green: 0.09, blue: 0.40),
             ]
-        ),
+        )
     ]
 }
 
 struct LargeEmotionCard: View {
     let emotion: EmotionModel
     let isActive: Bool
+    var isMarked: Bool = false
+    var onToggle: () -> Void = {}
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -88,10 +120,24 @@ struct LargeEmotionCard: View {
             .frame(maxWidth: .infinity)
 
             // Selection dot indicator — top right
-            Circle()
-                .fill(Color.white.opacity(0.80))
+            Button(action: onToggle) {
+                ZStack {
+                    Circle()
+                        .fill(isMarked ? Color.blue : Color.white.opacity(0.15))
+                        .overlay(
+                            Circle().stroke(isMarked ? Color.clear : Color.white.opacity(0.4), lineWidth: 1)
+                        )
+                    
+                    if isMarked {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                }
                 .frame(width: 24, height: 24)
-                .padding(18)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(18)
         }
         .frame(width: isActive ? 342 : 237, height: isActive ? 172 : 106)
     }
