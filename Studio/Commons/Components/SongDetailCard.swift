@@ -7,7 +7,7 @@ struct SongDetailCard: View {
     var body: some View {
         ZStack {
             // LinearGradient(gradient: Gradient(colors: [Color.black, Color.black]), startPoint: .top, endPoint: .bottom)
-            VStack(spacing: 5) {
+            VStack(spacing: 2) {
                 Image(entry.imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -27,9 +27,9 @@ struct SongDetailCard: View {
                     .padding(.bottom, 20)
                 
                 HStack(spacing: 10) {
-                    Image("AppleMusic").resizable().frame(width: 25, height: 25)
+                    Image(systemName: "play.fill").resizable().frame(width: 20, height: 20)
                     Link(destination: URL(string: "https://youtu.be/Zu2Spp4nrTM?si=dTqeYNHSM_Jujhvr")!) {
-                        Text("Open in Apple Music")
+                        Text("Play Music")
                     }
                 }
                 .padding()

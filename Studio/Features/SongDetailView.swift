@@ -9,7 +9,7 @@ struct SongDetailView: View {
             LinearGradient(colors: [Color(red: 0.07450980392156863, green: 0.07450980392156863, blue: 0.07450980392156863), Color(red: 0.0196078431372549, green: 0, blue: 0.047058823529411764)], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            VStack(alignment: .leading, spacing: 30) {
+            VStack(alignment: .leading, spacing: 20) {
                 SongDetailCard(entry: entry)
                 
                 VStack (alignment: .leading){

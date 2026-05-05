@@ -13,7 +13,7 @@ struct ProjectDetailView: View {
         RecordHistoryCardModel(title: "Vocal Take_03 (Main)", subtitle: "Yesterday • 18:05 • 3:42"),
         RecordHistoryCardModel(title: "Scratch Track_02", subtitle: "Oct 22 • 09:12 • 2:10")
     ]
-    let project:ProjectCardModel
+    let project: ProjectCardModel
     
     @State private var sortOrder: SortOrder = .latest
     
@@ -46,27 +46,27 @@ struct ProjectDetailView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
                                 Text("CURRENT BASE RECORDING")
-                                    .font(.system(size: 12, weight: .bold))
+                                    .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
                                 Text("Take 04")
-                                    .font(.system(size: 12, weight: .semibold))
+                                    .font(.system(size: 14, weight: .semibold))
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 12)
-                                    .padding(.vertical, 4)
+                                    .padding(.vertical, 8)
                                     .background(Color(red: 0.2, green: 0.15, blue: 0.35))
                                     .glassEffect(.clear)
                                     .cornerRadius(12)
-                                
                             }
-                            CurrentBaseRecordingCard()
+                            MusicPlayer()
+                                .padding(.bottom, 8)
                         }
                         .padding(.horizontal)
                         
                         // Selected Emotion
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 8) {
                             Text("SELECTED EMOTION")
-                                .font(.system(size: 12, weight: .bold))
+                                .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.white)
                             
                             Button(action: {}) {
@@ -86,35 +86,35 @@ struct ProjectDetailView: View {
                         .padding(.horizontal)
                         
                         // Song References
-                        Text("SONG REFERENCES")
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(.white)
-                        
-                        VStack(spacing: 8) {
-                            ForEach(Array(SampleData.songs.enumerated()), id: \.element.id) { index, song in
-                                NavigationLink {
-                                    SongDetailView(entry: song)
-                                } label: {
-                                    SavedSongCard(song: song)
-                                }
-                                .buttonStyle(.plain)
-                                
-                                if index < SampleData.songs.count - 1 {
-                                    Divider()
-                                        .background(Color.white.opacity(0.1))
-                                        .padding(.horizontal)
+                        VStack (alignment: .leading, spacing: 8) {
+                            Text("SONG REFERENCES")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.white)
+                            
+                            VStack() {
+                                ForEach(Array(SampleData.songs.enumerated()), id: \.element.id) { index, song in
+                                    NavigationLink {
+                                        SongDetailView(entry: song)
+                                    } label: {
+                                        SavedSongCard(song: song)
+                                    }
+                                    .buttonStyle(.plain)
+                                    
+                                    if index < SampleData.songs.count - 1 {
+                                        Divider()
+                                            .background(Color.white.opacity(0.1))
+                                            .padding(.horizontal)
+                                    }
                                 }
                             }
                         }
-                        .background(Color.white.opacity(0.05))
-                        .cornerRadius(16)
                         .padding(.horizontal)
                         
                         // Recording History
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 8) {
                             HStack {
-                                Text("Recording History")
-                                    .font(.system(size: 14, weight: .bold))
+                                Text("RECORDING HISTORY")
+                                    .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
                                 Menu {
@@ -146,19 +146,19 @@ struct ProjectDetailView: View {
                 
                 // Bottom Buttons
                 VStack(spacing: 12) {
-                    Button(action: {}) {
-                        HStack {
-                            Image(systemName: "waveform")
-                            Text("EDIT VISION")
-                        }
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(red: 0.25, green: 0.25, blue: 0.45)) // Purple-ish blue
-                        .glassEffect(.clear, in: .rect(cornerRadius: 24))
-                        .cornerRadius(24)
-                    }
+//                    Button(action: {}) {
+//                        HStack {
+//                            Image(systemName: "waveform")
+//                            Text("EDIT VISION")
+//                        }
+//                        .font(.system(size: 14, weight: .bold))
+//                        .foregroundColor(.white)
+//                        .frame(maxWidth: .infinity)
+//                        .padding()
+//                        .background(Color(red: 0.25, green: 0.25, blue: 0.45)) // Purple-ish blue
+//                        .glassEffect(.clear, in: .rect(cornerRadius: 24))
+//                        .cornerRadius(24)
+//                    }
                     
                     NavigationLink {
                         RecordingNewTakeView()
