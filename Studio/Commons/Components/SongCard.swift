@@ -28,6 +28,7 @@ struct SongCard: View {
                 
                 NavigationLink("SEE DETAILS") {
                     SongDetailView(entry: entry)
+                        .studioNavbar()
                 }
                 .padding()
                 .frame(maxWidth: .infinity)

@@ -55,17 +55,17 @@ struct EmotionPickerView: View {
                                         }
                                     }
                                 )
-                                    .padding(.horizontal, isSelected ? 24 : 60)
-                                    .scaleEffect(isSelected ? 1.0 : 0.85)
-                                    .opacity(isSelected ? 1.0 : 0.4)
-                                    .blur(radius: isSelected ? 0 : 2)
-                                    .offset(y: CGFloat(distance * 110))
-                                    .zIndex(isSelected ? 1 : 0)
-                                    .onTapGesture {
-                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                                            selectedIndex = index
-                                        }
+                                .padding(.horizontal, isSelected ? 24 : 60)
+                                .scaleEffect(isSelected ? 1.0 : 0.85)
+                                .opacity(isSelected ? 1.0 : 0.4)
+                                .blur(radius: isSelected ? 0 : 2)
+                                .offset(y: CGFloat(distance * 110))
+                                .zIndex(isSelected ? 1 : 0)
+                                .onTapGesture {
+                                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                        selectedIndex = index
                                     }
+                                }
                             }
                         }
                     }
@@ -76,15 +76,19 @@ struct EmotionPickerView: View {
                     // Continue Button
                     HStack {
                         Spacer()
-                        Button(action: {}) {
+                        NavigationLink {
+                            SongResultsView().studioNavbar()
+                        } label: {
                             Text("Continue")
                                 .font(.custom("SF Pro", size: 17).weight(.medium))
                                 .foregroundColor(.white)
                                 .padding(.vertical, 16)
                                 .padding(.horizontal, 40)
-                                .background(Capsule()
-                                    .fill(Color(red: 0.33, green: 0.38, blue: 0.97).opacity(0.4)))
-                                .glassEffect(.clear, in: .capsule)
+                                .background(
+                                    Capsule()
+                                        .fill(Color(red: 0.33, green: 0.38, blue: 0.97).opacity(0.4))
+                                )
+                                .glassEffect(.clear.interactive(), in: .capsule)
                                 .overlay(
                                     Capsule()
                                         .stroke(Color.white.opacity(0.2), lineWidth: 1)

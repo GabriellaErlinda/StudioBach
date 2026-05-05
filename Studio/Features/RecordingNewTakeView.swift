@@ -1,28 +1,14 @@
-//
-//  RecordingSoundView.swift
-//  airbach
-//
-//  Created by Farrell Habibie Putra Haris pagi pagi di teras academy tanggal 04/05/26
-//
-
 import SwiftUI
 import AVFoundation
 
-// state
-enum RecordingState {
-    case idle
-    case recording
-    case done
-}
-
 // view
-struct RecordingSoundView: View {
+struct RecordingNewTakeView: View {
     @State private var recordingState: RecordingState = .idle
     @State private var elapsedSeconds: Int = 0
     @State private var timer: Timer?
     @State private var waveformPhase: Double = 0
     @State private var pulseScale: CGFloat = 1.0
-    @State private var showAddFilePopup = false
+    @StateObject var viewModel = ProjectViewModel()
     
     // waveform amplitudes
     @State private var waveformAmplitudes: [CGFloat] = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }
@@ -77,19 +63,8 @@ struct RecordingSoundView: View {
                     actionArea
                         .padding(.bottom, 24)
                     
-                    // Record to Existing Project
-                    if recordingState == .idle || recordingState == .done {
-                        existingProjectLink
-                            .padding(.bottom, 20)
-                    }
-                    
                     Spacer()
                 }
-            }
-            
-            if showAddFilePopup {
-                AddFilePopupView(isPresented: $showAddFilePopup)
-                    .zIndex(2)
             }
         }
         .preferredColorScheme(.dark)
@@ -210,34 +185,11 @@ struct RecordingSoundView: View {
     private var actionArea: some View {
         switch recordingState {
         case .idle:
-            VStack(spacing: 16) {
-                Text("TAP TO RECORD")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.7))
-                    .tracking(1.5)
-                
-                Button(action: {
-                    withAnimation {
-                        showAddFilePopup = true
-                    }
-                }) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "doc.badge.plus")
-                            .font(.system(size: 13, weight: .semibold))
-                        Text("Add File")
-                            .font(.system(size: 13, weight: .semibold))
-                    }
-                    .foregroundColor(.white.opacity(0.9))
-                    .padding(.horizontal, 18)
-                    .padding(.vertical, 10)
-                    .background(
-                        Capsule()
-                            .fill(Color.white.opacity(0.1))
-                            .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
-                    )
-                }
-            }
-            .transition(.opacity)
+            Text("TAP TO RECORD")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(.white.opacity(0.7))
+                .tracking(1.5)
+                .transition(.opacity)
             
         case .recording:
             // Empty during recording - the button itself is the action
@@ -269,7 +221,7 @@ struct RecordingSoundView: View {
                 }
                 
                 // Next Button
-                NavigationLink(destination: EmotionPickerView().studioNavbar()) {
+                NavigationLink(destination: ProjectDetailView(project: viewModel.projects[0]).studioNavbar()) {
                     HStack(spacing: 6) {
                         Image(systemName: "play.fill")
                             .font(.system(size: 11, weight: .semibold))
@@ -283,19 +235,6 @@ struct RecordingSoundView: View {
                 }
             }
             .transition(.opacity.combined(with: .move(edge: .bottom)))
-        }
-    }
-    
-    // Existing Project Link
-    private var existingProjectLink: some View {
-        NavigationLink {
-            // The view you want to navigate to
-            ProjectListView().studioNavbar()
-        } label: {
-            Text("RECORD TO EXISTING PROJECT?")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.white.opacity(0.4))
-                .tracking(1)
         }
     }
     
@@ -410,5 +349,5 @@ struct RecordingSoundView: View {
 }
 
 #Preview {
-    RecordingSoundView()
+    RecordingNewTakeView()
 }
