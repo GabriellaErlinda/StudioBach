@@ -62,7 +62,7 @@ struct Song: Identifiable {
         self.audioURL = result.audioUrl
     }
     
-    /// Map mood strings to SF Symbol icon names
+    // Map mood strings to SF Symbol icon names
     static func iconForMood(_ mood: String) -> String {
         switch mood.lowercased() {
         case "happy", "joyful":         return "sun.max"

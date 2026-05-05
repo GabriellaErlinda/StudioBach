@@ -21,8 +21,8 @@ struct AddFilePopupView: View {
                 // Icon
                 Image(systemName: "music.note.list")
                     .font(.system(size: 48))
-                    .foregroundColor(Color(red: 0.38, green: 0.35, blue: 0.87))
-                    .shadow(color: Color(red: 0.38, green: 0.35, blue: 0.87).opacity(0.5), radius: 10, x: 0, y: 5)
+                    .foregroundColor(Color("blue-ribbon-500"))
+                    .shadow(color: Color("blue-ribbon-400").opacity(0.5), radius: 10, x: 0, y: 5)
                 
                 // Texts
                 VStack(spacing: 8) {
@@ -47,7 +47,7 @@ struct AddFilePopupView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                            .background(Capsule().fill(Color(red: 0.38, green: 0.35, blue: 0.87)))
+                            .background(Capsule().fill(Color("blue-ribbon-400")))
                     }
                     
                     Button(action: {
@@ -68,17 +68,13 @@ struct AddFilePopupView: View {
             .padding(32)
             .background(
                 LinearGradient(
-                    colors: [Color(red: 0.15, green: 0.12, blue: 0.25).opacity(0.8), Color(red: 0.08, green: 0.06, blue: 0.15).opacity(0.8)],
+                    colors: [Color("blue-ribbon-950").opacity(0.8), Color("primary-950").opacity(0.8)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
             )
             .clipShape(RoundedRectangle(cornerRadius: 32))
             .glassEffect(.clear, in: .rect(cornerRadius: 32))
-            .overlay(
-                RoundedRectangle(cornerRadius: 32)
-                    .stroke(Color.white.opacity(0.15), lineWidth: 1)
-            )
             .padding(.horizontal, 32)
             .padding(.bottom, 0)
         }
@@ -87,7 +83,7 @@ struct AddFilePopupView: View {
             allowedContentTypes: [.audio],
             allowsMultipleSelection: false
         ) { result in
-            // Here you'd handle the file selection, e.g., passing the URL back
+            // TODO: handling file selection
             withAnimation {
                 isPresented = false
             }

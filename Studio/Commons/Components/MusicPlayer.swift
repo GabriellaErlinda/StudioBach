@@ -103,18 +103,23 @@ struct MusicPlayer: View {
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color(red: 0.18, green: 0.12, blue: 0.35),
-                    Color(red: 0.08, green: 0.06, blue: 0.18)
+                    Color("blue-ribbon-800"),
+                    Color("blue-ribbon-950")
                 ]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
         )
-        .glassEffect(.clear, in: .rect(cornerRadius: 24))
-        .cornerRadius(24)
+        .overlay(
+            RoundedRectangle(cornerRadius: 32)
+                .stroke(Color.white, lineWidth: 1)
+        )
+        //.glassEffect(.clear, in: .rect(cornerRadius: 24))
+        .cornerRadius(32)
         .shadow(color: Color.purple.opacity(0.15), radius: 20, x: 0, y: 10)
         .onAppear(perform: setupPlayer)
-        .onDisappear { player?.pause() }
+        .onDisappear { player?.pause()
+        }
     }
     
     private func setupPlayer() {

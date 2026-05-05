@@ -11,11 +11,11 @@ struct RecordHistoryCard: View {
             }) {
                 ZStack {
                     Circle()
-                        .fill(Color(red: 0.23, green: 0.23, blue: 0.32)) // Lightish grey/purple circle
+                        .fill(Color("blue-ribbon-300").opacity(0.4)) // Lightish grey/purple circle
                         .frame(width: 44, height: 44)
                         //.glassEffect(.clear, in: .circle)
                     Image(systemName: "play.fill")
-                        .foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.65))
+                        .foregroundColor(Color("blue-ribbon-200"))
                         .font(.system(size: 20))
                         
                 }
@@ -29,7 +29,7 @@ struct RecordHistoryCard: View {
                 
                 Text(model.subtitle)
                     .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.7))
+                    .foregroundColor(Color("primary-400"))
             }
             
             Spacer()
@@ -44,9 +44,9 @@ struct RecordHistoryCard: View {
             }
         }
         .padding()
-        .background(Color(red: 0.12, green: 0.09, blue: 0.18)) // Dark purple background from image
-        .glassEffect(.clear, in: .rect(cornerRadius: 24))
-        .cornerRadius(24)
+        .background(Color("blue-ribbon-900").opacity(0.6))
+        //.glassEffect(.clear, in: .rect(cornerRadius: 24))
+        .cornerRadius(32)
     }
 }
 

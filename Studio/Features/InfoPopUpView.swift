@@ -8,33 +8,37 @@
 import SwiftUI
 
 struct InfoPopUpView: View {
-
-    private let profileURL = URL(string: "https://www.figma.com/api/mcp/asset/61fd2b9c-1684-4566-95dc-df36c2626b26")
+    @Binding var isPresented: Bool
 
     var body: some View {
-        VStack(spacing: 16) {
-            profileAvatar
-            headerText
-            featureList
-            ctaButton
+        ZStack(alignment: .topTrailing) {
+            VStack(spacing: 16) {
+                profileAvatar
+                headerText
+                featureList
+                ctaButton
+            }
+            .padding(16)
+            .background(glassCard)
+            .clipShape(cardShape)
+            .overlay(cardShape.strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5))
+            .shadow(color: .white.opacity(0.04), radius: 10, x: 4, y: 4)
+
+            // Close button pinned to top-trailing corner
+            Button(action: { withAnimation(.easeOut) { isPresented = false } }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 20))
+                    .foregroundColor(.white.opacity(0.4))
+            }
+            .offset(x: 8, y: -8)
         }
-        .padding(16)
-        .background(glassCard)
-        .clipShape(cardShape)
-        .overlay(cardShape.strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5))
-        .shadow(color: .white.opacity(0.04), radius: 10, x: 4, y: 4)
     }
 
     // MARK: - Subviews
-
     private var profileAvatar: some View {
-        AsyncImage(url: profileURL) { image in
-            image.resizable().scaledToFill()
-        } placeholder: {
-            Circle().fill(Color.gray.opacity(0.3))
-        }
-        .frame(width: 64, height: 64)
-        .clipShape(Circle())
+        Image("studio_logo")
+            .resizable()
+            .frame(width: 100, height: 100)
     }
 
     private var headerText: some View {
@@ -151,12 +155,4 @@ extension Color {
         let b = Double(int & 0xFF) / 255
         self.init(red: r, green: g, blue: b)
     }
-}
-
-// MARK: - Preview
-#Preview {
-    InfoPopUpView()
-        .frame(width: 200)
-        .background(Color(red: 6/255, green: 7/255, blue: 22/255))
-        .padding(32)
 }

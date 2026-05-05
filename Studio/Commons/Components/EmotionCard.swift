@@ -12,9 +12,9 @@ struct EmotionModel: Identifiable {
             name: "Anger",
             icon: "flame",
             gradientColors: [
-                Color(red: 0.38, green: 0.32, blue: 0.78),
-                Color(red: 0.20, green: 0.16, blue: 0.56),
-                Color(red: 0.36, green: 0.09, blue: 0.40),
+                Color("blue-ribbon-400"),
+                Color("blue-ribbon-700"),
+                Color("blue-ribbon-950"),
             ]
         ),
         EmotionModel(
@@ -22,9 +22,9 @@ struct EmotionModel: Identifiable {
             name: "Disgust",
             icon: "hand.raised",
             gradientColors: [
-                Color(red: 0.38, green: 0.32, blue: 0.78),
-                Color(red: 0.20, green: 0.16, blue: 0.56),
-                Color(red: 0.36, green: 0.09, blue: 0.40),
+                Color("blue-ribbon-400"),
+                Color("blue-ribbon-700"),
+                Color("blue-ribbon-950"),
             ]
         ),
         EmotionModel(
@@ -32,9 +32,9 @@ struct EmotionModel: Identifiable {
             name: "Fear",
             icon: "eye",
             gradientColors: [
-                Color(red: 0.38, green: 0.32, blue: 0.78),
-                Color(red: 0.20, green: 0.16, blue: 0.56),
-                Color(red: 0.36, green: 0.09, blue: 0.40),
+                Color("blue-ribbon-400"),
+                Color("blue-ribbon-700"),
+                Color("blue-ribbon-950"),
             ]
         ),
         EmotionModel(
@@ -42,9 +42,9 @@ struct EmotionModel: Identifiable {
             name: "Happiness",
             icon: "sun.max",
             gradientColors: [
-                Color(red: 0.38, green: 0.32, blue: 0.78),
-                Color(red: 0.20, green: 0.16, blue: 0.56),
-                Color(red: 0.36, green: 0.09, blue: 0.40),
+                Color("blue-ribbon-400"),
+                Color("blue-ribbon-700"),
+                Color("blue-ribbon-950"),
             ]
         ),
         EmotionModel(
@@ -52,9 +52,9 @@ struct EmotionModel: Identifiable {
             name: "Sadness",
             icon: "drop",
             gradientColors: [
-                Color(red: 0.38, green: 0.32, blue: 0.78),
-                Color(red: 0.20, green: 0.16, blue: 0.56),
-                Color(red: 0.36, green: 0.09, blue: 0.40),
+                Color("blue-ribbon-400"),
+                Color("blue-ribbon-700"),
+                Color("blue-ribbon-950"),
             ]
         ),
         EmotionModel(
@@ -62,9 +62,9 @@ struct EmotionModel: Identifiable {
             name: "Surprise",
             icon: "sparkles",
             gradientColors: [
-                Color(red: 0.38, green: 0.32, blue: 0.78),
-                Color(red: 0.20, green: 0.16, blue: 0.56),
-                Color(red: 0.36, green: 0.09, blue: 0.40),
+                Color("blue-ribbon-400"),
+                Color("blue-ribbon-700"),
+                Color("blue-ribbon-950"),
             ]
         )
     ]
@@ -83,7 +83,7 @@ struct LargeEmotionCard: View {
                 .glassEffect(.clear, in: .rect(cornerRadius: 24))
                 .background(
                     LinearGradient(
-                        colors: emotion.gradientColors.map { $0.opacity(0.8) }, // Match the subtle transparency of other features
+                        colors: emotion.gradientColors.map { $0.opacity(0.8) },
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
