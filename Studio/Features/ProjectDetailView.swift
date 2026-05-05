@@ -159,7 +159,9 @@ struct ProjectDetailView: View {
                         .cornerRadius(24)
                     }
                     
-                    Button(action: {}) {
+                    NavigationLink {
+                        RecordingNewTakeView()
+                    } label: {
                         HStack {
                             Image(systemName: "mic.fill")
                             Text("RECORD NEW TAKE")
@@ -168,7 +170,7 @@ struct ProjectDetailView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(red: 0.12, green: 0.09, blue: 0.22)) // Darker purple
+                        .background(Color(red: 0.12, green: 0.09, blue: 0.22))
                         .glassEffect(.clear, in: .rect(cornerRadius: 24))
                         .cornerRadius(24)
                     }

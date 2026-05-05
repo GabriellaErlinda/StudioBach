@@ -1,27 +1,14 @@
-//
-//  RecordingSoundView.swift
-//  airbach
-//
-//  Created by Farrell Habibie Putra Haris pagi pagi di teras academy tanggal 04/05/26
-//
-
 import SwiftUI
 import AVFoundation
 
-// state
-enum RecordingState {
-    case idle
-    case recording
-    case done
-}
-
 // view
-struct RecordingSoundView: View {
+struct RecordingNewTakeView: View {
     @State private var recordingState: RecordingState = .idle
     @State private var elapsedSeconds: Int = 0
     @State private var timer: Timer?
     @State private var waveformPhase: Double = 0
     @State private var pulseScale: CGFloat = 1.0
+    @StateObject var viewModel = ProjectViewModel()
     
     // waveform amplitudes
     @State private var waveformAmplitudes: [CGFloat] = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }
@@ -75,12 +62,6 @@ struct RecordingSoundView: View {
                     // Action Area (TAP TO RECORD / Re-Record & Next)
                     actionArea
                         .padding(.bottom, 24)
-                    
-                    // Record to Existing Project
-                    if recordingState == .idle || recordingState == .done {
-                        existingProjectLink
-                            .padding(.bottom, 20)
-                    }
                     
                     Spacer()
                 }
@@ -240,7 +221,7 @@ struct RecordingSoundView: View {
                 }
                 
                 // Next Button
-                NavigationLink(destination: EmotionPickerView().studioNavbar()) {
+                NavigationLink(destination: ProjectDetailView(project: viewModel.projects[0]).studioNavbar()) {
                     HStack(spacing: 6) {
                         Image(systemName: "play.fill")
                             .font(.system(size: 11, weight: .semibold))
@@ -254,19 +235,6 @@ struct RecordingSoundView: View {
                 }
             }
             .transition(.opacity.combined(with: .move(edge: .bottom)))
-        }
-    }
-    
-    // Existing Project Link
-    private var existingProjectLink: some View {
-        NavigationLink {
-            // The view you want to navigate to
-            ProjectListView().studioNavbar()
-        } label: {
-            Text("RECORD TO EXISTING PROJECT?")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.white.opacity(0.4))
-                .tracking(1)
         }
     }
     
@@ -381,5 +349,5 @@ struct RecordingSoundView: View {
 }
 
 #Preview {
-    RecordingSoundView()
+    RecordingNewTakeView()
 }
