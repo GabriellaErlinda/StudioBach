@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		83FE97B62FA7152500262519 /* Studio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83FE97B62FA7152500262519 /* BachStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BachStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		83FE97B72FA7152500262519 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				83FE97B62FA7152500262519 /* Studio.app */,
+				83FE97B62FA7152500262519 /* BachStudio.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		83FE97B52FA7152500262519 /* Studio */ = {
+		83FE97B52FA7152500262519 /* BachStudio */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83FE97C12FA7152600262519 /* Build configuration list for PBXNativeTarget "Studio" */;
+			buildConfigurationList = 83FE97C12FA7152600262519 /* Build configuration list for PBXNativeTarget "BachStudio" */;
 			buildPhases = (
 				83FE97B22FA7152500262519 /* Sources */,
 				83FE97B32FA7152500262519 /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				83FE97B82FA7152500262519 /* Studio */,
 			);
-			name = Studio;
+			name = BachStudio;
 			packageProductDependencies = (
 			);
 			productName = Studio;
-			productReference = 83FE97B62FA7152500262519 /* Studio.app */;
+			productReference = 83FE97B62FA7152500262519 /* BachStudio.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				83FE97B52FA7152500262519 /* Studio */,
+				83FE97B52FA7152500262519 /* BachStudio */,
 			);
 		};
 /* End PBXProject section */
@@ -253,22 +253,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BBW6TR42T6;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gabe11.Studio;
+				PRODUCT_BUNDLE_IDENTIFIER = nicksontest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -287,22 +287,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BBW6TR42T6;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gabe11.Studio;
+				PRODUCT_BUNDLE_IDENTIFIER = nicksontest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -326,7 +326,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83FE97C12FA7152600262519 /* Build configuration list for PBXNativeTarget "Studio" */ = {
+		83FE97C12FA7152600262519 /* Build configuration list for PBXNativeTarget "BachStudio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83FE97C22FA7152600262519 /* Debug */,

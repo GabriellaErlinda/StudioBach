@@ -47,12 +47,17 @@ struct MusicPlayer: View {
                     GeometryReader { geometry in
                         Color.clear
                             .contentShape(Rectangle())
-                            .onTapGesture { location in
-                                let percentage = min(max(0, location.x / geometry.size.width), 1)
-                                progress = Double(percentage)
-                                let targetTime = progress * duration
-                                player?.seek(to: CMTime(seconds: targetTime, preferredTimescale: 1))
-                            }
+                            .gesture(
+                                DragGesture(minimumDistance: 0)
+                                    .onChanged { value in
+                                        let percentage = min(max(0, value.location.x / geometry.size.width), 1)
+                                        progress = Double(percentage)
+                                    }
+                                    .onEnded { value in
+                                        let targetTime = progress * duration
+                                        player?.seek(to: CMTime(seconds: targetTime, preferredTimescale: 1000))
+                                    }
+                            )
                     }
                 )
                 
