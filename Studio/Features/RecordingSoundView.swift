@@ -23,6 +23,7 @@ struct RecordingSoundView: View {
     @State private var waveformPhase: Double = 0
     @State private var pulseScale: CGFloat = 1.0
     @State private var showAddFilePopup = false
+    @State private var projectTitle: String = ""
     
     // waveform amplitudes
     @State private var waveformAmplitudes: [CGFloat] = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }
@@ -71,7 +72,7 @@ struct RecordingSoundView: View {
                     
                     // Microphone Button
                     microphoneButton
-                        .padding(.bottom, 16)
+                        .padding(.bottom, 40)
                     
                     // Action Area (TAP TO RECORD / Re-Record & Next)
                     actionArea
@@ -80,11 +81,12 @@ struct RecordingSoundView: View {
                     // Record to Existing Project
                     if recordingState == .idle || recordingState == .done {
                         existingProjectLink
-                            .padding(.bottom, 20)
+                            .padding(.top, 22)
                     }
-                    
+
                     Spacer()
                 }
+                .offset(y: -60)
             }
             
             if showAddFilePopup {
@@ -102,15 +104,32 @@ struct RecordingSoundView: View {
     private var headerContent: some View {
         switch recordingState {
         case .idle:
-            Text("Let's Compose Music")
-                .font(.system(size: 26, weight: .bold))
-                .foregroundColor(.white)
-                .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            VStack(spacing: 8) { // Adjust spacing as needed
+                Text("Let's Compose Music")
+                    .font(.system(size: 26, weight: .bold))
+                    .foregroundColor(.white)
+                
+                TextField("Input Project Name...", text: $projectTitle)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                    .tint(.white.opacity(0.5))
+            }
+            .transition(.opacity.combined(with: .scale(scale: 0.95)))
+                
         case .recording, .done:
-            Text(formattedTime)
-                .font(.system(size: 32, weight: .semibold, design: .monospaced))
-                .foregroundColor(.white)
-                .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            VStack(spacing: 8) { // Adjust spacing as needed
+                TextField("Project Name...", text: $projectTitle)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                    .tint(.white.opacity(0.5))
+                
+                Text(formattedTime)
+                    .font(.system(size: 32, weight: .semibold, design: .monospaced))
+                    .foregroundColor(.white)
+                    .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            }
         }
     }
     
@@ -132,7 +151,7 @@ struct RecordingSoundView: View {
                     )
                     .frame(
                         width: 3,
-                        height: barHeight(for: index)
+                        height: barHeight(for: index) + 20
                     )
                     .animation(
                         recordingState == .recording
@@ -142,7 +161,7 @@ struct RecordingSoundView: View {
                     )
             }
         }
-        .frame(height: 80)
+        .frame(height: 100)
     }
     
     // Microphone Button
@@ -228,8 +247,8 @@ struct RecordingSoundView: View {
                             .font(.system(size: 13, weight: .semibold))
                     }
                     .foregroundColor(.white.opacity(0.9))
-                    .padding(.horizontal, 18)
-                    .padding(.vertical, 10)
+                    .padding(.horizontal, 25)
+                    .padding(.vertical, 16)
                     .background(
                         Capsule()
                             .fill(Color.white.opacity(0.1))

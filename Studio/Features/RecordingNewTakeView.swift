@@ -9,6 +9,7 @@ struct RecordingNewTakeView: View {
     @State private var waveformPhase: Double = 0
     @State private var pulseScale: CGFloat = 1.0
     @StateObject var viewModel = ProjectViewModel()
+    @State private var showAddFilePopup = false
     
     // waveform amplitudes
     @State private var waveformAmplitudes: [CGFloat] = (0..<40).map { _ in CGFloat.random(in: 0.1...0.6) }
@@ -66,6 +67,10 @@ struct RecordingNewTakeView: View {
                     Spacer()
                 }
             }
+            if showAddFilePopup {
+                AddFilePopupView(isPresented: $showAddFilePopup)
+                    .zIndex(2)
+            }
         }
         .preferredColorScheme(.dark)
     }
@@ -77,10 +82,7 @@ struct RecordingNewTakeView: View {
     private var headerContent: some View {
         switch recordingState {
         case .idle:
-            Text("Let's Compose Music")
-                .font(.system(size: 26, weight: .bold))
-                .foregroundColor(.white)
-                .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            EmptyView()
         case .recording, .done:
             Text(formattedTime)
                 .font(.system(size: 32, weight: .semibold, design: .monospaced))
@@ -89,6 +91,7 @@ struct RecordingNewTakeView: View {
         }
     }
     
+    // Waveform View
     // Waveform View
     private var waveformView: some View {
         HStack(spacing: 3) {
@@ -107,7 +110,7 @@ struct RecordingNewTakeView: View {
                     )
                     .frame(
                         width: 3,
-                        height: barHeight(for: index)
+                        height: barHeight(for: index) + 20
                     )
                     .animation(
                         recordingState == .recording
@@ -117,7 +120,7 @@ struct RecordingNewTakeView: View {
                     )
             }
         }
-        .frame(height: 80)
+        .frame(height: 100)
     }
     
     // Microphone Button
@@ -185,11 +188,34 @@ struct RecordingNewTakeView: View {
     private var actionArea: some View {
         switch recordingState {
         case .idle:
-            Text("TAP TO RECORD")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(.white.opacity(0.7))
-                .tracking(1.5)
-                .transition(.opacity)
+            VStack(spacing: 16) {
+                Text("TAP TO RECORD")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.white.opacity(0.7))
+                    .tracking(1.5)
+                
+                Button(action: {
+                    withAnimation {
+                        showAddFilePopup = true
+                    }
+                }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "doc.badge.plus")
+                            .font(.system(size: 13, weight: .semibold))
+                        Text("Add File")
+                            .font(.system(size: 13, weight: .semibold))
+                    }
+                    .foregroundColor(.white.opacity(0.9))
+                    .padding(.horizontal, 25)
+                    .padding(.vertical, 16)
+                    .background(
+                        Capsule()
+                            .fill(Color.white.opacity(0.1))
+                            .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
+                    )
+                }
+            }
+            .transition(.opacity)
             
         case .recording:
             // Empty during recording - the button itself is the action

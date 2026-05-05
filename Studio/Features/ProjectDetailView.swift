@@ -16,7 +16,7 @@ struct ProjectDetailView: View {
     let project:ProjectCardModel
     
     @State private var sortOrder: SortOrder = .latest
-
+    
     enum SortOrder {
         case latest, earliest
     }
@@ -86,27 +86,28 @@ struct ProjectDetailView: View {
                         .padding(.horizontal)
                         
                         // Song References
-                        VStack(alignment: .leading, spacing: 12) {
-                            HStack {
-                                Text("SONG REFERENCES")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.white)
-                                Spacer()
-                                Text("2 Versions Generated")
-                                    .font(.system(size: 10, weight: .regular))
-                                    .foregroundColor(Color(red: 0.4, green: 0.5, blue: 0.8))
-                            }
-                            
-                            VStack(spacing: 0) {
-                                ForEach(Array(SampleData.songs.enumerated()), id: \.element.id) { index, song in
+                        Text("SONG REFERENCES")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(.white)
+                        
+                        VStack(spacing: 8) {
+                            ForEach(Array(SampleData.songs.enumerated()), id: \.element.id) { index, song in
+                                NavigationLink {
+                                    SongDetailView(entry: song)
+                                } label: {
                                     SavedSongCard(song: song)
-                                    if index < SampleData.songs.count - 1 {
-                                        Spacer()
-                                    }
+                                }
+                                .buttonStyle(.plain)
+                                
+                                if index < SampleData.songs.count - 1 {
+                                    Divider()
+                                        .background(Color.white.opacity(0.1))
+                                        .padding(.horizontal)
                                 }
                             }
-                            .cornerRadius(16)
                         }
+                        .background(Color.white.opacity(0.05))
+                        .cornerRadius(16)
                         .padding(.horizontal)
                         
                         // Recording History

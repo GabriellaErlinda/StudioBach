@@ -59,6 +59,7 @@ struct ProjectListView: View {
                     }
                     Spacer()
                 }
+                .offset(y: -30)
             }
             .navigationDestination(isPresented: $isPresentingRecordingView) {
                 RecordingSoundView()
