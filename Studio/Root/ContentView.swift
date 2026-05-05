@@ -14,7 +14,7 @@ struct ContentView: View {
         
         TabView(selection: $selectedTab) {
             NavigationStack {
-                SongResultsView()
+                RecordingSoundView()
                     .toolbar {
                         primaryToolbarItems()
                     }
