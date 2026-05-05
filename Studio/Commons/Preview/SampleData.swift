@@ -20,8 +20,8 @@ struct RecordHistoryEntry: Identifiable {
 
 struct SampleData {
     static let songs: [Song] = [
-        Song(imageName: "laufey", title: "Promises", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"]),
-        Song(imageName: "taylor", title: "You Belong With Me", artist: "Taylor Swift", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"])
+        Song(imageName: "laufey", title: "Promises", artist: "Laufey", emotion: ["Sadness", "Surprise"], emotionIcon: ["drop", "sparkles"]),
+        Song(imageName: "taylor", title: "You Belong With Me", artist: "Taylor Swift", emotion: ["Happiness", "Anger"], emotionIcon: ["sun.max", "flame"])
     ]
     
     static let recordHistory: [RecordHistoryEntry] = [

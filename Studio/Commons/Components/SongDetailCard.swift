@@ -1,8 +1,10 @@
 import SwiftUI
+import AVFoundation
 
 struct SongDetailCard: View {
     
     let entry: Song
+
     
     var body: some View {
         ZStack {
@@ -17,41 +19,17 @@ struct SongDetailCard: View {
                     .padding(.bottom)
                     .scaledToFill()
                 
-                Text(entry.title)
-                    .font(.system(size: 24, weight: .semibold))
-                    .foregroundStyle(.white)
-                
-                Text(entry.artist)
-                    .font(.system(size: 14))
-                    .foregroundStyle(Color(red: 0.5294117647058824, green: 0.6, blue: 0.9372549019607843))
-                    .padding(.bottom, 20)
-                
-                HStack(spacing: 10) {
-                    Image(systemName: "play.fill").resizable().frame(width: 20, height: 20)
-                    Link(destination: URL(string: "https://youtu.be/Zu2Spp4nrTM?si=dTqeYNHSM_Jujhvr")!) {
-                        Text("Play Music")
-                    }
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .foregroundStyle(.white)
-                .fontWeight(.bold)
-                .glassEffect(.regular.interactive())
-                .background(Color(red: 0.050980392156862744, green: 0, blue: 0.3137254901960784).clipShape(RoundedRectangle(cornerRadius: 48)))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 48)
-                        .stroke(Color.white, lineWidth: 0.5)
-                )
-                .padding(.leading)
-                .padding(.trailing)
+                MusicPlayer(title: entry.title, artist: entry.artist)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 20)
             }
-            .frame(width: 280, height: 373)
+            .frame(width: 280, height: 420)
             .glassEffect(.clear, in: .rect(cornerRadius: 40))
-            .background(LinearGradient(colors: [Color(red: 0.3568627450980392, green: 0.3764705882352941, blue: 0.9490196078431372), Color(red: 0.023529411764705882, green: 0.027450980392156862, blue: 0.08627450980392157)], startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.1).clipShape(RoundedRectangle(cornerRadius: 40)))
+            .background(LinearGradient(colors: [Color(red: 0.050980392156862744, green: 0, blue:0.3137254901960784), Color(red: 0.050980392156862744, green: 0, blue:0.3137254901960784)], startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.1).clipShape(RoundedRectangle(cornerRadius: 40)))
         }
     }
 }
 
 #Preview {
-    SongDetailCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"]))
+    SongDetailCard(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Sadness", "Surprise"], emotionIcon: ["drop", "sparkles"]))
 }

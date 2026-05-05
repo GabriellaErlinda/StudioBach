@@ -11,6 +11,7 @@ struct SongDetailView: View {
             
             VStack(alignment: .leading, spacing: 20) {
                 SongDetailCard(entry: entry)
+                    .padding(.vertical, 32)
                 
                 VStack (alignment: .leading){
                     Text("EMOTION")
@@ -47,7 +48,7 @@ struct SongDetailView: View {
                     .foregroundStyle(.white)
                     .fontWeight(.bold)
                     .glassEffect(.regular.interactive())
-                    .background(Color(red: 0.050980392156862744, green: 0, blue: 0.3137254901960784).clipShape(RoundedRectangle(cornerRadius: 48)))
+                    .background(Color(red: 0.050980392156862744, green: 0, blue:0.3137254901960784).clipShape(RoundedRectangle(cornerRadius: 48)))
                     .overlay(
                         RoundedRectangle(cornerRadius: 48)
                             .stroke(Color.white, lineWidth: 0.5)
@@ -59,5 +60,5 @@ struct SongDetailView: View {
 }
 
 #Preview {
-    SongDetailView(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Happy", "Sad"], emotionIcon: ["face.smiling", "drop.fill"]))
+    SongDetailView(entry: Song(imageName: "laufey", title: "Promise", artist: "Laufey", emotion: ["Sadness", "Surprise"], emotionIcon: ["drop", "sparkles"]))
 }
