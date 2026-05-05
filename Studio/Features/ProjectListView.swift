@@ -9,8 +9,7 @@ struct ProjectListView: View {
     let footerProjectColor = Color(red: 85/255, green: 96/255, blue: 247/255) // #5560F7
     
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
+        VStack(spacing: 0) {
                 HStack {
                     Text("PROJECTS")
                         .font(.system(size: 24, weight: .bold))
@@ -63,8 +62,8 @@ struct ProjectListView: View {
             }
             .navigationDestination(isPresented: $isPresentingRecordingView) {
                 RecordingSoundView()
+                    .studioNavbar()
             }
-        }
         .preferredColorScheme(.dark)
     }
 }

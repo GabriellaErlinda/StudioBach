@@ -6,7 +6,7 @@ struct AddFilePopupView: View {
     @State private var isFileImporterPresented = false
     
     var body: some View {
-        ZStack {
+        ZStack/*(alignment: .bottom)*/ {
             // Backdrop
             Color.black.opacity(0.6)
                 .ignoresSafeArea()
@@ -73,12 +73,14 @@ struct AddFilePopupView: View {
                     endPoint: .bottomTrailing
                 )
             )
+            .clipShape(RoundedRectangle(cornerRadius: 32))
             .glassEffect(.clear, in: .rect(cornerRadius: 32))
             .overlay(
                 RoundedRectangle(cornerRadius: 32)
                     .stroke(Color.white.opacity(0.15), lineWidth: 1)
             )
-            .padding(32)
+            .padding(.horizontal, 32)
+            .padding(.bottom, 0)
         }
         .fileImporter(
             isPresented: $isFileImporterPresented,
