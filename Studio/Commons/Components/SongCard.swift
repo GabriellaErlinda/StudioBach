@@ -58,17 +58,25 @@ struct SongCard: View {
                 .foregroundStyle(.white)
                 .fontWeight(.bold)
                 .glassEffect(.regular.interactive())
-                .background(Color(red: 0.050980392156862744, green: 0, blue: 0.3137254901960784).clipShape(RoundedRectangle(cornerRadius: 48)))
+                .background(Color(red: 0.050980392156862744, green: 0, blue: 0.3137254901960784)
+                .clipShape(RoundedRectangle(cornerRadius: 32)))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 48)
+                    RoundedRectangle(cornerRadius: 32)
                         .stroke(Color.white, lineWidth: 0.5)
                 )
                 .padding(.leading)
                 .padding(.trailing)
             }
             .frame(width: 280, height: 373)
-            .glassEffect(.clear, in: .rect(cornerRadius: 40))
-            .background(LinearGradient(colors: [Color(red: 0.3568627450980392, green: 0.3764705882352941, blue: 0.9490196078431372), Color(red: 0.023529411764705882, green: 0.027450980392156862, blue: 0.08627450980392157)], startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.1).clipShape(RoundedRectangle(cornerRadius: 40)))
+            .glassEffect(.clear, in: .rect(cornerRadius: 32))
+            .background(LinearGradient(colors: [
+                    Color("blue-ribbon-800"),
+                    Color("blue-ribbon-900")],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                    )
+                .opacity(0.1)
+                .clipShape(RoundedRectangle(cornerRadius: 32)))
         }
     }
     

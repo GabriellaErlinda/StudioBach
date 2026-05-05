@@ -6,8 +6,16 @@ struct SongDetailView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            LinearGradient(colors: [Color(red: 0.07450980392156863, green: 0.07450980392156863, blue: 0.07450980392156863), Color(red: 0.0196078431372549, green: 0, blue: 0.047058823529411764)], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color("blue-ribbon-900"),
+                    Color("blue-ribbon-950"),
+                    Color("primary-950")
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
             
             VStack(alignment: .leading, spacing: 20) {
                 SongDetailCard(entry: entry)
@@ -68,7 +76,8 @@ struct SongDetailView: View {
                     .foregroundStyle(.white)
                     .fontWeight(.bold)
                     .glassEffect(.regular.interactive())
-                    .background(Color(red: 0.050980392156862744, green: 0, blue:0.3137254901960784).clipShape(RoundedRectangle(cornerRadius: 48)))
+                    .background(Color(red: 0.050980392156862744, green: 0, blue:0.3137254901960784)
+                    .clipShape(RoundedRectangle(cornerRadius: 48)))
                     .overlay(
                         RoundedRectangle(cornerRadius: 48)
                             .stroke(Color.white, lineWidth: 0.5)

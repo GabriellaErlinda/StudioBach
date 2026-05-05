@@ -38,9 +38,9 @@ struct ProjectCard: View {
         .padding(.horizontal, 24)
         .padding(.vertical, 20)
         .background(cardBackgroundColor)
-        .cornerRadius(25)
+        .cornerRadius(32)
         .overlay(
-            RoundedRectangle(cornerRadius: 25)
+            RoundedRectangle(cornerRadius: 32)
                 .stroke(Color.white.opacity(0.1), lineWidth: 1)
         )
     }
@@ -65,17 +65,15 @@ private struct CircularSongImage: View {
     let imageName: String
     
     var body: some View {
-        // Menggunakan Image(systemName:) untuk testing icon.
-        // Ubah jadi Image(imageName) nanti jika Anda menggunakan gambar dari Assets.
         Image(systemName: imageName)
             .resizable()
             .scaledToFit()
             .padding(8)
             .frame(width: 40, height: 40)
-            .background(Color.gray.opacity(0.3)) // Background agar icon terlihat
+            .background(Color.gray.opacity(0.3))
             .clipShape(Circle())
             .overlay(
-                Circle().stroke(Color.black, lineWidth: 2) // Outline pemisah antar gambar
+                Circle().stroke(Color.black, lineWidth: 2)
             )
     }
 }

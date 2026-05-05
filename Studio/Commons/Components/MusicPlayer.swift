@@ -39,6 +39,26 @@ struct MusicPlayer: View {
                 ), in: 0...1)
                 .tint(Color(red: 0.529, green: 0.6, blue: 0.937))
                 .scaleEffect(x: 1, y: 0.8)
+<<<<<<< HEAD
+=======
+                .overlay(
+                    GeometryReader { geometry in
+                        Color.clear
+                            .contentShape(Rectangle())
+                            .gesture(
+                                DragGesture(minimumDistance: 0)
+                                    .onChanged { value in
+                                        let percentage = min(max(0, value.location.x / geometry.size.width), 1)
+                                        progress = Double(percentage)
+                                    }
+                                    .onEnded { value in
+                                        let targetTime = progress * duration
+                                        player?.seek(to: CMTime(seconds: targetTime, preferredTimescale: 1000))
+                                    }
+                            )
+                    }
+                )
+>>>>>>> 99fb13b3d63c51c32ab298094a8f4f4ad3d16af0
                 
                 HStack {
                     Text(player.formatTime(player.currentTime))
@@ -91,18 +111,39 @@ struct MusicPlayer: View {
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color(red: 0.18, green: 0.12, blue: 0.35),
-                    Color(red: 0.08, green: 0.06, blue: 0.18)
+                    Color("blue-ribbon-800"),
+                    Color("blue-ribbon-950")
                 ]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
         )
-        .glassEffect(.clear, in: .rect(cornerRadius: 24))
-        .cornerRadius(24)
+        .overlay(
+            RoundedRectangle(cornerRadius: 32)
+                .stroke(Color.white, lineWidth: 1)
+        )
+        //.glassEffect(.clear, in: .rect(cornerRadius: 24))
+        .cornerRadius(32)
         .shadow(color: Color.purple.opacity(0.15), radius: 20, x: 0, y: 10)
+<<<<<<< HEAD
         .onDisappear {
             player.stop()
+=======
+        .onAppear(perform: setupPlayer)
+        .onDisappear { player?.pause()
+        }
+    }
+    
+    private func setupPlayer() {
+        // Use API snippet URL if provided, otherwise fallback
+        let url: URL
+        if let provided = audioURL {
+            url = provided
+        } else if let fallback = URL(string: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3") {
+            url = fallback
+        } else {
+            return
+>>>>>>> 99fb13b3d63c51c32ab298094a8f4f4ad3d16af0
         }
     }
 }

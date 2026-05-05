@@ -9,6 +9,8 @@ import SwiftUI
 
 struct StudioNavbar: ViewModifier {
     @Environment(\.dismiss) var dismiss
+    @State private var showInfo = false
+
     func body(content: Content) -> some View {
         content
             .toolbar {
@@ -24,12 +26,26 @@ struct StudioNavbar: ViewModifier {
                         .frame(width: 120, height: 41)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {}) {
+                    Button(action: { showInfo = true }) {
                         Image(systemName: "info")
                     }
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .overlay {
+                if showInfo {
+                    // Dimmed backdrop — tap to dismiss
+                    Color.black.opacity(0.5)
+                        .ignoresSafeArea()
+                        .onTapGesture { withAnimation(.easeOut) { showInfo = false } }
+
+                    // Centered card
+                    InfoPopUpView(isPresented: $showInfo)
+                        .padding(.horizontal, 40)
+                        .transition(.opacity.combined(with: .scale(scale: 0.95)))
+                }
+            }
+            .animation(.easeOut(duration: 0.2), value: showInfo)
     }
 }
 

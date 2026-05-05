@@ -4,8 +4,16 @@ struct ProjectListView: View {
     @StateObject var viewModel = ProjectViewModel()
     @State private var isPresentingRecordingView = false
     
-    // Warna Hex Sesuai Instruksi
-    let themeColor = Color(red: 135/255, green: 153/255, blue: 239/255)       // #8799EF
+    let themeColor = LinearGradient(
+        gradient: Gradient(colors: [
+            Color("blue-ribbon-900"),
+            Color("blue-ribbon-950"),
+            Color("primary-950")
+        ]),
+        startPoint: .top,
+        endPoint: .bottom
+    )
+    
     let footerProjectColor = Color(red: 85/255, green: 96/255, blue: 247/255) // #5560F7
     
     var body: some View {
@@ -50,7 +58,7 @@ struct ProjectListView: View {
                         .padding(.vertical, 16)
                         .padding(.horizontal, 40)
                         .background(Capsule()
-                            .fill(Color(red: 0.33, green: 0.38, blue: 0.97).opacity(0.4)))
+                            .fill(Color("blue-ribbon-400")))
                         .overlay(
                             Capsule()
                                 .stroke(Color.white.opacity(0.2), lineWidth: 1)

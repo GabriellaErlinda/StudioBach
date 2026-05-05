@@ -24,7 +24,16 @@ struct ProjectDetailView: View {
     var body: some View {
         ZStack {
             // Background
-            Color(red: 0.04, green: 0.03, blue: 0.05).ignoresSafeArea()
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color("blue-ribbon-900"),
+                    Color("blue-ribbon-950"),
+                    Color("primary-950")
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
             
             VStack(alignment: .leading, spacing: 0) {
                 

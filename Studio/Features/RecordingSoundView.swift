@@ -17,13 +17,18 @@ enum RecordingState {
 
 // view
 struct RecordingSoundView: View {
+    //record states
     @State private var recordingState: RecordingState = .idle
     @State private var elapsedSeconds: Int = 0
     @State private var timer: Timer?
     @State private var waveformPhase: Double = 0
     @State private var pulseScale: CGFloat = 1.0
     @State private var showAddFilePopup = false
+    
+    // project management
     @State private var projectTitle: String = ""
+    @State private var isNamingProject: Bool = false
+    @State private var hasStartedProject: Bool = false
     
     // Audio recording
     @State private var audioRecorder: AVAudioRecorder?
@@ -40,9 +45,9 @@ struct RecordingSoundView: View {
                 // Background gradient
                 LinearGradient(
                     gradient: Gradient(colors: [
-                        Color(red: 0.08, green: 0.06, blue: 0.15),
-                        Color(red: 0.10, green: 0.08, blue: 0.20),
-                        Color(red: 0.06, green: 0.05, blue: 0.12)
+                        Color("blue-ribbon-900"),
+                        Color("blue-ribbon-950"),
+                        Color("primary-950")
                     ]),
                     startPoint: .top,
                     endPoint: .bottom
@@ -52,7 +57,8 @@ struct RecordingSoundView: View {
                 // radial glow ala ala dibawah mic
                 RadialGradient(
                     gradient: Gradient(colors: [
-                        accentBlue.opacity(0.15),
+                        Color("blue-ribbon-600").opacity(0.5),
+                        Color("blue-ribbon-800").opacity(0.5),
                         Color.clear
                     ]),
                     center: .center,
@@ -98,12 +104,46 @@ struct RecordingSoundView: View {
                     .zIndex(2)
             }
         }
-        .preferredColorScheme(.dark)
+//        .preferredColorScheme(.dark)
+        .ignoresSafeArea(.keyboard)
     }
     
     
     
     // Header Content
+    private var projectTitleInput: some View {
+        HStack {
+            TextField("", text: $projectTitle, prompt:
+                Text("Project Name")
+                    .foregroundColor(.white.opacity(0.3))
+            )
+            .font(.system(size: 18, weight: .medium))
+            .foregroundColor(.white)
+            .multilineTextAlignment(.center)
+            .tint(Color("blue-ribbon-400"))
+
+            if !projectTitle.isEmpty {
+                Button(action: { projectTitle = "" }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.white.opacity(0.3))
+                }
+                .transition(.opacity)
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
+        .frame(maxWidth: 280)
+        .background(
+            RoundedRectangle(cornerRadius: 18)
+                .fill(Color.black.opacity(0.3))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 18)
+                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                )
+        )
+        .animation(.default, value: projectTitle.isEmpty)
+    }
+    
     @ViewBuilder
     private var headerContent: some View {
         switch recordingState {
@@ -113,16 +153,47 @@ struct RecordingSoundView: View {
                     .font(.system(size: 26, weight: .bold))
                     .foregroundColor(.white)
                 
-                TextField("Input Project Name...", text: $projectTitle)
+                HStack {
+                    TextField("", text: $projectTitle, prompt:
+                        Text("Name this project")
+                            .foregroundColor(.white.opacity(0.3))
+                    )
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .tint(.white.opacity(0.5))
+                    .tint(Color("blue-ribbon-400"))
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 18)
+                            .fill(Color.black.opacity(0.3)) // Dark card look from image
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 18)
+                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                            )
+                    )
+                    
+                    // Clear Button (only shows when there is text)
+                    if !projectTitle.isEmpty {
+                        Button(action: { projectTitle = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.white.opacity(0.3))
+                        }
+                        .transition(.opacity)
+                    }
+                }.frame(maxWidth: 280)
+                
+                Text("Each recording creates a new project if left empty")
+                    .font(.system(size: 11))
+                    .foregroundColor(.white.opacity(0.4))
+                    .multilineTextAlignment(.center)
+                
             }
             .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            
                 
         case .recording, .done:
-            VStack(spacing: 8) { // Adjust spacing as needed
+            VStack(spacing: 8) {
                 TextField("Project Name...", text: $projectTitle)
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(.white.opacity(0.8))
@@ -145,9 +216,9 @@ struct RecordingSoundView: View {
                     .fill(
                         LinearGradient(
                             colors: [
-                                accentBlue.opacity(0.6),
-                                accentBlue,
-                                Color.white.opacity(0.7)
+                                Color("blue-ribbon-700"),
+                                Color("blue-ribbon-400"),
+                                Color("blue-ribbon-100")
                             ],
                             startPoint: .bottom,
                             endPoint: .top

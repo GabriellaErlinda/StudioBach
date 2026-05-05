@@ -15,9 +15,8 @@ struct ChordCard: View {
             .frame(width: 75, height: 75)
             .foregroundStyle(.white)
             .fontWeight(.bold)
-            .glassEffect(.clear)
-            .background(Color(red: 0.3333333333333333, green: 0.3764705882352941, blue: 0.9686274509803922, opacity: 0.5))
-            .clipShape(RoundedRectangle(cornerRadius: 48))
+            .background(Color("blue-ribbon-300"))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 

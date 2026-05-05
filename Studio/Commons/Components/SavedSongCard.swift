@@ -53,16 +53,8 @@ struct SavedSongCard: View {
                 .foregroundColor(.white.opacity(0.8))
         }
         .padding()
-        .background(
-            ZStack {
-                Color("blue-ribbon-950")
-                    .opacity(0.2)
-                
-                RoundedRectangle(cornerRadius: 24)
-                    .glassEffect(.clear, in: .rect(cornerRadius: 24))
-            }
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .background(Color("blue-ribbon-900").opacity(0.6))
+        .clipShape(RoundedRectangle(cornerRadius: 32))
     }
     
     private var songPlaceholder: some View {
