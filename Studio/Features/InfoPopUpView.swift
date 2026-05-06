@@ -21,7 +21,7 @@ struct InfoPopUpView: View {
             .padding(16)
             .background(glassCard)
             .clipShape(cardShape)
-            .overlay(cardShape.strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5))
+            //.overlay(cardShape.strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5))
             .shadow(color: .white.opacity(0.04), radius: 10, x: 4, y: 4)
 
             // Close button pinned to top-trailing corner
@@ -30,7 +30,7 @@ struct InfoPopUpView: View {
                     .font(.system(size: 20))
                     .foregroundColor(.white.opacity(0.4))
             }
-            .offset(x: 8, y: -8)
+            .offset(x: -8, y: 8)
         }
     }
 
@@ -72,12 +72,11 @@ struct InfoPopUpView: View {
     private var ctaButton: some View {
         Text("Get Started")
             .font(.custom("Urbanist-Bold", size: 12))
-            .foregroundColor(Color(hex: "bfbfbf"))
             .padding(.horizontal, 24)
             .padding(.vertical, 8)
             .background(
                 LinearGradient(
-                    colors: [Color(hex: "5560f7"), Color(hex: "323891")],
+                    colors: [Color("blue-ribbon-400"), Color("blue-ribbon-600")],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -85,33 +84,27 @@ struct InfoPopUpView: View {
             .clipShape(Capsule())
     }
 
-    // Top-right corner is sharp; all others are 24pt
-    private var cardShape: UnevenRoundedRectangle {
-        UnevenRoundedRectangle(
-            topLeadingRadius: 24,
-            bottomLeadingRadius: 24,
-            bottomTrailingRadius: 24,
-            topTrailingRadius: 0
-        )
+    private var cardShape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: 24)
     }
 
     // Frosted glass card: blur backdrop + semi-transparent gradient tint
     private var glassCard: some View {
         ZStack {
             // Backdrop blur — recreates CSS backdrop-filter: blur()
-            Color.clear
-                .background(.ultraThinMaterial)
+//            Color.clear
+//                .background(.ultraThinMaterial)
 
             // Gradient tint on top of the blur
             LinearGradient(
                 stops: [
-                    .init(color: Color(red: 91/255, green: 96/255, blue: 242/255).opacity(0.18), location: 0),
-                    .init(color: Color(red: 6/255, green: 7/255, blue: 22/255).opacity(0.18), location: 1)
+                    .init(color: Color("blue-ribbon-800").opacity(0.5), location: 0),
+                    .init(color: Color("blue-ribbon-900").opacity(0.5), location: 1)
                 ],
                 startPoint: UnitPoint(x: 0.179, y: 0.117),
                 endPoint: UnitPoint(x: 0.821, y: 0.883)
             )
-        }
+        } .glassEffect(.clear, in: .rect(cornerRadius: 24))
     }
 }
 
@@ -141,18 +134,5 @@ private struct FeatureRow: View {
                 .lineSpacing(1)
                 .frame(width: labelWidth, alignment: .leading)
         }
-    }
-}
-
-// MARK: - Color Extension
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let r = Double((int >> 16) & 0xFF) / 255
-        let g = Double((int >> 8) & 0xFF) / 255
-        let b = Double(int & 0xFF) / 255
-        self.init(red: r, green: g, blue: b)
     }
 }
