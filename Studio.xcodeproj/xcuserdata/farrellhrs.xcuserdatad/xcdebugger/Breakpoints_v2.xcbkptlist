@@ -18,6 +18,36 @@
             endingLineNumber = "123"
             landmarkName = "snippetURL(songId:start:end:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D11F1BAA-EED2-466B-B812-C176A9462915 - 8bc0d76048ea3640"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BachStudio.AudioSearchService.snippetURL(songId: Swift.String, start: Swift.String, end: Swift.String) -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "BachStudio.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/farrellhrs/Documents/CBL/CBL_2/StudioBach/Studio/App/AudioSearchService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124">
+               </Location>
+               <Location
+                  uuid = "D11F1BAA-EED2-466B-B812-C176A9462915 - 8bc0d76048ea3640"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BachStudio.AudioSearchService.snippetURL(songId: Swift.String, start: Swift.String, end: Swift.String) -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "BachStudio.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/farrellhrs/Documents/CBL/CBL_2/StudioBach/Studio/App/AudioSearchService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -90,6 +90,8 @@ struct SongResultsView: View {
         }
     }
     
+    @State private var scrolledIndex: Int?
+    
     // view result
     private var resultsView: some View {
         VStack(spacing: 16) {
@@ -120,13 +122,6 @@ struct SongResultsView: View {
                                     .opacity(phase.isIdentity ? 1.0 : 0.8)
                                     .blur(radius: phase.isIdentity ? 0 : 2)
                             }
-                            .onAppear {
-                                // When this card scrolls into view, play its snippet
-                                if currentIndex != index {
-                                    currentIndex = index
-                                    playSnippet(for: entry)
-                                }
-                            }
                     }
                     
                     if visibleCount < songs.count {
@@ -135,11 +130,21 @@ struct SongResultsView: View {
                                 visibleCount += 5
                             }
                         }
+                        .id(visibleCount) // give it an id too just in case
                     }
                 }
                 .scrollTargetLayout()
             }
             .scrollTargetBehavior(.viewAligned)
+            .scrollPosition(id: $scrolledIndex)
+            .onChange(of: scrolledIndex) { oldIndex, newIndex in
+                if let newIndex = newIndex, newIndex < songs.count {
+                    if currentIndex != newIndex {
+                        currentIndex = newIndex
+                        playSnippet(for: songs[newIndex])
+                    }
+                }
+            }
             .safeAreaPadding(.horizontal, 60)
             
             // Now Playing indicator

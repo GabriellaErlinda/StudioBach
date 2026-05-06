@@ -55,8 +55,11 @@ class SnippetPlayerManager: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 if status == .readyToPlay {
+                    print("SnippetPlayerManager: readyToPlay for \(url)")
                     self?.player?.play()
                     self?.isPlaying = true
+                } else if status == .failed {
+                    print("SnippetPlayerManager: Failed to play \(url). Error: \(String(describing: playerItem.error))")
                 }
             }
             .store(in: &cancellables)
