@@ -27,10 +27,14 @@ struct SongDetailView: View {
                         Text("EMOTION")
                             .foregroundStyle(.white)
                             .fontWeight(.bold)
+                        
                         HStack(spacing: 8) {
-                            ForEach(entry.emotion.indices, id: \.self) { index in
+                            // Use .prefix(2) and Array() to keep it stable
+                            let limitedEmotions = Array(entry.emotion.prefix(2))
+                            
+                            ForEach(limitedEmotions.indices, id: \.self) { index in
                                 let iconName = index < entry.emotionIcon.count ? entry.emotionIcon[index] : "music.note"
-                                EmotionPill(emotion: entry.emotion[index], iconName: iconName)
+                                EmotionPill(emotion: limitedEmotions[index], iconName: iconName)
                             }
                         }
                     }
