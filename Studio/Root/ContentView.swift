@@ -11,10 +11,6 @@ struct ContentView: View {
     @State private var selectedTab = 0
     
     var body: some View {
-        Button("Test Crash") {
-            fatalError("Crashlytics Test Crash")
-        }
-        
         TabView(selection: $selectedTab) {
             NavigationStack {
                 RecordingSoundView()
