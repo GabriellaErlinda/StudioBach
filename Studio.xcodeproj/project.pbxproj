@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		83FE97B62FA7152500262519 /* BachStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BachStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,8 +58,9 @@
 			buildConfigurationList = 83FE97C12FA7152600262519 /* Build configuration list for PBXNativeTarget "BachStudio" */;
 			buildPhases = (
 				83FE97B22FA7152500262519 /* Sources */,
-				83FE97B32FA7152500262519 /* Frameworks */,
 				83FE97B42FA7152500262519 /* Resources */,
+				83FE97B32FA7152500262519 /* Frameworks */,
+				7F1CD6E630498E2F001BAB02 /* Firebase Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -65,6 +71,7 @@
 			);
 			name = BachStudio;
 			packageProductDependencies = (
+				7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */,
 			);
 			productName = Studio;
 			productReference = 83FE97B62FA7152500262519 /* BachStudio.app */;
@@ -94,6 +101,9 @@
 			);
 			mainGroup = 83FE97AD2FA7152500262519;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 83FE97B72FA7152500262519 /* Products */;
 			projectDirPath = "";
@@ -113,6 +123,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7F1CD6E630498E2F001BAB02 /* Firebase Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		83FE97B22FA7152500262519 /* Sources */ = {
@@ -159,7 +190,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BBW6TR42T6;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -254,7 +285,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F864349U64;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
@@ -290,7 +321,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F864349U64;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
@@ -340,6 +371,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.18.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83FE97AE2FA7152500262519 /* Project object */;
 }
