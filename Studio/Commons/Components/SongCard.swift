@@ -1,9 +1,7 @@
 import SwiftUI
 
 struct SongCard: View {
-    
     let entry: Song
-    
     var body: some View {
         ZStack {
             VStack(spacing: 5) {
@@ -14,7 +12,7 @@ struct SongCard: View {
                         case .success(let image):
                             image
                                 .resizable()
-                                .aspectRatio(contentMode: .fill)
+                                .scaledToFill()
                         case .failure:
                             imagePlaceholder
                         case .empty:
@@ -30,25 +28,22 @@ struct SongCard: View {
                 } else {
                     Image(entry.imageName)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .scaledToFill()
                         .font(.system(size: 100))
                         .frame(width: 192, height: 192, alignment: .center)
                         .clipShape(Circle())
                         .padding(.bottom)
                         .scaledToFill()
                 }
-                
                 Text(entry.title)
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(.white)
                     .lineLimit(1)
-                
                 Text(entry.artist)
                     .font(.system(size: 14))
                     .foregroundStyle(Color(red: 0.5294117647058824, green: 0.6, blue: 0.9372549019607843))
                     .padding(.bottom, 20)
                     .lineLimit(1)
-                
                 NavigationLink("SEE DETAILS") {
                     SongDetailView(entry: entry)
                         .studioNavbar()
@@ -79,7 +74,6 @@ struct SongCard: View {
                 .clipShape(RoundedRectangle(cornerRadius: 32)))
         }
     }
-    
     private var imagePlaceholder: some View {
         ZStack {
             Circle()

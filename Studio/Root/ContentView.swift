@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab = 0
-    
+
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
@@ -20,7 +20,7 @@ struct ContentView: View {
                 Label("Record", systemImage: "microphone.fill")
             }
             .tag(0)
-            
+
             NavigationStack {
                 ProjectListView()
                     .studioNavbar()

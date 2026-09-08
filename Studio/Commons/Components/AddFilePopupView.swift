@@ -4,7 +4,6 @@ import UniformTypeIdentifiers
 struct AddFilePopupView: View {
     @Binding var isPresented: Bool
     @State private var isFileImporterPresented = false
-    
     var body: some View {
         ZStack/*(alignment: .bottom)*/ {
             // Backdrop
@@ -15,7 +14,6 @@ struct AddFilePopupView: View {
                         isPresented = false
                     }
                 }
-            
             // Popup Box
             VStack(spacing: 24) {
                 // Icon
@@ -23,46 +21,48 @@ struct AddFilePopupView: View {
                     .font(.system(size: 48))
                     .foregroundColor(Color("blue-ribbon-500"))
                     .shadow(color: Color("blue-ribbon-400").opacity(0.5), radius: 10, x: 0, y: 5)
-                
                 // Texts
                 VStack(spacing: 8) {
                     Text("Import Audio File")
                         .font(.system(size: 22, weight: .bold))
                         .foregroundColor(.white)
-                    
                     Text("Select an audio file from your device to use in this project.")
                         .font(.system(size: 14))
                         .foregroundColor(.white.opacity(0.7))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                 }
-                
                 // Buttons
                 VStack(spacing: 12) {
-                    Button(action: {
-                        isFileImporterPresented = true
-                    }) {
-                        Text("Browse Files")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Capsule().fill(Color("blue-ribbon-400")))
-                    }
-                    
-                    Button(action: {
-                        withAnimation {
-                            isPresented = false
+                    Button(
+                        action: {
+                            isFileImporterPresented = true
+                        },
+                        label: {
+                            Text("Browse Files")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Capsule().fill(Color("blue-ribbon-400")))
                         }
-                    }) {
-                        Text("Cancel")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white.opacity(0.8))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Capsule().fill(Color.white.opacity(0.1)))
-                            .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
-                    }
+                    )
+                    Button(
+                        action: {
+                            withAnimation {
+                                isPresented = false
+                            }
+                        },
+                        label: {
+                            Text("Cancel")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.white.opacity(0.8))
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Capsule().fill(Color.white.opacity(0.1)))
+                                .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
+                        }
+                    )
                 }
             }
             .padding(32)
@@ -82,7 +82,7 @@ struct AddFilePopupView: View {
             isPresented: $isFileImporterPresented,
             allowedContentTypes: [.audio],
             allowsMultipleSelection: false
-        ) { result in
+        ) { _ in
             // TODO: handling file selection
             withAnimation {
                 isPresented = false

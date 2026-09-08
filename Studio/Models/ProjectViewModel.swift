@@ -1,3 +1,4 @@
+import Combine
 //
 //  ProjectViewModel.swift
 //  Studio
@@ -6,10 +7,9 @@
 //
 import Foundation
 import SwiftUI
-import Combine
 
 class ProjectViewModel: ObservableObject {
-    
+
     // Masukkan data contoh (dummy data) langsung ke sini agar tidak kosong saat di-run
     @Published var projects: [ProjectCardModel] = [
         ProjectCardModel(
@@ -34,29 +34,29 @@ class ProjectViewModel: ObservableObject {
             ]
         )
     ]
-    
+
     // --- ASUMSI LOGIC PENDETEKSI EMOSI ---
     private func analyzeEmotion(from audioRecord: Any?) -> SongEmotion {
         let detectedEmotions: [SongEmotion] = [.joyful, .sadness, .nostalgic, .energetic, .calm]
         return detectedEmotions.randomElement() ?? .unknown
     }
-    
+
     // --- LOGIC SAVE PROJECT ---
     func saveSongToNewProject(title: String, coverImage: String, recordedAudio: Any?) {
-        
+
         let detectedEmotion = analyzeEmotion(from: recordedAudio)
-        
+
         let newSong = RecentSongModel(
             imageName: coverImage,
             dateSaved: Date(),
             emotion: detectedEmotion
         )
-        
+
         let newProject = ProjectCardModel(
             title: title,
             recentSongs: [newSong]
         )
-        
+
         projects.insert(newProject, at: 0)
     }
 }

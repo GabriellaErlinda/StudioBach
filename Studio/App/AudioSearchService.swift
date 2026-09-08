@@ -5,8 +5,8 @@
 //  Networking layer for the StudioBach audio retrieval API.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 // model response API nyax`
 
@@ -14,7 +14,6 @@ struct SearchResponse: Codable {
     let status: String
     let queryTimeSeconds: Double
     let results: [SearchResult]
-    
     enum CodingKeys: String, CodingKey {
         case status
         case queryTimeSeconds = "query_time_seconds"
@@ -24,7 +23,6 @@ struct SearchResponse: Codable {
 
 struct SearchResult: Codable, Identifiable {
     var id: String { songId }
-    
     let rank: Int
     let songId: String
     let score: Double
@@ -36,7 +34,6 @@ struct SearchResult: Codable, Identifiable {
     let audioUrl: String
     let albumImageUrl: String
     let artistImageUrl: String
-    
     enum CodingKeys: String, CodingKey {
         case rank
         case songId = "song_id"
@@ -57,63 +54,120 @@ struct Timestamp: Codable {
     let end: String
 }
 
-// service
+private let mockResults: [SearchResult] = [
+    SearchResult(
+        rank: 1,
+        songId: "mock_song_1",
+        score: 0.95,
+        timestamp: Timestamp(start: "0:00", end: "0:15"),
+        moods: ["Sadness", "Surprise"],
+        trackTitle: "Promise (Mock)",
+        artistName: "Laufey",
+        albumName: "Bewitched",
+        audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        albumImageUrl: "https://i.scdn.co/image/ab67616d0000b27313832cc69a78c53b18a8bc10",
+        artistImageUrl: ""
+    ),
+    SearchResult(
+        rank: 2,
+        songId: "mock_song_2",
+        score: 0.88,
+        timestamp: Timestamp(start: "0:10", end: "0:25"),
+        moods: ["Happiness", "Anger"],
+        trackTitle: "You Belong With Me (Mock)",
+        artistName: "Taylor Swift",
+        albumName: "Fearless",
+        audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        albumImageUrl: "https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png",
+        artistImageUrl: ""
+    ),
+    SearchResult(
+        rank: 3,
+        songId: "mock_song_3",
+        score: 0.88,
+        timestamp: Timestamp(start: "0:10", end: "0:25"),
+        moods: ["Happiness", "Anger"],
+        trackTitle: "You Belong With Me (Mock)",
+        artistName: "Taylor Swift",
+        albumName: "Fearless",
+        audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        albumImageUrl: "https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png",
+        artistImageUrl: ""
+    ),
+    SearchResult(
+        rank: 4,
+        songId: "mock_song_4",
+        score: 0.88,
+        timestamp: Timestamp(start: "0:10", end: "0:25"),
+        moods: ["Happiness", "Anger"],
+        trackTitle: "You Belong With Me (Mock)",
+        artistName: "Taylor Swift",
+        albumName: "Fearless",
+        audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        albumImageUrl: "https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png",
+        artistImageUrl: ""
+    ),
+    SearchResult(
+        rank: 5,
+        songId: "mock_song_5",
+        score: 0.88,
+        timestamp: Timestamp(start: "0:10", end: "0:25"),
+        moods: ["Happiness", "Anger"],
+        trackTitle: "You Belong With Me (Mock)",
+        artistName: "Taylor Swift",
+        albumName: "Fearless",
+        audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        albumImageUrl: "https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png",
+        artistImageUrl: ""
+    ),
+    SearchResult(
+        rank: 6,
+        songId: "mock_song_6",
+        score: 0.88,
+        timestamp: Timestamp(start: "0:10", end: "0:25"),
+        moods: ["Happiness", "Anger"],
+        trackTitle: "You Belong With Me (Mock)",
+        artistName: "Taylor Swift",
+        albumName: "Fearless",
+        audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        albumImageUrl: "https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png",
+        artistImageUrl: ""
+    ),
+    SearchResult(
+        rank: 7,
+        songId: "mock_song_7",
+        score: 0.88,
+        timestamp: Timestamp(start: "0:10", end: "0:25"),
+        moods: ["Happiness", "Anger"],
+        trackTitle: "You Belong With Me (Mock)",
+        artistName: "Taylor Swift",
+        albumName: "Fearless",
+        audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        albumImageUrl: "https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png",
+        artistImageUrl: ""
+    )
 
+]
+
+// service
 class AudioSearchService: ObservableObject {
     static let shared = AudioSearchService()
-    
     private let baseURL = "https://api.farrellhrs.dpdns.org"
-    
     @Published var searchResults: [SearchResult] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
-    
     /// Upload an audio file and get cover song matches.
     func search(audioURL: URL, alpha: Double = 0.5) async throws -> [SearchResult] {
-        let endpoint = "\(baseURL)/api/v1/search?alpha=\(alpha)"
-        guard let url = URL(string: endpoint) else {
-            throw URLError(.badURL)
+        // Simulate network delay (2 seconds)
+        try await Task.sleep(nanoseconds: 2_000_000_000)
+
+        // Update published property for UI (if applicable in your original code)
+        DispatchQueue.main.async {
+            self.searchResults = mockResults
         }
-        
-        let boundary = UUID().uuidString
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = 120 // API can take ~45s
-        
-        // Build multipart body
-        let audioData = try Data(contentsOf: audioURL)
-        var body = Data()
-        
-        // File field
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"recording.m4a\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: audio/mp4\r\n\r\n".data(using: .utf8)!)
-        body.append(audioData)
-        body.append("\r\n".data(using: .utf8)!)
-        
-        // Closing boundary
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        request.httpBody = body
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw URLError(.badServerResponse)
-        }
-        
-        guard httpResponse.statusCode == 200 else {
-            let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
-            throw NSError(domain: "API", code: httpResponse.statusCode,
-                          userInfo: [NSLocalizedDescriptionKey: "Server error \(httpResponse.statusCode): \(errorBody)"])
-        }
-        
-        let decoder = JSONDecoder()
-        let searchResponse = try decoder.decode(SearchResponse.self, from: data)
-        return searchResponse.results
+
+        return mockResults
     }
-    
     /// Build a snippet playback URL for a given song and timestamp range.
     func snippetURL(songId: String, start: String, end: String) -> URL? {
         var components = URLComponents(string: "\(baseURL)/api/v1/audio/\(songId)/snippet")
@@ -123,7 +177,6 @@ class AudioSearchService: ObservableObject {
         ]
         return components?.url
     }
-    
     /// Build a full audio URL for a given song.
     func fullAudioURL(songId: String) -> URL? {
         return URL(string: "\(baseURL)/api/v1/audio/\(songId)")

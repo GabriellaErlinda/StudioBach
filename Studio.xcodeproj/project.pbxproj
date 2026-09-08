@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */; };
+		7F6525B2304A792A0048148C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B1304A792A0048148C /* FirebasePerformance */; };
+		7F6525B4304A79300048148C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B3304A79300048148C /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,17 +29,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F6525B2304A792A0048148C /* FirebasePerformance in Frameworks */,
 				7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */,
+				7F6525B4304A79300048148C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F6525B0304A792A0048148C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83FE97AD2FA7152500262519 = {
 			isa = PBXGroup;
 			children = (
 				83FE97B82FA7152500262519 /* Studio */,
+				7F6525B0304A792A0048148C /* Frameworks */,
 				83FE97B72FA7152500262519 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +69,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83FE97C12FA7152600262519 /* Build configuration list for PBXNativeTarget "BachStudio" */;
 			buildPhases = (
+				7F6525D0304A7AE30048148C /* SwiftLint */,
 				83FE97B22FA7152500262519 /* Sources */,
 				83FE97B42FA7152500262519 /* Resources */,
 				83FE97B32FA7152500262519 /* Frameworks */,
@@ -72,6 +85,8 @@
 			name = BachStudio;
 			packageProductDependencies = (
 				7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */,
+				7F6525B1304A792A0048148C /* FirebasePerformance */,
+				7F6525B3304A79300048148C /* FirebaseAnalytics */,
 			);
 			productName = Studio;
 			productReference = 83FE97B62FA7152500262519 /* BachStudio.app */;
@@ -145,6 +160,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Locate GoogleService-Info.plist dynamically using SRCROOT\nGSP_PATH=\"${SRCROOT}/Studio/GoogleService-Info.plist\"\n\n# Dynamically locate the Crashlytics run tool in DerivedData\nRUN_SCRIPT=$(find \"${BUILD_DIR%/Build/*}\" -name \"run\" -path \"*/Crashlytics/run\" | head -n 1)\n\nif [ ! -f \"$GSP_PATH\" ]; then\n    echo \"error: GoogleService-Info.plist not found at path: $GSP_PATH\"\n    exit 1\nfi\n\nif [ -z \"$RUN_SCRIPT\" ]; then\n    echo \"error: Firebase run script tool not found.\"\n    exit 1\nfi\n\n# Run the upload tool with explicit plist path\n\"$RUN_SCRIPT\" -gsp \"$GSP_PATH\"\n";
+		};
+		7F6525D0304A7AE30048148C /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -393,6 +427,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		7F6525B1304A792A0048148C /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		7F6525B3304A79300048148C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

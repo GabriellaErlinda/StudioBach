@@ -28,7 +28,7 @@ struct ProjectCardModel: Identifiable {
     let id = UUID()
     var title: String
     var recentSongs: [RecentSongModel] = []
-    
+
     // 2. LOGIC UTAMA: Subtitle otomatis, bukan lagi String manual
     var subtitle: String {
         // Cari lagu dengan tanggal paling baru

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct Song: Identifiable {
     let id: String
-    
     // Display fields
     let imageName: String
     let imageURL: String?
@@ -14,14 +13,12 @@ struct Song: Identifiable {
     let emotionIcon: [String]
     let chords: [String]
     let chordImage: [String]
-    
     // API-specific fields
     let songId: String?
     let score: Double?
     let timestampStart: String?
     let timestampEnd: String?
     let audioURL: String?
-    
     // Convenience initializer for hardcoded preview data (backward compat)
     init(imageName: String, title: String, artist: String, emotion: [String], emotionIcon: [String]) {
         self.id = UUID().uuidString
@@ -41,7 +38,6 @@ struct Song: Identifiable {
         self.timestampEnd = nil
         self.audioURL = nil
     }
-    
     // Initializer from API SearchResult
     init(from result: SearchResult) {
         self.id = result.songId
@@ -61,26 +57,30 @@ struct Song: Identifiable {
         self.timestampEnd = result.timestamp.end
         self.audioURL = result.audioUrl
     }
-    
-    // Map mood strings to SF Symbol icon names
+    private static let moodIcons: [String: String] = [
+        "happy": "sun.max",
+        "joyful": "sun.max",
+        "sad": "drop",
+        "sadness": "drop",
+        "calm": "leaf",
+        "relaxing": "leaf",
+        "energetic": "bolt",
+        "nostalgic": "clock",
+        "angry": "flame",
+        "anger": "flame",
+        "surprise": "sparkles",
+        "film": "film",
+        "nature": "tree",
+        "warm": "sun.haze",
+        "emotional": "heart",
+        "meditative": "brain.head.profile",
+        "motivational": "star",
+        "corporate": "briefcase",
+        "advertising": "briefcase"
+    ]
+
     static func iconForMood(_ mood: String) -> String {
-        switch mood.lowercased() {
-        case "happy", "joyful":         return "sun.max"
-        case "sad", "sadness":          return "drop"
-        case "calm", "relaxing":        return "leaf"
-        case "energetic":               return "bolt"
-        case "nostalgic":               return "clock"
-        case "angry", "anger":          return "flame"
-        case "surprise":                return "sparkles"
-        case "film":                    return "film"
-        case "nature":                  return "tree"
-        case "warm":                    return "sun.haze"
-        case "emotional":               return "heart"
-        case "meditative":              return "brain.head.profile"
-        case "motivational":            return "star"
-        case "corporate", "advertising": return "briefcase"
-        default:                        return "music.note"
-        }
+        return moodIcons[mood.lowercased()] ?? "music.note"
     }
 }
 
@@ -96,16 +96,13 @@ struct SampleData {
         Song(imageName: "laufey", title: "Promises", artist: "Laufey", emotion: ["Sadness", "Surprise"], emotionIcon: ["drop", "sparkles"]),
         Song(imageName: "taylor", title: "You Belong With Me", artist: "Taylor Swift", emotion: ["Happiness", "Anger"], emotionIcon: ["sun.max", "flame"])
     ]
-    
     static let recordHistory: [RecordHistoryEntry] = [
         RecordHistoryEntry(recordName: "Take 1", date: "13.04.2026", length: "01:30:05"),
         RecordHistoryEntry(recordName: "Take 2", date: "13.04.2026", length: "01:30:05")
     ]
-    
     static let recentSongs: [RecentSongModel] = [
         .init(imageName: "laufey", dateSaved: .init(timeIntervalSince1970: 0), emotion: .joyful),
         .init(imageName: "taylor", dateSaved: .init(timeIntervalSince1970: 0), emotion: .sadness)
     ]
-    
     static let songEmotional: [SongEmotion] = [.joyful, .sadness, .nostalgic, .energetic, .calm, .unknown]
 }

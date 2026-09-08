@@ -12,4 +12,3 @@ struct RecordHistoryCardModel: Identifiable {
     let title: String
     let subtitle: String
 }
-

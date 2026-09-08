@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct EmotionPill: View {
-    
     let emotion: String
     let iconName: String
-    
     var body: some View {
-        
         HStack {
             Image(systemName: iconName)
             Text(emotion)

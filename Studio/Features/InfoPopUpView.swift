@@ -9,7 +9,6 @@ import SwiftUI
 
 struct InfoPopUpView: View {
     @Binding var isPresented: Bool
-
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack(spacing: 16) {
@@ -21,26 +20,25 @@ struct InfoPopUpView: View {
             .padding(16)
             .background(glassCard)
             .clipShape(cardShape)
-            //.overlay(cardShape.strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5))
+            // .overlay(cardShape.strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5))
             .shadow(color: .white.opacity(0.04), radius: 10, x: 4, y: 4)
-
             // Close button pinned to top-trailing corner
-            Button(action: { withAnimation(.easeOut) { isPresented = false } }) {
+            Button(action: { withAnimation(.easeOut) { isPresented = false } },
+                   label: {
                 Image(systemName: "xmark.circle.fill")
                     .font(.system(size: 20))
                     .foregroundColor(.white.opacity(0.4))
             }
+            )
             .offset(x: -8, y: 8)
         }
     }
-
     // MARK: - Subviews
     private var profileAvatar: some View {
         Image("studio_logo")
             .resizable()
             .frame(width: 100, height: 100)
     }
-
     private var headerText: some View {
         VStack(spacing: 8) {
             Text("Get in Composing")
@@ -48,7 +46,6 @@ struct InfoPopUpView: View {
                 .tracking(-0.15)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .center)
-
             Text("All you need for fast accurate chords and melody")
                 .font(.custom("Urbanist-Regular", size: 11))
                 .tracking(-0.16)
@@ -57,7 +54,6 @@ struct InfoPopUpView: View {
                 .frame(maxWidth: .infinity)
         }
     }
-
     private var featureList: some View {
         VStack(alignment: .leading, spacing: 8) {
             FeatureRow(icon: "waveform", label: "Record your melody")
@@ -68,7 +64,6 @@ struct InfoPopUpView: View {
             )
         }
     }
-
     private var ctaButton: some View {
         Text("Get Started")
             .font(.custom("Urbanist-Bold", size: 12))
@@ -83,18 +78,15 @@ struct InfoPopUpView: View {
             )
             .clipShape(Capsule())
     }
-
     private var cardShape: RoundedRectangle {
         RoundedRectangle(cornerRadius: 24)
     }
-
     // Frosted glass card: blur backdrop + semi-transparent gradient tint
     private var glassCard: some View {
         ZStack {
             // Backdrop blur — recreates CSS backdrop-filter: blur()
-//            Color.clear
-//                .background(.ultraThinMaterial)
-
+            //            Color.clear
+            //                .background(.ultraThinMaterial)
             // Gradient tint on top of the blur
             LinearGradient(
                 stops: [
@@ -112,8 +104,7 @@ struct InfoPopUpView: View {
 private struct FeatureRow: View {
     let icon: String
     let label: String
-    var labelWidth: CGFloat? = nil
-
+    var labelWidth: CGFloat?
     var body: some View {
         HStack(spacing: 8) {
             ZStack {
@@ -126,7 +117,6 @@ private struct FeatureRow: View {
             }
             .frame(width: 20, height: 20)
             .drawingGroup()
-
             Text(label)
                 .font(.custom("Urbanist-Bold", size: 8))
                 .tracking(-0.16)

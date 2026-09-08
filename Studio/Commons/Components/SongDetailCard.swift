@@ -1,11 +1,10 @@
-import SwiftUI
 import AVFoundation
+import SwiftUI
 
 struct SongDetailCard: View {
-    
     let entry: Song
-    
     var body: some View {
+        let darkPurple = Color(red: 0.05098, green: 0, blue: 0.3137)
         ZStack {
             VStack(spacing: 2) {
                 // Album image: remote or local
@@ -15,7 +14,7 @@ struct SongDetailCard: View {
                         case .success(let image):
                             image
                                 .resizable()
-                                .aspectRatio(contentMode: .fill)
+                                .scaledToFill()
                         case .failure:
                             imagePlaceholder
                         case .empty:
@@ -31,14 +30,13 @@ struct SongDetailCard: View {
                 } else {
                     Image(entry.imageName)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .scaledToFill()
                         .font(.system(size: 100))
                         .frame(width: 192, height: 192, alignment: .center)
                         .clipShape(Circle())
                         .padding(.bottom)
                         .scaledToFill()
                 }
-                
                 // Build snippet URL for playback
                 MusicPlayer(
                     title: entry.title,
@@ -51,10 +49,9 @@ struct SongDetailCard: View {
             }
             .frame(width: 280, height: 420)
             .glassEffect(.clear, in: .rect(cornerRadius: 40))
-            .background(LinearGradient(colors: [Color(red: 0.050980392156862744, green: 0, blue:0.3137254901960784), Color(red: 0.050980392156862744, green: 0, blue:0.3137254901960784)], startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.1).clipShape(RoundedRectangle(cornerRadius: 40)))
+            .background(darkPurple.opacity(0.1).clipShape(RoundedRectangle(cornerRadius: 40)))
         }
     }
-    
     private var imagePlaceholder: some View {
         ZStack {
             Circle()
@@ -65,7 +62,6 @@ struct SongDetailCard: View {
         }
         .frame(width: 192, height: 192)
     }
-    
     private func buildSnippetURL() -> URL? {
         guard let songId = entry.songId,
               let start = entry.timestampStart,

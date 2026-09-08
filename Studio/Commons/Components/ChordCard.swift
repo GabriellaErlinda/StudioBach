@@ -1,12 +1,9 @@
 import SwiftUI
 
 struct ChordCard: View {
-    
     let chord: String
     let chordImage: String
-    
     var body: some View {
-        
         VStack(spacing: 5) {
             Text(chord)
             Image(chordImage)

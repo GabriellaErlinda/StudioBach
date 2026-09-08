@@ -10,14 +10,16 @@ import SwiftUI
 struct StudioNavbar: ViewModifier {
     @Environment(\.dismiss) var dismiss
     @State private var showInfo = false
-
     func body(content: Content) -> some View {
         content
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(action: { dismiss() }) {
-                        Image(systemName: "chevron.backward")
-                    }
+                    Button(
+                        action: { dismiss() },
+                        label: {
+                            Image(systemName: "chevron.backward")
+                        }
+                    )
                 }
                 ToolbarItem(placement: .principal) {
                     Image("logo_inline")
@@ -26,9 +28,11 @@ struct StudioNavbar: ViewModifier {
                         .frame(width: 120, height: 41)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: { showInfo = true }) {
+                    Button(action: { showInfo = true },
+                           label: {
                         Image(systemName: "info")
                     }
+                    )
                 }
             }
             .navigationBarBackButtonHidden(true)
@@ -38,7 +42,6 @@ struct StudioNavbar: ViewModifier {
                     Color.black.opacity(0.5)
                         .ignoresSafeArea()
                         .onTapGesture { withAnimation(.easeOut) { showInfo = false } }
-
                     // Centered card
                     InfoPopUpView(isPresented: $showInfo)
                         .padding(.horizontal, 40)

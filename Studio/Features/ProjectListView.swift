@@ -3,7 +3,6 @@ import SwiftUI
 struct ProjectListView: View {
     @StateObject var viewModel = ProjectViewModel()
     @State private var isPresentingRecordingView = false
-    
     let themeColor = LinearGradient(
         gradient: Gradient(colors: [
             Color("blue-ribbon-900"),
@@ -13,9 +12,7 @@ struct ProjectListView: View {
         startPoint: .top,
         endPoint: .bottom
     )
-    
     let footerProjectColor = Color(red: 85/255, green: 96/255, blue: 247/255) // #5560F7
-    
     var body: some View {
         VStack(spacing: 0) {
                 HStack {
@@ -27,7 +24,6 @@ struct ProjectListView: View {
                 .padding(.horizontal, 25)
                 .padding(.top, 30)
                 .padding(.bottom, 10)
-                
                 ScrollView {
                     VStack(spacing: 15) {
                         ForEach(viewModel.projects) { project in
@@ -41,7 +37,6 @@ struct ProjectListView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 120)
                 }
-                
                 // --- FIXED BUTTON STYLE ---
                 HStack {
                     Spacer()

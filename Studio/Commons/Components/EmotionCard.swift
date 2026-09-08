@@ -14,7 +14,7 @@ struct EmotionModel: Identifiable {
             gradientColors: [
                 Color("blue-ribbon-400"),
                 Color("blue-ribbon-700"),
-                Color("blue-ribbon-950"),
+                Color("blue-ribbon-950")
             ]
         ),
         EmotionModel(
@@ -24,7 +24,7 @@ struct EmotionModel: Identifiable {
             gradientColors: [
                 Color("blue-ribbon-400"),
                 Color("blue-ribbon-700"),
-                Color("blue-ribbon-950"),
+                Color("blue-ribbon-950")
             ]
         ),
         EmotionModel(
@@ -34,7 +34,7 @@ struct EmotionModel: Identifiable {
             gradientColors: [
                 Color("blue-ribbon-400"),
                 Color("blue-ribbon-700"),
-                Color("blue-ribbon-950"),
+                Color("blue-ribbon-950")
             ]
         ),
         EmotionModel(
@@ -44,7 +44,7 @@ struct EmotionModel: Identifiable {
             gradientColors: [
                 Color("blue-ribbon-400"),
                 Color("blue-ribbon-700"),
-                Color("blue-ribbon-950"),
+                Color("blue-ribbon-950")
             ]
         ),
         EmotionModel(
@@ -54,7 +54,7 @@ struct EmotionModel: Identifiable {
             gradientColors: [
                 Color("blue-ribbon-400"),
                 Color("blue-ribbon-700"),
-                Color("blue-ribbon-950"),
+                Color("blue-ribbon-950")
             ]
         ),
         EmotionModel(
@@ -64,7 +64,7 @@ struct EmotionModel: Identifiable {
             gradientColors: [
                 Color("blue-ribbon-400"),
                 Color("blue-ribbon-700"),
-                Color("blue-ribbon-950"),
+                Color("blue-ribbon-950")
             ]
         )
     ]
@@ -127,7 +127,6 @@ struct LargeEmotionCard: View {
                         .overlay(
                             Circle().stroke(isMarked ? Color.clear : Color.white.opacity(0.4), lineWidth: 1)
                         )
-                    
                     if isMarked {
                         Image(systemName: "checkmark")
                             .font(.system(size: 12, weight: .bold))

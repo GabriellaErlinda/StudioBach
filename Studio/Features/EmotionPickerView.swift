@@ -9,17 +9,14 @@ import SwiftUI
 
 struct EmotionPickerView: View {
     let recordedAudioURL: URL?
-    
     @State private var selectedIndex = 1
     @State private var selectedEmotionIDs: Set<Int> = []
     let emotions = EmotionModel.all
-    
     var body: some View {
         ZStack {
             // Background
             Color(red: 0.07, green: 0.07, blue: 0.07)
                 .ignoresSafeArea()
-            
             VStack(spacing: 0) {
                 // Content
                 VStack(alignment: .leading, spacing: 0) {
@@ -28,7 +25,6 @@ struct EmotionPickerView: View {
                         Text("Current State")
                             .font(.custom("Urbanist", size: 24).weight(.semibold))
                             .foregroundColor(Color(red: 0.89, green: 0.89, blue: 0.89))
-                        
                         Text("Select the term that best describes your\nprimary emotion right now. \n\(selectedEmotionIDs.count)/3 selected")
                             .font(.custom("Urbanist", size: 16).weight(.medium))
                             .lineSpacing(6)
@@ -37,13 +33,11 @@ struct EmotionPickerView: View {
                     .padding(.horizontal, 24)
                     .padding(.top, 40)
                     .padding(.bottom, 40)
-                    
                     // Emotion Picker (Card Stack)
                     ZStack {
                         ForEach(0..<emotions.count, id: \.self) { index in
                             let distance = index - selectedIndex
                             let isSelected = distance == 0
-                            
                             if abs(distance) <= 1 { // Show only adjacent cards to mimic the design
                                 LargeEmotionCard(
                                     emotion: emotions[index],
@@ -72,9 +66,7 @@ struct EmotionPickerView: View {
                         }
                     }
                     .frame(height: 320)
-                    
                     Spacer()
-                    
                     // Continue Button
                     HStack {
                         Spacer()

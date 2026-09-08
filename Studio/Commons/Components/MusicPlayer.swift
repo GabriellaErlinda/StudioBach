@@ -10,11 +10,9 @@ import SwiftUI
 struct MusicPlayer: View {
     var title: String = "Midnight City"
     var artist: String = "M83"
-    var audioURL: URL? = nil
-    var songId: String? = nil
-    
+    var audioURL: URL?
+    var songId: String?
     @StateObject private var player = SnippetPlayerManager()
-    
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 4) {
@@ -27,9 +25,8 @@ struct MusicPlayer: View {
                     .foregroundColor(.white.opacity(0.6))
                     .lineLimit(1)
             }
-            
             // Progress Bar
-            VStack() {
+            VStack {
                 Slider(value: Binding(
                     get: { player.progress },
                     set: { newValue in
@@ -51,7 +48,6 @@ struct MusicPlayer: View {
                             )
                     }
                 )
-                
                 HStack {
                     Text(player.formatTime(player.currentTime))
                     Spacer()
@@ -61,38 +57,44 @@ struct MusicPlayer: View {
                 .foregroundColor(.white.opacity(0.6))
                 .offset(y: -8)
             }
-            
             // Playback Controls
             HStack(spacing: 40) {
-                Button(action: {
-                    player.skipBackward()
-                }) {
-                    Image(systemName: "backward.fill")
-                        .font(.system(size: 18))
-                }
-                
-                Button(action: {
-                    if player.isPlaying {
-                        player.togglePlayPause()
-                    } else if let url = audioURL {
-                        // If player hasn't started yet, start it
-                        if player.currentSongId == nil {
-                            player.play(url: url, songId: songId)
-                        } else {
-                            player.togglePlayPause()
-                        }
+                Button(
+                    action: {
+                        player.skipBackward()
+                    },
+                    label: {
+                        Image(systemName: "backward.fill")
+                            .font(.system(size: 18))
                     }
-                }) {
-                    Image(systemName: player.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                        .font(.system(size: 40))
-                }
-                
-                Button(action: {
-                    player.skipForward()
-                }) {
-                    Image(systemName: "forward.fill")
-                        .font(.system(size: 18))
-                }
+                )
+                Button(
+                    action: {
+                        if player.isPlaying {
+                            player.togglePlayPause()
+                        } else if let url = audioURL {
+                            // If player hasn't started yet, start it
+                            if player.currentSongId == nil {
+                                player.play(url: url, songId: songId)
+                            } else {
+                                player.togglePlayPause()
+                            }
+                        }
+                    },
+                    label: {
+                        Image(systemName: player.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                            .font(.system(size: 40))
+                    }
+                )
+                Button(
+                    action: {
+                        player.skipForward()
+                    },
+                    label: {
+                        Image(systemName: "forward.fill")
+                            .font(.system(size: 18))
+                    }
+                )
             }
             .foregroundColor(.white)
             .offset(y: -10)
@@ -114,7 +116,7 @@ struct MusicPlayer: View {
             RoundedRectangle(cornerRadius: 32)
                 .stroke(Color.white, lineWidth: 1)
         )
-        //.glassEffect(.clear, in: .rect(cornerRadius: 24))
+        // .glassEffect(.clear, in: .rect(cornerRadius: 24))
         .cornerRadius(32)
         .shadow(color: Color.purple.opacity(0.15), radius: 20, x: 0, y: 10)
         .onDisappear { player.pause() }
