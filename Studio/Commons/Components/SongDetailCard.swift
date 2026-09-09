@@ -1,4 +1,6 @@
 import AVFoundation
+import Models
+import Services
 import SwiftUI
 
 struct SongDetailCard: View {
@@ -52,6 +54,7 @@ struct SongDetailCard: View {
             .background(darkPurple.opacity(0.1).clipShape(RoundedRectangle(cornerRadius: 40)))
         }
     }
+    
     private var imagePlaceholder: some View {
         ZStack {
             Circle()
@@ -62,13 +65,15 @@ struct SongDetailCard: View {
         }
         .frame(width: 192, height: 192)
     }
+    
     private func buildSnippetURL() -> URL? {
         guard let songId = entry.songId,
               let start = entry.timestampStart,
               let end = entry.timestampEnd else {
             return nil
         }
-        return AudioSearchService.shared.snippetURL(songId: songId, start: start, end: end)
+        let service = AudioSearchService()
+        return service.snippetURL(songId: songId, start: start, end: end)
     }
 }
 

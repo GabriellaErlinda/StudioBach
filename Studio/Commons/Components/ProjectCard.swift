@@ -5,6 +5,8 @@
 //  Created by Gabriella Erlinda on 04/05/26.
 //
 
+import Models
+import Services
 import SwiftUI
 
 struct ProjectCard: View {

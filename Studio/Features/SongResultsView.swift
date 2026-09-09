@@ -1,3 +1,5 @@
+import Models
+import Services
 import SwiftUI
 
 struct SongResultsView: View {
@@ -10,7 +12,7 @@ struct SongResultsView: View {
     @State private var currentIndex: Int = 0
     @StateObject private var playerManager = SnippetPlayerManager()
 
-    private let service = AudioSearchService.shared
+    private let service = AudioSearchService()
 
     var body: some View {
         ZStack {
@@ -63,7 +65,6 @@ struct SongResultsView: View {
         }
     }
 
-    // view kalo error api call
     private func errorView(_ message: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle")
@@ -92,7 +93,6 @@ struct SongResultsView: View {
 
     @State private var scrolledIndex: Int?
 
-    // view result
     private var resultsView: some View {
         VStack(spacing: 16) {
             VStack {
@@ -130,7 +130,7 @@ struct SongResultsView: View {
                                 visibleCount += 5
                             }
                         }
-                        .id(visibleCount) // give it an id too just in case
+                        .id(visibleCount)
                     }
                 }
                 .scrollTargetLayout()
@@ -147,10 +147,8 @@ struct SongResultsView: View {
             }
             .safeAreaPadding(.horizontal, 60)
 
-            // Now Playing indicator
             if playerManager.isPlaying, currentIndex < songs.count {
                 HStack(spacing: 8) {
-                    // Animated bars
                     ForEach(0..<3, id: \.self) { i in
                         RoundedRectangle(cornerRadius: 1.5)
                             .fill(Color(red: 0.53, green: 0.6, blue: 0.94))
@@ -177,21 +175,19 @@ struct SongResultsView: View {
         .offset(y: -40)
     }
 
-    // MARK: - Playback
     private func playSnippet(for song: Song) {
         guard let songId = song.songId,
               let start = song.timestampStart,
               let end = song.timestampEnd else { return }
 
-        guard let url = AudioSearchService.shared.snippetURL(songId: songId, start: start, end: end) else { return }
+        let localService = AudioSearchService()
+        guard let url = localService.snippetURL(songId: songId, start: start, end: end) else { return }
 
         playerManager.play(url: url, songId: songId)
     }
 
-    // API call
     private func performSearch() {
         guard let audioURL = recordedAudioURL else {
-            // Fallback to sample data if no recording (e.g. preview)
             songs = SampleData.songs
             return
         }
@@ -206,7 +202,6 @@ struct SongResultsView: View {
                     songs = results.map { Song(from: $0) }
                     isLoading = false
 
-                    // Auto-play first result
                     if let firstSong = songs.first {
                         playSnippet(for: firstSong)
                     }

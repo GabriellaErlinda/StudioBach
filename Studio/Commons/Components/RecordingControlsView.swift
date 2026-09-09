@@ -74,6 +74,9 @@ struct RecordingControlsView: View {
                 onMicTap()
             }
             .animation(.spring(response: 0.4, dampingFraction: 0.7), value: recordingState)
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isButton)
+            .accessibilityIdentifier("recordMicButton")
 
             // Action Area
             actionArea
@@ -110,6 +113,7 @@ struct RecordingControlsView: View {
                             .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
                     )
                 })
+                .accessibilityIdentifier("addFileButton")
             }
             .transition(.opacity)
 
@@ -139,6 +143,7 @@ struct RecordingControlsView: View {
                             )
                     )
                 })
+                .accessibilityIdentifier("reRecordButton")
 
                 NavigationLink(destination: EmotionPickerView(recordedAudioURL: recordedAudioURL).studioNavbar()) {
                     HStack(spacing: 6) {
@@ -152,6 +157,7 @@ struct RecordingControlsView: View {
                     .padding(.vertical, 10)
                     .background(Capsule().fill(accentBlue))
                 }
+                .accessibilityIdentifier("nextButton")
             }
             .transition(.opacity.combined(with: .move(edge: .bottom)))
         }

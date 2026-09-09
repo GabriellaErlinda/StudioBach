@@ -1,16 +1,10 @@
 import Combine
-//
-//  ProjectViewModel.swift
-//  Studio
-//
-//  Created by Gabriella Erlinda on 04/05/26.
-//
 import Foundation
+import Models
+import Services
 import SwiftUI
 
 class ProjectViewModel: ObservableObject {
-
-    // Masukkan data contoh (dummy data) langsung ke sini agar tidak kosong saat di-run
     @Published var projects: [ProjectCardModel] = [
         ProjectCardModel(
             title: "PROJECT 3",
@@ -35,28 +29,29 @@ class ProjectViewModel: ObservableObject {
         )
     ]
 
-    // --- ASUMSI LOGIC PENDETEKSI EMOSI ---
+    private let audioSearchService: AudioSearchServiceProtocol
+
+    // Dependency Injection Seam
+    init(audioSearchService: AudioSearchServiceProtocol = AudioSearchService()) {
+        self.audioSearchService = audioSearchService
+    }
+
     private func analyzeEmotion(from audioRecord: Any?) -> SongEmotion {
         let detectedEmotions: [SongEmotion] = [.joyful, .sadness, .nostalgic, .energetic, .calm]
         return detectedEmotions.randomElement() ?? .unknown
     }
 
-    // --- LOGIC SAVE PROJECT ---
     func saveSongToNewProject(title: String, coverImage: String, recordedAudio: Any?) {
-
         let detectedEmotion = analyzeEmotion(from: recordedAudio)
-
         let newSong = RecentSongModel(
             imageName: coverImage,
             dateSaved: Date(),
             emotion: detectedEmotion
         )
-
         let newProject = ProjectCardModel(
             title: title,
             recentSongs: [newSong]
         )
-
         projects.insert(newProject, at: 0)
     }
 }

@@ -5,6 +5,8 @@
 //  Created by Nickson Leviel on 05/05/26.
 //
 
+import Models
+import Services
 import SwiftUI
 
 struct MusicPlayer: View {

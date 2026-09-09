@@ -5,6 +5,8 @@
 //  Created by Rendi Septrian on 03/05/26.
 //
 
+import Models
+import Services
 import SwiftUI
 
 struct ProjectDetailView: View {

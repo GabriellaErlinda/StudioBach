@@ -88,6 +88,7 @@ struct SongDetailView: View {
                     )
                 }
                 )
+                .accessibilityIdentifier("addToProjectButton")
             }
         }
     }

@@ -88,6 +88,7 @@ struct EmotionPickerView: View {
                                         .stroke(Color.white.opacity(0.2), lineWidth: 1)
                                 )
                         }
+                        .accessibilityIdentifier("continueButton")
                         Spacer()
                     }
                     .padding(.bottom, 40)

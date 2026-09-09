@@ -10,13 +10,44 @@
 		7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */; };
 		7F6525B2304A792A0048148C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B1304A792A0048148C /* FirebasePerformance */; };
 		7F6525B4304A79300048148C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B3304A79300048148C /* FirebaseAnalytics */; };
+		7FA63F8530518A9100B33686 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 7FA63F8430518A9100B33686 /* Models */; };
+		7FA63F8730518A9100B33686 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 7FA63F8630518A9100B33686 /* Services */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7FA63F54304FA7FE00B33686 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83FE97AE2FA7152500262519 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83FE97B52FA7152500262519;
+			remoteInfo = BachStudio;
+		};
+		7FA63F72305025C900B33686 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83FE97AE2FA7152500262519 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83FE97B52FA7152500262519;
+			remoteInfo = BachStudio;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		7FA63F50304FA7FE00B33686 /* BachStudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BachStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FA63F6C305025C900B33686 /* BachStudioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BachStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FE97B62FA7152500262519 /* BachStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BachStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		7FA63F51304FA7FE00B33686 /* BachStudioTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = BachStudioTests;
+			sourceTree = "<group>";
+		};
+		7FA63F6D305025C900B33686 /* BachStudioUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = BachStudioUITests;
+			sourceTree = "<group>";
+		};
 		83FE97B82FA7152500262519 /* Studio */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Studio;
@@ -25,12 +56,28 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7FA63F4D304FA7FE00B33686 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FA63F69305025C900B33686 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83FE97B32FA7152500262519 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA63F8730518A9100B33686 /* Services in Frameworks */,
 				7F6525B2304A792A0048148C /* FirebasePerformance in Frameworks */,
 				7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */,
+				7FA63F8530518A9100B33686 /* Models in Frameworks */,
 				7F6525B4304A79300048148C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				83FE97B82FA7152500262519 /* Studio */,
+				7FA63F51304FA7FE00B33686 /* BachStudioTests */,
+				7FA63F6D305025C900B33686 /* BachStudioUITests */,
 				7F6525B0304A792A0048148C /* Frameworks */,
 				83FE97B72FA7152500262519 /* Products */,
 			);
@@ -58,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				83FE97B62FA7152500262519 /* BachStudio.app */,
+				7FA63F50304FA7FE00B33686 /* BachStudioTests.xctest */,
+				7FA63F6C305025C900B33686 /* BachStudioUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,6 +116,52 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7FA63F4F304FA7FE00B33686 /* BachStudioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FA63F58304FA7FE00B33686 /* Build configuration list for PBXNativeTarget "BachStudioTests" */;
+			buildPhases = (
+				7FA63F4C304FA7FE00B33686 /* Sources */,
+				7FA63F4D304FA7FE00B33686 /* Frameworks */,
+				7FA63F4E304FA7FE00B33686 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FA63F55304FA7FE00B33686 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7FA63F51304FA7FE00B33686 /* BachStudioTests */,
+			);
+			name = BachStudioTests;
+			packageProductDependencies = (
+			);
+			productName = BachStudioTests;
+			productReference = 7FA63F50304FA7FE00B33686 /* BachStudioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7FA63F6B305025C900B33686 /* BachStudioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FA63F74305025C900B33686 /* Build configuration list for PBXNativeTarget "BachStudioUITests" */;
+			buildPhases = (
+				7FA63F68305025C900B33686 /* Sources */,
+				7FA63F69305025C900B33686 /* Frameworks */,
+				7FA63F6A305025C900B33686 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FA63F73305025C900B33686 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7FA63F6D305025C900B33686 /* BachStudioUITests */,
+			);
+			name = BachStudioUITests;
+			packageProductDependencies = (
+			);
+			productName = BachStudioUITests;
+			productReference = 7FA63F6C305025C900B33686 /* BachStudioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		83FE97B52FA7152500262519 /* BachStudio */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83FE97C12FA7152600262519 /* Build configuration list for PBXNativeTarget "BachStudio" */;
@@ -87,6 +184,8 @@
 				7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */,
 				7F6525B1304A792A0048148C /* FirebasePerformance */,
 				7F6525B3304A79300048148C /* FirebaseAnalytics */,
+				7FA63F8430518A9100B33686 /* Models */,
+				7FA63F8630518A9100B33686 /* Services */,
 			);
 			productName = Studio;
 			productReference = 83FE97B62FA7152500262519 /* BachStudio.app */;
@@ -99,9 +198,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2630;
+				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
+					7FA63F4F304FA7FE00B33686 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 83FE97B52FA7152500262519;
+					};
+					7FA63F6B305025C900B33686 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 83FE97B52FA7152500262519;
+					};
 					83FE97B52FA7152500262519 = {
 						CreatedOnToolsVersion = 26.3;
 					};
@@ -118,6 +225,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7FA63F8330518A9100B33686 /* XCLocalSwiftPackageReference "BachStudioCore" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 83FE97B72FA7152500262519 /* Products */;
@@ -125,11 +233,27 @@
 			projectRoot = "";
 			targets = (
 				83FE97B52FA7152500262519 /* BachStudio */,
+				7FA63F4F304FA7FE00B33686 /* BachStudioTests */,
+				7FA63F6B305025C900B33686 /* BachStudioUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7FA63F4E304FA7FE00B33686 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FA63F6A305025C900B33686 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83FE97B42FA7152500262519 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +307,20 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7FA63F4C304FA7FE00B33686 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FA63F68305025C900B33686 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83FE97B22FA7152500262519 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -192,7 +330,116 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7FA63F55304FA7FE00B33686 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83FE97B52FA7152500262519 /* BachStudio */;
+			targetProxy = 7FA63F54304FA7FE00B33686 /* PBXContainerItemProxy */;
+		};
+		7FA63F73305025C900B33686 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83FE97B52FA7152500262519 /* BachStudio */;
+			targetProxy = 7FA63F72305025C900B33686 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7FA63F56304FA7FE00B33686 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksonleviel.BachStudioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BachStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BachStudio";
+			};
+			name = Debug;
+		};
+		7FA63F57304FA7FE00B33686 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksonleviel.BachStudioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BachStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BachStudio";
+			};
+			name = Release;
+		};
+		7FA63F75305025C900B33686 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksonleviel.BachStudioUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BachStudio;
+			};
+			name = Debug;
+		};
+		7FA63F76305025C900B33686 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S7UUDUF2A2;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksonleviel.BachStudioUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BachStudio;
+			};
+			name = Release;
+		};
 		83FE97BF2FA7152600262519 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -391,6 +638,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7FA63F58304FA7FE00B33686 /* Build configuration list for PBXNativeTarget "BachStudioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FA63F56304FA7FE00B33686 /* Debug */,
+				7FA63F57304FA7FE00B33686 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7FA63F74305025C900B33686 /* Build configuration list for PBXNativeTarget "BachStudioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FA63F75305025C900B33686 /* Debug */,
+				7FA63F76305025C900B33686 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		83FE97B12FA7152500262519 /* Build configuration list for PBXProject "Studio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -410,6 +675,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		7FA63F8330518A9100B33686 /* XCLocalSwiftPackageReference "BachStudioCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = BachStudioCore;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -437,6 +709,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		7FA63F8430518A9100B33686 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
+		};
+		7FA63F8630518A9100B33686 /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Services;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

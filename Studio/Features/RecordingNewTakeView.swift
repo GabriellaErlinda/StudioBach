@@ -1,4 +1,6 @@
 import AVFoundation
+import Models
+import Services
 import SwiftUI
 
 struct RecordingNewTakeView: View {
@@ -305,6 +307,9 @@ struct NewTakeMicButton: View {
         }
         .onTapGesture { onTap() }
         .animation(.spring(response: 0.4, dampingFraction: 0.7), value: recordingState)
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityIdentifier("newTakeMicButton")
     }
 }
 
@@ -343,6 +348,7 @@ struct NewTakeActionArea: View {
                         )
                     }
                 )
+                .accessibilityIdentifier("addFileButton")
             }
             .transition(.opacity)
 
@@ -370,6 +376,7 @@ struct NewTakeActionArea: View {
                         )
                     }
                 )
+                .accessibilityIdentifier("reRecordButton")
 
                 NavigationLink(destination: ProjectDetailView(project: returnCard)) {
                     HStack(spacing: 6) {
@@ -383,6 +390,7 @@ struct NewTakeActionArea: View {
                     .padding(.vertical, 10)
                     .background(Capsule().fill(accentBlue))
                 }
+                .accessibilityIdentifier("nextButton")
             }
             .transition(.opacity.combined(with: .move(edge: .bottom)))
         }

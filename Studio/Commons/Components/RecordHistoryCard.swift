@@ -1,3 +1,5 @@
+import Models
+import Services
 import SwiftUI
 
 struct RecordHistoryCard: View {
