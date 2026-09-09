@@ -8,7 +8,7 @@ public protocol SnippetPlayerManagerProtocol {
     var duration: Double { get }
     var progress: Double { get }
     var currentSongId: String? { get }
-    
+
     func play(url: URL, songId: String?)
     func pause()
     func stop()
@@ -25,11 +25,11 @@ public final class SnippetPlayerManager: ObservableObject, SnippetPlayerManagerP
     @Published public var duration: Double = 0.0
     @Published public var progress: Double = 0.0
     @Published public var currentSongId: String?
-    
+
     private var player: AVPlayer?
     private var timeObserver: Any?
     private var cancellables = Set<AnyCancellable>()
-    
+
     public init() {
         do {
             let session = AVAudioSession.sharedInstance()
@@ -39,19 +39,19 @@ public final class SnippetPlayerManager: ObservableObject, SnippetPlayerManagerP
             print("Audio session error: \(error)")
         }
     }
-    
+
     public func play(url: URL, songId: String? = nil) {
         if let currentId = currentSongId, currentId == songId, player != nil {
             player?.play()
             isPlaying = true
             return
         }
-        
+
         stop()
         currentSongId = songId
         let playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
-        
+
         playerItem.publisher(for: \.status)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
@@ -61,7 +61,7 @@ public final class SnippetPlayerManager: ObservableObject, SnippetPlayerManagerP
                 }
             }
             .store(in: &cancellables)
-            
+
         NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime, object: playerItem)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -73,7 +73,7 @@ public final class SnippetPlayerManager: ObservableObject, SnippetPlayerManagerP
                 self?.isPlaying = true
             }
             .store(in: &cancellables)
-            
+
         timeObserver = player?.addPeriodicTimeObserver(
             forInterval: CMTime(seconds: 0.25, preferredTimescale: 600),
             queue: .main
@@ -89,18 +89,22 @@ public final class SnippetPlayerManager: ObservableObject, SnippetPlayerManagerP
             }
         }
     }
-    
+
     public func togglePlayPause() {
-        guard let player = player else { return }
-        isPlaying ? player.pause() : player.play()
-        isPlaying.toggle()
-    }
-    
+            guard let player = player else { return }
+            if isPlaying {
+                player.pause()
+            } else {
+                player.play()
+            }
+            isPlaying.toggle()
+        }
+
     public func pause() {
         player?.pause()
         isPlaying = false
     }
-    
+
     public func stop() {
         player?.pause()
         if let observer = timeObserver {
@@ -115,25 +119,25 @@ public final class SnippetPlayerManager: ObservableObject, SnippetPlayerManagerP
         currentSongId = nil
         cancellables.removeAll()
     }
-    
+
     public func seek(to fraction: Double) {
         guard let player = player, duration > 0 else { return }
         let targetTime = CMTime(seconds: fraction * duration, preferredTimescale: 600)
         player.seek(to: targetTime)
     }
-    
+
     public func skipForward(_ seconds: Double = 5) {
         guard let player = player else { return }
         let target = min(currentTime + seconds, duration)
         player.seek(to: CMTime(seconds: target, preferredTimescale: 600))
     }
-    
+
     public func skipBackward(_ seconds: Double = 5) {
         guard let player = player else { return }
         let target = max(currentTime - seconds, 0)
         player.seek(to: CMTime(seconds: target, preferredTimescale: 600))
     }
-    
+
     public func formatTime(_ time: Double) -> String {
         guard !time.isNaN && !time.isInfinite else { return "0:00" }
         let minutes = Int(time) / 60

@@ -54,7 +54,7 @@ struct SongDetailCard: View {
             .background(darkPurple.opacity(0.1).clipShape(RoundedRectangle(cornerRadius: 40)))
         }
     }
-    
+
     private var imagePlaceholder: some View {
         ZStack {
             Circle()
@@ -65,7 +65,7 @@ struct SongDetailCard: View {
         }
         .frame(width: 192, height: 192)
     }
-    
+
     private func buildSnippetURL() -> URL? {
         guard let songId = entry.songId,
               let start = entry.timestampStart,

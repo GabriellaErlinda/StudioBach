@@ -70,6 +70,7 @@ struct MusicPlayer: View {
                             .font(.system(size: 18))
                     }
                 )
+                .accessibilityIdentifier("skipBackwardButton")
                 Button(
                     action: {
                         if player.isPlaying {
@@ -88,6 +89,7 @@ struct MusicPlayer: View {
                             .font(.system(size: 40))
                     }
                 )
+                .accessibilityIdentifier("playPauseButton")
                 Button(
                     action: {
                         player.skipForward()
@@ -97,6 +99,7 @@ struct MusicPlayer: View {
                             .font(.system(size: 18))
                     }
                 )
+                .accessibilityIdentifier("skipForwardButton")
             }
             .foregroundColor(.white)
             .offset(y: -10)

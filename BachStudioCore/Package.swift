@@ -8,7 +8,7 @@ let package = Package(
     platforms: [.iOS(.v26)],
     products: [
         .library(name: "Models", targets: ["Models"]),
-        .library(name: "Services", targets: ["Services"]),
+        .library(name: "Services", targets: ["Services"])
     ],
     targets: [
         .target(name: "Models"),

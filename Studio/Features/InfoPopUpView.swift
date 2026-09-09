@@ -30,6 +30,7 @@ struct InfoPopUpView: View {
                     .foregroundColor(.white.opacity(0.4))
             }
             )
+            .accessibilityIdentifier("infoPopUpCloseButton")
             .offset(x: -8, y: 8)
         }
     }
@@ -65,19 +66,26 @@ struct InfoPopUpView: View {
         }
     }
     private var ctaButton: some View {
-        Text("Get Started")
-            .font(.custom("Urbanist-Bold", size: 12))
-            .padding(.horizontal, 24)
-            .padding(.vertical, 8)
-            .background(
-                LinearGradient(
-                    colors: [Color("blue-ribbon-400"), Color("blue-ribbon-600")],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
+            Button(
+                action: { isPresented = false },
+                label: {
+                    Text("Get Started")
+                        .font(.custom("Urbanist-Bold", size: 12))
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 8)
+                        .background(
+                            LinearGradient(
+                                colors: [Color("blue-ribbon-400"), Color("blue-ribbon-600")],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .clipShape(Capsule())
+                }
             )
-            .clipShape(Capsule())
-    }
+            .accessibilityIdentifier("infoPopUpGetStartedButton")
+        }
+    
     private var cardShape: RoundedRectangle {
         RoundedRectangle(cornerRadius: 24)
     }

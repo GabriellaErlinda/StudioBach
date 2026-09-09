@@ -136,6 +136,7 @@ struct LargeEmotionCard: View {
                 .frame(width: 24, height: 24)
             }
             .buttonStyle(PlainButtonStyle())
+            .accessibilityIdentifier("emotionCardToggleButton_\(emotion.id)")
             .padding(18)
         }
         .frame(width: isActive ? 342 : 237, height: isActive ? 172 : 106)

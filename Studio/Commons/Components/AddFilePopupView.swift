@@ -47,6 +47,8 @@ struct AddFilePopupView: View {
                                 .background(Capsule().fill(Color("blue-ribbon-400")))
                         }
                     )
+                    .accessibilityIdentifier("browseFilesButton")
+
                     Button(
                         action: {
                             withAnimation {
@@ -63,6 +65,7 @@ struct AddFilePopupView: View {
                                 .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
                         }
                     )
+                    .accessibilityIdentifier("cancelAddFileButton")
                 }
             }
             .padding(32)

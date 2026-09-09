@@ -23,6 +23,7 @@ struct RecordHistoryCard: View {
                     }
                 }
             )
+            .accessibilityIdentifier("recordHistoryPlayButton")
             // Text details
             VStack(alignment: .leading, spacing: 4) {
                 Text(model.title)
@@ -44,6 +45,7 @@ struct RecordHistoryCard: View {
                         .foregroundColor(.white)
                 }
             )
+            .accessibilityIdentifier("recordHistoryDownloadButton")
         }
         .padding()
         .background(Color("blue-ribbon-900").opacity(0.6))

@@ -86,6 +86,7 @@ struct ProjectDetailView: View {
                                 .cornerRadius(24)
                             }
                             )
+                            .accessibilityIdentifier("projectDetailEmotionButton")
                         }
                         .padding(.horizontal)
                         // Song References
@@ -101,6 +102,7 @@ struct ProjectDetailView: View {
                                         SavedSongCard(song: song)
                                     }
                                     .buttonStyle(.plain)
+                                    .accessibilityIdentifier("projectDetailSongReferenceLink_\(song.id)")
                                     if index < SampleData.songs.count - 1 {
                                         Divider()
                                             .background(Color.white.opacity(0.1))
@@ -123,16 +125,21 @@ struct ProjectDetailView: View {
                                             Label("Latest", systemImage: "arrow.down")
                                         }
                                     )
+                                    .accessibilityIdentifier("recordingHistorySortLatestButton")
+
                                     Button(action: { sortOrder = .earliest },
                                         label: {
                                             Label("Earliest", systemImage: "arrow.up")
                                         }
                                     )
+                                    .accessibilityIdentifier("recordingHistorySortEarliestButton")
+
                                 } label: {
                                     Image(systemName: "line.3.horizontal.decrease")
                                         .foregroundColor(.white)
                                         .font(.system(size: 18))
                                 }
+                                .accessibilityIdentifier("recordingHistorySortMenu")
                             }
                             VStack(spacing: 12) {
                                 ForEach(historyRecords) { record in
@@ -174,6 +181,7 @@ struct ProjectDetailView: View {
                         .glassEffect(.clear, in: .rect(cornerRadius: 24))
                         .cornerRadius(24)
                     }
+                    .accessibilityIdentifier("recordNewTakeButton")
                 }
                 .padding(.horizontal, 40)
                 .padding(.bottom, 32)

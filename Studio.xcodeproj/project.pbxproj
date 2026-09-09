@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */; };
+		7F63B2003051A36A00AECD33 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 7F63B1FF3051A36A00AECD33 /* FirebasePerformance */; };
 		7F6525B2304A792A0048148C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B1304A792A0048148C /* FirebasePerformance */; };
 		7F6525B4304A79300048148C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B3304A79300048148C /* FirebaseAnalytics */; };
 		7FA63F8530518A9100B33686 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 7FA63F8430518A9100B33686 /* Models */; };
@@ -60,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F63B2003051A36A00AECD33 /* FirebasePerformance in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +136,7 @@
 			);
 			name = BachStudioTests;
 			packageProductDependencies = (
+				7F63B1FF3051A36A00AECD33 /* FirebasePerformance */,
 			);
 			productName = BachStudioTests;
 			productReference = 7FA63F50304FA7FE00B33686 /* BachStudioTests.xctest */;
@@ -699,6 +702,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		7F63B1FF3051A36A00AECD33 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F1CD6E330498CED001BAB02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 		7F6525B1304A792A0048148C /* FirebasePerformance */ = {
 			isa = XCSwiftPackageProductDependency;

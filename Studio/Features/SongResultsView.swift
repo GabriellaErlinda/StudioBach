@@ -4,6 +4,12 @@ import SwiftUI
 
 struct SongResultsView: View {
     let recordedAudioURL: URL?
+    var randomGenerator: RandomNumberGeneratable
+
+    init(recordedAudioURL: URL?, randomGenerator: RandomNumberGeneratable = SystemRandomGenerator()) {
+        self.recordedAudioURL = recordedAudioURL
+        self.randomGenerator = randomGenerator
+    }
 
     @State private var songs: [Song] = []
     @State private var isLoading = false
@@ -63,8 +69,10 @@ struct SongResultsView: View {
                     .multilineTextAlignment(.center)
             }
         }
+        .accessibilityIdentifier("loadingView") // Tag container for UI test checks
     }
 
+    // MARK: - Error View
     private func errorView(_ message: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle")
@@ -84,11 +92,13 @@ struct SongResultsView: View {
             Button("Try Again") {
                 performSearch()
             }
+            .accessibilityIdentifier("tryAgainButton") // Stable identifier for recovery action
             .foregroundStyle(.white)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
             .background(Capsule().fill(Color(red: 0.38, green: 0.35, blue: 0.87)))
         }
+        .accessibilityIdentifier("errorView")
     }
 
     @State private var scrolledIndex: Int?
@@ -115,6 +125,7 @@ struct SongResultsView: View {
                 HStack(spacing: 10) {
                     ForEach(Array(songs.prefix(visibleCount).enumerated()), id: \.element.id) { index, entry in
                         SongCard(entry: entry)
+                            .accessibilityIdentifier("songCard_\(entry.songId ?? "")") // Unique identifier per card
                             .id(index)
                             .scrollTransition(.animated) { content, phase in
                                 content
@@ -152,11 +163,11 @@ struct SongResultsView: View {
                     ForEach(0..<3, id: \.self) { i in
                         RoundedRectangle(cornerRadius: 1.5)
                             .fill(Color(red: 0.53, green: 0.6, blue: 0.94))
-                            .frame(width: 3, height: playerManager.isPlaying ? CGFloat.random(in: 8...18) : 6)
+                            .frame(width: 3, height: playerManager.isPlaying ? randomGenerator.random(in: 8...18) : 6)
                             .animation(
                                 .easeInOut(duration: 0.4)
-                                    .repeatForever(autoreverses: true)
-                                    .delay(Double(i) * 0.15),
+                                .repeatForever(autoreverses: true)
+                                .delay(Double(i) * 0.15),
                                 value: playerManager.isPlaying
                             )
                     }
@@ -169,6 +180,7 @@ struct SongResultsView: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background(Capsule().fill(Color.white.opacity(0.08)))
+                .accessibilityIdentifier("nowPlayingIndicator")
                 .transition(.opacity.combined(with: .move(edge: .bottom)))
             }
         }
@@ -238,6 +250,7 @@ struct ShowMoreCard: View {
                     .background(Color.white.opacity(0.05))
             )
         }
+        .accessibilityIdentifier("showMoreButton") // Stable target for pagination UI test
     }
 }
 

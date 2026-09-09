@@ -12,11 +12,11 @@ public protocol AudioSearchServiceProtocol {
 @MainActor
 public final class AudioSearchService: AudioSearchServiceProtocol, ObservableObject {
     private let baseURL = "https://api.farrellhrs.dpdns.org"
-    
+
     @Published public var searchResults: [SearchResult] = []
     @Published public var isLoading = false
     @Published public var errorMessage: String?
-    
+
     private let mockResults: [SearchResult] = [
         SearchResult(
             rank: 1,
@@ -32,19 +32,19 @@ public final class AudioSearchService: AudioSearchServiceProtocol, ObservableObj
             artistImageUrl: ""
         )
     ]
-    
+
     // Mark the initializer as nonisolated so it can be called from anywhere
     nonisolated public init() {}
-    
+
     public func search(audioURL: URL, alpha: Double = 0.5) async throws -> [SearchResult] {
         try await Task.sleep(nanoseconds: 2_000_000_000)
-        
+
         await MainActor.run {
             self.searchResults = mockResults
         }
         return mockResults
     }
-    
+
     public func snippetURL(songId: String, start: String, end: String) -> URL? {
         var components = URLComponents(string: "\(baseURL)/api/v1/audio/\(songId)/snippet")
         components?.queryItems = [
@@ -53,7 +53,7 @@ public final class AudioSearchService: AudioSearchServiceProtocol, ObservableObj
         ]
         return components?.url
     }
-    
+
     public func fullAudioURL(songId: String) -> URL? {
         return URL(string: "\(baseURL)/api/v1/audio/\(songId)")
     }

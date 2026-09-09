@@ -20,6 +20,7 @@ struct StudioNavbar: ViewModifier {
                             Image(systemName: "chevron.backward")
                         }
                     )
+                    .accessibilityIdentifier("navBackButton")
                 }
                 ToolbarItem(placement: .principal) {
                     Image("logo_inline")
@@ -33,6 +34,7 @@ struct StudioNavbar: ViewModifier {
                         Image(systemName: "info")
                     }
                     )
+                    .accessibilityIdentifier("navInfoButton")
                 }
             }
             .navigationBarBackButtonHidden(true)

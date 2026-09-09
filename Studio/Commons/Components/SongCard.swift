@@ -48,6 +48,7 @@ struct SongCard: View {
                     SongDetailView(entry: entry)
                         .studioNavbar()
                 }
+                .accessibilityIdentifier("songCardSeeDetailsLink_\(entry.id)")
                 .padding()
                 .frame(maxWidth: .infinity)
                 .foregroundStyle(.white)

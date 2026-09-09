@@ -4,7 +4,7 @@ public struct SearchResponse: Codable, Sendable {
     public let status: String
     public let queryTimeSeconds: Double
     public let results: [SearchResult]
-    
+
     public enum CodingKeys: String, CodingKey {
         case status
         case queryTimeSeconds = "query_time_seconds"
@@ -25,7 +25,7 @@ public struct SearchResult: Codable, Identifiable, Sendable {
     public let audioUrl: String
     public let albumImageUrl: String
     public let artistImageUrl: String
-    
+
     public enum CodingKeys: String, CodingKey {
         case rank
         case songId = "song_id"
@@ -39,7 +39,7 @@ public struct SearchResult: Codable, Identifiable, Sendable {
         case albumImageUrl = "album_image_url"
         case artistImageUrl = "artist_image_url"
     }
-    
+
     public init(
         rank: Int,
         songId: String,
@@ -70,7 +70,7 @@ public struct SearchResult: Codable, Identifiable, Sendable {
 public struct Timestamp: Codable, Sendable {
     public let start: String
     public let end: String
-    
+
     public init(start: String, end: String) {
         self.start = start
         self.end = end
