@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7F1CD6E530498CED001BAB02 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F1CD6E430498CED001BAB02 /* FirebaseCrashlytics */; };
+		7F4FECFB305324EC0094895F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */; };
+		7F4FECFC305324EC0094895F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */; };
+		7F4FECFD305324EC0094895F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */; };
 		7F63B2003051A36A00AECD33 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 7F63B1FF3051A36A00AECD33 /* FirebasePerformance */; };
 		7F6525B2304A792A0048148C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B1304A792A0048148C /* FirebasePerformance */; };
 		7F6525B4304A79300048148C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F6525B3304A79300048148C /* FirebaseAnalytics */; };
@@ -33,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F4FECFA305324EC0094895F /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		7F4FECFE305325910094895F /* BachStudio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BachStudio-Info.plist"; sourceTree = "<group>"; };
 		7FA63F50304FA7FE00B33686 /* BachStudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BachStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FA63F6C305025C900B33686 /* BachStudioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BachStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FE97B62FA7152500262519 /* BachStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BachStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +102,8 @@
 		83FE97AD2FA7152500262519 = {
 			isa = PBXGroup;
 			children = (
+				7F4FECFE305325910094895F /* BachStudio-Info.plist */,
+				7F4FECFA305324EC0094895F /* Secrets.xcconfig */,
 				83FE97B82FA7152500262519 /* Studio */,
 				7FA63F51304FA7FE00B33686 /* BachStudioTests */,
 				7FA63F6D305025C900B33686 /* BachStudioUITests */,
@@ -247,6 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F4FECFC305324EC0094895F /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F4FECFD305324EC0094895F /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F4FECFB305324EC0094895F /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +359,7 @@
 /* Begin XCBuildConfiguration section */
 		7FA63F56304FA7FE00B33686 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -374,6 +385,7 @@
 		};
 		7FA63F57304FA7FE00B33686 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -398,6 +410,7 @@
 		};
 		7FA63F75305025C900B33686 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -422,6 +435,7 @@
 		};
 		7FA63F76305025C900B33686 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -445,6 +459,7 @@
 		};
 		83FE97BF2FA7152600262519 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -510,6 +525,7 @@
 		};
 		83FE97C02FA7152600262519 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -568,6 +584,7 @@
 		};
 		83FE97C22FA7152600262519 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -577,6 +594,7 @@
 				DEVELOPMENT_TEAM = S7UUDUF2A2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BachStudio-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -604,6 +622,7 @@
 		};
 		83FE97C32FA7152600262519 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4FECFA305324EC0094895F /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -613,6 +632,7 @@
 				DEVELOPMENT_TEAM = S7UUDUF2A2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BachStudio-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StudioBach needs microphone access to record your music for cover song identification.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

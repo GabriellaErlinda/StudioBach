@@ -1,1 +1,4 @@
 GoogleServices-Info.plist
+xcuserdata/
+*.xcuserdatad
+Secrets.xcconfig

@@ -11,7 +11,7 @@ public protocol AudioSearchServiceProtocol {
 
 @MainActor
 public final class AudioSearchService: AudioSearchServiceProtocol, ObservableObject {
-    private let baseURL = "https://api.farrellhrs.dpdns.org"
+    private let baseURL: URL
 
     @Published public var searchResults: [SearchResult] = []
     @Published public var isLoading = false
@@ -33,8 +33,10 @@ public final class AudioSearchService: AudioSearchServiceProtocol, ObservableObj
         )
     ]
 
-    // Mark the initializer as nonisolated so it can be called from anywhere
-    nonisolated public init() {}
+    // Accept baseURL via dependency injection, defaulting to an environment/config resolver if needed
+    nonisolated public init(baseURL: URL) {
+        self.baseURL = baseURL
+    }
 
     public func search(audioURL: URL, alpha: Double = 0.5) async throws -> [SearchResult] {
         try await Task.sleep(nanoseconds: 2_000_000_000)
@@ -46,7 +48,8 @@ public final class AudioSearchService: AudioSearchServiceProtocol, ObservableObj
     }
 
     public func snippetURL(songId: String, start: String, end: String) -> URL? {
-        var components = URLComponents(string: "\(baseURL)/api/v1/audio/\(songId)/snippet")
+        let targetURL = baseURL.appendingPathComponent("api/v1/audio/\(songId)/snippet")
+        var components = URLComponents(url: targetURL, resolvingAgainstBaseURL: false)
         components?.queryItems = [
             URLQueryItem(name: "start", value: start),
             URLQueryItem(name: "end", value: end)
@@ -55,6 +58,6 @@ public final class AudioSearchService: AudioSearchServiceProtocol, ObservableObj
     }
 
     public func fullAudioURL(songId: String) -> URL? {
-        return URL(string: "\(baseURL)/api/v1/audio/\(songId)")
+        return baseURL.appendingPathComponent("api/v1/audio/\(songId)")
     }
 }

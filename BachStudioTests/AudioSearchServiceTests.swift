@@ -10,7 +10,8 @@ struct AudioSearchServiceTests {
 
     @Test("search() returns the full mock result set")
     func returnsMockResults() async throws {
-        let service = AudioSearchService()
+        let testBaseURL = URL(string: "https://test-server.local")!
+        let service = AudioSearchService(baseURL: testBaseURL)
         let results = try await service.search(audioURL: URL(fileURLWithPath: "/tmp/does-not-matter.m4a"), alpha: 0.5)
 
         #expect(results.count == 1)
@@ -20,7 +21,8 @@ struct AudioSearchServiceTests {
 
     @Test("search() ignores whether the given audioURL is valid or even exists")
     func ignoresInputURL() async throws {
-        let service = AudioSearchService()
+        let testBaseURL = URL(string: "https://test-server.local")!
+        let service = AudioSearchService(baseURL: testBaseURL)
         let bogusURL = URL(fileURLWithPath: "/definitely/not/a/real/path.m4a")
         let results = try await service.search(audioURL: bogusURL, alpha: 0.5)
         #expect(results.count == 1)
@@ -28,7 +30,8 @@ struct AudioSearchServiceTests {
 
     @Test("search() throws CancellationError if the calling task is cancelled mid-flight")
     func searchThrowsWhenCancelled() async {
-        let service = AudioSearchService()
+        let testBaseURL = URL(string: "https://test-server.local")!
+        let service = AudioSearchService(baseURL: testBaseURL)
         let task = Task {
             try await service.search(audioURL: URL(fileURLWithPath: "/tmp/fake.m4a"), alpha: 0.5)
         }
@@ -48,10 +51,11 @@ struct AudioSearchServiceTests {
 
     @Test("snippetURL builds the expected path with start/end query items")
     func snippetURLIsWellFormed() throws {
-        let service = AudioSearchService()
+        let testBaseURL = URL(string: "https://test-server.local")!
+        let service = AudioSearchService(baseURL: testBaseURL)
         let url = try #require(service.snippetURL(songId: "abc123", start: "0:10", end: "0:25"))
 
-        #expect(url.absoluteString.hasPrefix("https://api.farrellhrs.dpdns.org/api/v1/audio/abc123/snippet"))
+        #expect(url.absoluteString.hasPrefix("https://test-server.local/api/v1/audio/abc123/snippet"))
 
         let components = try #require(URLComponents(url: url, resolvingAgainstBaseURL: false))
         let queryDict = [String: String?](uniqueKeysWithValues: (components.queryItems ?? []).map { ($0.name, $0.value) })
@@ -61,9 +65,10 @@ struct AudioSearchServiceTests {
 
     @Test("fullAudioURL builds the expected path")
     func fullAudioURLIsWellFormed() throws {
-        let service = AudioSearchService()
+        let testBaseURL = URL(string: "https://test-server.local")!
+        let service = AudioSearchService(baseURL: testBaseURL)
         let url = try #require(service.fullAudioURL(songId: "abc123"))
-        #expect(url.absoluteString == "https://api.farrellhrs.dpdns.org/api/v1/audio/abc123")
+        #expect(url.absoluteString == "https://test-server.local/api/v1/audio/abc123")
     }
 }
 
