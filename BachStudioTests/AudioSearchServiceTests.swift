@@ -13,7 +13,7 @@ struct AudioSearchServiceTests {
         let service = AudioSearchService()
         let results = try await service.search(audioURL: URL(fileURLWithPath: "/tmp/does-not-matter.m4a"), alpha: 0.5)
 
-        #expect(results.count == 1) // Adjusted based on your mock count, or match your expected items
+        #expect(results.count == 1)
         #expect(results.first?.songId == "mock_song_1")
         #expect(results.first?.trackTitle == "Promise (Mock)")
     }

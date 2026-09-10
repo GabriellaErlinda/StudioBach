@@ -1,6 +1,6 @@
 import Foundation
 
-public enum SongEmotion: String {
+public enum SongEmotion: String, Hashable, Sendable {
     case joyful = "Joyful"
     case sadness = "Sadness"
     case nostalgic = "Nostalgic"
@@ -9,7 +9,7 @@ public enum SongEmotion: String {
     case unknown = "Unknown"
 }
 
-public struct RecentSongModel: Identifiable {
+public struct RecentSongModel: Identifiable, Hashable, Sendable {
     public let id = UUID()
     public let imageName: String
     public let dateSaved: Date
@@ -22,7 +22,7 @@ public struct RecentSongModel: Identifiable {
     }
 }
 
-public struct ProjectCardModel: Identifiable {
+public struct ProjectCardModel: Identifiable, Hashable, Sendable {
     public let id = UUID()
     public var title: String
     public var recentSongs: [RecentSongModel]

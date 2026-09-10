@@ -9,7 +9,6 @@ final class DeterministicUITests: XCTestCase {
         let generator = ConstantRandomGenerator(fixedValue: 12.0)
         let view = SongResultsView(recordedAudioURL: nil, randomGenerator: generator)
 
-        // Assert view initializes cleanly with predictable parameters
         XCTAssertNotNil(view)
     }
 }

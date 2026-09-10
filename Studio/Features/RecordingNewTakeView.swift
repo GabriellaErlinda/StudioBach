@@ -18,51 +18,50 @@ struct RecordingNewTakeView: View {
     let returnCard: ProjectCardModel
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                NewTakeBackgroundView(accentBlue: accentBlue)
+        ZStack {
+            NewTakeBackgroundView(accentBlue: accentBlue)
 
-                VStack(spacing: 0) {
-                    Spacer()
+            VStack(spacing: 0) {
+                Spacer()
 
-                    if recordingState != .idle {
-                        Text(formattedTime)
-                            .font(.system(size: 32, weight: .semibold, design: .monospaced))
-                            .foregroundColor(.white)
-                            .transition(.opacity.combined(with: .scale(scale: 0.95)))
-                            .padding(.bottom, 24)
-                    } else {
-                        Color.clear.frame(height: 38).padding(.bottom, 24)
-                    }
-
-                    NewTakeWaveformView(
-                        recordingState: recordingState,
-                        waveformAmplitudes: waveformAmplitudes,
-                        accentBlue: accentBlue
-                    )
-                    .padding(.horizontal, 40)
-                    .padding(.bottom, 32)
-
-                    NewTakeMicButton(
-                        recordingState: recordingState,
-                        pulseScale: pulseScale,
-                        accentBlue: accentBlue,
-                        onTap: handleMicTap
-                    )
-                    .padding(.bottom, 16)
-
-                    NewTakeActionArea(
-                        recordingState: recordingState,
-                        showAddFilePopup: $showAddFilePopup,
-                        returnCard: returnCard,
-                        accentBlue: accentBlue,
-                        onReRecord: reRecord
-                    )
-                    .padding(.bottom, 24)
-
-                    Spacer()
+                if recordingState != .idle {
+                    Text(formattedTime)
+                        .font(.title3.bold().monospaced())
+                        .foregroundColor(.white)
+                        .transition(.opacity.combined(with: .scale(scale: 0.95)))
+                        .padding(.bottom, 24)
+                } else {
+                    Color.clear.frame(height: 38).padding(.bottom, 24)
                 }
+
+                NewTakeWaveformView(
+                    recordingState: recordingState,
+                    waveformAmplitudes: waveformAmplitudes,
+                    accentBlue: accentBlue
+                )
+                .padding(.horizontal, 40)
+                .padding(.bottom, 32)
+
+                NewTakeMicButton(
+                    recordingState: recordingState,
+                    pulseScale: pulseScale,
+                    accentBlue: accentBlue,
+                    onTap: handleMicTap
+                )
+                .padding(.bottom, 16)
+
+                NewTakeActionArea(
+                    recordingState: recordingState,
+                    showAddFilePopup: $showAddFilePopup,
+                    returnCard: returnCard,
+                    accentBlue: accentBlue,
+                    onReRecord: reRecord
+                )
+                .padding(.bottom, 24)
+
+                Spacer()
             }
+
             if showAddFilePopup {
                 AddFilePopupView(isPresented: $showAddFilePopup)
                     .zIndex(2)
@@ -320,13 +319,15 @@ struct NewTakeActionArea: View {
     let accentBlue: Color
     let onReRecord: () -> Void
 
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         switch recordingState {
         case .idle:
             VStack(spacing: 16) {
                 Text("TAP TO RECORD")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.7))
+                    .font(.caption.bold())
+                    .foregroundColor(.white.opacity(1))
                     .tracking(1.5)
 
                 Button(
@@ -334,16 +335,16 @@ struct NewTakeActionArea: View {
                     label: {
                         HStack(spacing: 6) {
                             Image(systemName: "doc.badge.plus")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(.caption.bold())
                             Text("Add File")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(.caption.bold())
                         }
-                        .foregroundColor(.white.opacity(0.9))
+                        .foregroundColor(.white.opacity(1))
                         .padding(.horizontal, 25)
                         .padding(.vertical, 16)
                         .background(
                             Capsule()
-                                .fill(Color.white.opacity(0.1))
+                                .fill(Color.white.opacity(0.05))
                                 .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
                         )
                     }
@@ -362,9 +363,9 @@ struct NewTakeActionArea: View {
                     label: {
                         HStack(spacing: 6) {
                             Image(systemName: "arrow.counterclockwise")
-                                .font(.system(size: 12, weight: .semibold))
+                                .font(.caption.bold())
                             Text("Re-Record")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(.caption.bold())
                         }
                         .foregroundColor(.white.opacity(0.9))
                         .padding(.horizontal, 18)
@@ -378,12 +379,14 @@ struct NewTakeActionArea: View {
                 )
                 .accessibilityIdentifier("reRecordButton")
 
-                NavigationLink(destination: ProjectDetailView(project: returnCard)) {
+                Button {
+                    dismiss()
+                } label: {
                     HStack(spacing: 6) {
                         Image(systemName: "play.fill")
-                            .font(.system(size: 11, weight: .semibold))
+                            .font(.caption.bold())
                         Text("Next")
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.caption.bold())
                     }
                     .foregroundColor(.white)
                     .padding(.horizontal, 22)

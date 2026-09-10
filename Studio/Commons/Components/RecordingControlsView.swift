@@ -89,8 +89,8 @@ struct RecordingControlsView: View {
         case .idle:
             VStack(spacing: 16) {
                 Text("TAP TO RECORD")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.7))
+                    .font(.footnote.bold())
+                    .foregroundColor(.white.opacity(1))
                     .tracking(1.5)
 
                 Button(action: {
@@ -100,16 +100,16 @@ struct RecordingControlsView: View {
                 }, label: {
                     HStack(spacing: 6) {
                         Image(systemName: "doc.badge.plus")
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.footnote.bold())
                         Text("Add File")
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.footnote.bold())
                     }
-                    .foregroundColor(.white.opacity(0.9))
+                    .foregroundColor(.white.opacity(1))
                     .padding(.horizontal, 25)
                     .padding(.vertical, 16)
                     .background(
                         Capsule()
-                            .fill(Color.white.opacity(0.1))
+                            .fill(Color.white.opacity(0.05))
                             .overlay(Capsule().stroke(Color.white.opacity(0.2), lineWidth: 1))
                     )
                 })
@@ -127,9 +127,9 @@ struct RecordingControlsView: View {
                 }, label: {
                     HStack(spacing: 6) {
                         Image(systemName: "arrow.counterclockwise")
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.footnote.bold())
                         Text("Re-Record")
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.footnote.bold())
                     }
                     .foregroundColor(.white.opacity(0.9))
                     .padding(.horizontal, 18)
@@ -148,9 +148,9 @@ struct RecordingControlsView: View {
                 NavigationLink(destination: EmotionPickerView(recordedAudioURL: recordedAudioURL).studioNavbar()) {
                     HStack(spacing: 6) {
                         Image(systemName: "play.fill")
-                            .font(.system(size: 11, weight: .semibold))
+                            .font(.footnote.bold())
                         Text("Next")
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.footnote.bold())
                     }
                     .foregroundColor(.white)
                     .padding(.horizontal, 22)

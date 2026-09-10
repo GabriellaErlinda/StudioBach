@@ -33,7 +33,6 @@ struct SongDetailCard: View {
                     Image(entry.imageName)
                         .resizable()
                         .scaledToFill()
-                        .font(.system(size: 100))
                         .frame(width: 192, height: 192, alignment: .center)
                         .clipShape(Circle())
                         .padding(.bottom)
@@ -60,7 +59,7 @@ struct SongDetailCard: View {
             Circle()
                 .fill(Color(red: 0.15, green: 0.12, blue: 0.25))
             Image(systemName: "music.note")
-                .font(.system(size: 50))
+                .font(.largeTitle)
                 .foregroundStyle(.white.opacity(0.4))
         }
         .frame(width: 192, height: 192)

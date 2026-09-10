@@ -1,10 +1,3 @@
-//
-//  MockAudio.swift
-//  Studio
-//
-//  Created by Nickson Leviel on 09/09/26.
-//
-
 import Foundation
 import Models
 import Services

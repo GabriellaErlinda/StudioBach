@@ -1,10 +1,3 @@
-//
-//  MusicPlayer.swift
-//  Studio
-//
-//  Created by Nickson Leviel on 05/05/26.
-//
-
 import Models
 import Services
 import SwiftUI
@@ -19,13 +12,13 @@ struct MusicPlayer: View {
         VStack(spacing: 0) {
             VStack(spacing: 4) {
                 Text(title)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.subheadline.bold())
                     .foregroundColor(.white)
-                    .lineLimit(1)
+                    .lineLimit(nil)
                 Text(artist)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(.white.opacity(0.6))
-                    .lineLimit(1)
+                    .font(.subheadline)
+                    .foregroundColor(.white.opacity(1))
+                    .lineLimit(nil)
             }
             // Progress Bar
             VStack {
@@ -55,8 +48,8 @@ struct MusicPlayer: View {
                     Spacer()
                     Text(player.formatTime(player.duration))
                 }
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.white.opacity(0.6))
+                .font(.subheadline)
+                .foregroundColor(.white.opacity(1))
                 .offset(y: -8)
             }
             // Playback Controls
@@ -67,7 +60,7 @@ struct MusicPlayer: View {
                     },
                     label: {
                         Image(systemName: "backward.fill")
-                            .font(.system(size: 18))
+                            .font(.body)
                     }
                 )
                 .accessibilityIdentifier("skipBackwardButton")
@@ -86,7 +79,7 @@ struct MusicPlayer: View {
                     },
                     label: {
                         Image(systemName: player.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                            .font(.system(size: 40))
+                            .font(.largeTitle)
                     }
                 )
                 .accessibilityIdentifier("playPauseButton")
@@ -96,7 +89,7 @@ struct MusicPlayer: View {
                     },
                     label: {
                         Image(systemName: "forward.fill")
-                            .font(.system(size: 18))
+                            .font(.body)
                     }
                 )
                 .accessibilityIdentifier("skipForwardButton")

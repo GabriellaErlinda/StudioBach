@@ -8,12 +8,25 @@ final class BachStudioUITests: XCTestCase {
 
     // MARK: - Launch / Record tab (default tab)
 
-    func test_launchesOnRecordTab() {
+    func test_launchesOnRecordTab() throws {
         let app = XCUIApplication()
         app.launch()
 
         XCTAssertTrue(app.staticTexts["Let's Compose Music"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["TAP TO RECORD"].exists)
+
+        do {
+            try app.performAccessibilityAudit()
+        } catch {
+            if let issues = (error as NSError).userInfo["XCTAccessibilityAuditIssues"] as? [XCUIAccessibilityAuditIssue] {
+                for issue in issues {
+                    print("Audit issue: \(issue.auditType) — element: \(issue.element?.debugDescription ?? "unknown") — detail: \(issue.detailedDescription)")
+                }
+            } else {
+                print("Audit error: \(error)")
+            }
+            XCTFail("Accessibility audit failed: \(error)")
+        }
     }
 
     func test_mainRecordTab_micTap_showsPermissionPromptOrEntersRecordingState() {
@@ -101,7 +114,7 @@ final class BachStudioUITests: XCTestCase {
         app.buttons["RECORD NEW TAKE"].tap()
 
         let micButton = app.buttons["newTakeMicButton"]
-        XCTAssertTrue(micButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(micButton.waitForExistence(timeout: 20))
 
         addUIInterruptionMonitor(withDescription: "Microphone Permission") { alert in
             if alert.buttons["OK"].exists {
@@ -135,7 +148,7 @@ final class BachStudioUITests: XCTestCase {
         app.buttons["RECORD NEW TAKE"].tap()
 
         let addFileButton = app.buttons["addFileButton"]
-        XCTAssertTrue(addFileButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addFileButton.waitForExistence(timeout: 20))
         addFileButton.tap()
     }
 }

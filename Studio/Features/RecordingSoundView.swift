@@ -101,10 +101,17 @@ struct RecordingSoundView: View {
             ProjectListView().studioNavbar()
         } label: {
             Text("RECORD TO EXISTING PROJECT?")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.white.opacity(0.4))
+                .font(.caption.bold())
+                .foregroundColor(.white)
                 .tracking(1)
+                .multilineTextAlignment(.center)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, minHeight: 44)
+                .padding(.horizontal, 24)
         }
+        .accessibilityLabel("Record to existing project")
+        .accessibilityHint("Opens your list of projects to add a new recording to one")
     }
 
     private var micButtonSize: CGFloat {

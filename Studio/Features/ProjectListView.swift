@@ -1,8 +1,16 @@
+import Models
+import Services
 import SwiftUI
 
+enum ProjectRoute: Hashable {
+    case detail(ProjectCardModel)
+    case newRecording
+    case newTake(ProjectCardModel)
+}
+
 struct ProjectListView: View {
-    @StateObject var viewModel = ProjectViewModel()
-    @State private var isPresentingRecordingView = false
+    @State var viewModel = ProjectViewModel()
+    @State private var path = NavigationPath()
     let themeColor = LinearGradient(
         gradient: Gradient(colors: [
             Color("blue-ribbon-900"),
@@ -14,10 +22,11 @@ struct ProjectListView: View {
     )
     let footerProjectColor = Color(red: 85/255, green: 96/255, blue: 247/255) // #5560F7
     var body: some View {
-        VStack(spacing: 0) {
+        NavigationStack(path: $path) {
+            VStack(spacing: 0) {
                 HStack {
                     Text("PROJECTS")
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.title3.bold())
                         .foregroundColor(.white)
                     Spacer()
                 }
@@ -27,7 +36,7 @@ struct ProjectListView: View {
                 ScrollView {
                     VStack(spacing: 15) {
                         ForEach(viewModel.projects) { project in
-                            NavigationLink(destination: ProjectDetailView(project: project)) {
+                            NavigationLink(value: ProjectRoute.detail(project)) {
                                 ProjectCard(project: project)
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -37,17 +46,16 @@ struct ProjectListView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 120)
                 }
-                // --- FIXED BUTTON STYLE ---
                 HStack {
                     Spacer()
                     Button {
-                        isPresentingRecordingView = true
+                        path.append(ProjectRoute.newRecording)
                     } label: {
                         HStack(spacing: 8) {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title2)
                             Text("Add New Project")
-                                .font(.custom("SF Pro", size: 17).weight(.medium))
+                                .font(.body)
                         }
                         .foregroundColor(.white)
                         .padding(.vertical, 16)
@@ -64,10 +72,17 @@ struct ProjectListView: View {
                 }
                 .offset(y: -30)
             }
-            .navigationDestination(isPresented: $isPresentingRecordingView) {
-                RecordingSoundView()
-                    .studioNavbar()
+            .navigationDestination(for: ProjectRoute.self) { route in
+                switch route {
+                case .detail(let project):
+                    ProjectDetailView(project: project, path: $path)
+                case .newRecording:
+                    RecordingSoundView().studioNavbar()
+                case .newTake(let project):
+                    RecordingNewTakeView(returnCard: project)
+                }
             }
+        }
         .preferredColorScheme(.dark)
     }
 }

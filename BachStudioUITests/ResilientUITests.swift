@@ -9,8 +9,6 @@ final class ResilientUITests: XCTestCase {
     }
 
     func testErrorStateRecovery() throws {
-        // Instead of searching for literal text like app.buttons["Try Again"],
-        // use the robust accessibility identifier.
         let tryAgainButton = app.buttons["tryAgainButton"]
 
         if tryAgainButton.exists {

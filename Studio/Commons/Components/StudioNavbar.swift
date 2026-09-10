@@ -1,10 +1,3 @@
-//
-//  NavBar.swift
-//  Studio
-//
-//  Created by Nickson Leviel on 05/05/26.
-//
-
 import SwiftUI
 
 struct StudioNavbar: ViewModifier {
@@ -20,6 +13,7 @@ struct StudioNavbar: ViewModifier {
                             Image(systemName: "chevron.backward")
                         }
                     )
+                    .frame(minWidth: 44, minHeight: 44)
                     .accessibilityIdentifier("navBackButton")
                 }
                 ToolbarItem(placement: .principal) {
@@ -34,6 +28,7 @@ struct StudioNavbar: ViewModifier {
                         Image(systemName: "info")
                     }
                     )
+                    .frame(minWidth: 44, minHeight: 44)
                     .accessibilityIdentifier("navInfoButton")
                 }
             }

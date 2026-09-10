@@ -1,10 +1,3 @@
-//
-//  ProjectDetailView.swift
-//  projectdetail
-//
-//  Created by Rendi Septrian on 03/05/26.
-//
-
 import Models
 import Services
 import SwiftUI
@@ -16,6 +9,7 @@ struct ProjectDetailView: View {
         RecordHistoryCardModel(title: "Scratch Track_02", subtitle: "Oct 22 • 09:12 • 2:10")
     ]
     let project: ProjectCardModel
+    @Binding var path: NavigationPath
     @State private var sortOrder: SortOrder = .latest
     enum SortOrder {
         case latest, earliest
@@ -39,10 +33,10 @@ struct ProjectDetailView: View {
                         // Header
                         VStack(alignment: .leading, spacing: 4) {
                             Text("LIBRARY / \(project.title)")
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.caption.bold())
                                 .foregroundColor(.gray)
                             Text("Current Status")
-                                .font(.system(size: 32, weight: .bold))
+                                .font(.title2.bold())
                                 .foregroundColor(.white)
                         }
                         .padding(.horizontal)
@@ -50,11 +44,11 @@ struct ProjectDetailView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
                                 Text("CURRENT BASE RECORDING")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.caption.bold())
                                     .foregroundColor(.white)
                                 Spacer()
                                 Text("Take 04")
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .font(.caption.bold())
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 8)
@@ -69,14 +63,14 @@ struct ProjectDetailView: View {
                         // Selected Emotion
                         VStack(alignment: .leading, spacing: 8) {
                             Text("SELECTED EMOTION")
-                                .font(.system(size: 16, weight: .bold))
+                                .font(.caption.bold())
                                 .foregroundColor(.white)
                             Button(action: {},
                                    label: {
                                 HStack(spacing: 8) {
                                     Image(systemName: "drop")
                                     Text("Sadness")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.caption.bold())
                                 }
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 20)
@@ -92,7 +86,7 @@ struct ProjectDetailView: View {
                         // Song References
                         VStack(alignment: .leading, spacing: 8) {
                             Text("SONG REFERENCES")
-                                .font(.system(size: 16, weight: .bold))
+                                .font(.caption.bold())
                                 .foregroundColor(.white)
                             VStack {
                                 ForEach(Array(SampleData.songs.enumerated()), id: \.element.id) { index, song in
@@ -116,7 +110,7 @@ struct ProjectDetailView: View {
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
                                 Text("RECORDING HISTORY")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.caption.bold())
                                     .foregroundColor(.white)
                                 Spacer()
                                 Menu {
@@ -137,7 +131,7 @@ struct ProjectDetailView: View {
                                 } label: {
                                     Image(systemName: "line.3.horizontal.decrease")
                                         .foregroundColor(.white)
-                                        .font(.system(size: 18))
+                                        .font(.body)
                                 }
                                 .accessibilityIdentifier("recordingHistorySortMenu")
                             }
@@ -153,27 +147,14 @@ struct ProjectDetailView: View {
                 }
                 // Bottom Buttons
                 VStack(spacing: 12) {
-                    //                    Button(action: {}) {
-                    //                        HStack {
-                    //                            Image(systemName: "waveform")
-                    //                            Text("EDIT VISION")
-                    //                        }
-                    //                        .font(.system(size: 14, weight: .bold))
-                    //                        .foregroundColor(.white)
-                    //                        .frame(maxWidth: .infinity)
-                    //                        .padding()
-                    //                        .background(Color(red: 0.25, green: 0.25, blue: 0.45)) // Purple-ish blue
-                    //                        .glassEffect(.clear, in: .rect(cornerRadius: 24))
-                    //                        .cornerRadius(24)
-                    //                    }
-                    NavigationLink {
-                        RecordingNewTakeView(returnCard: project)
+                    Button {
+                        path.append(ProjectRoute.newTake(project))
                     } label: {
                         HStack {
                             Image(systemName: "mic.fill")
                             Text("RECORD NEW TAKE")
                         }
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.caption.bold())
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()

@@ -1,10 +1,3 @@
-//
-//  EmotionDetailCard.swift
-//  Minty
-//
-//  Created by Nickson Leviel on 04/05/26.
-//
-
 import SwiftUI
 
 struct EmotionPill: View {

@@ -26,12 +26,9 @@ struct ProjectCardModelTests {
         let older = RecentSongModel(imageName: "a", dateSaved: Date().addingTimeInterval(-100), emotion: .sadness)
         let newer = RecentSongModel(imageName: "b", dateSaved: Date(), emotion: .energetic)
 
-        // Newer inserted first in the array...
         let projectA = ProjectCardModel(title: "A", recentSongs: [newer, older])
         #expect(projectA.subtitle == SongEmotion.energetic.rawValue)
 
-        // ...and newer inserted last in the array. Result must be identical either way,
-        // proving the subtitle sorts by dateSaved rather than trusting array order.
         let projectB = ProjectCardModel(title: "B", recentSongs: [older, newer])
         #expect(projectB.subtitle == SongEmotion.energetic.rawValue)
     }
@@ -43,8 +40,6 @@ struct ProjectCardModelTests {
         let songB = RecentSongModel(imageName: "b", dateSaved: now, emotion: .nostalgic)
         let project = ProjectCardModel(title: "Tie", recentSongs: [songA, songB])
 
-        // The model doesn't define tie-breaking behavior, so we only assert it resolves
-        // to one of the two valid candidates rather than crashing or returning garbage.
         let subtitle = project.subtitle
         #expect(subtitle == SongEmotion.calm.rawValue || subtitle == SongEmotion.nostalgic.rawValue)
     }
@@ -88,7 +83,6 @@ struct RecordHistoryCardModelTests {
 
         #expect(a.title == "Take 1")
         #expect(a.subtitle == "Today")
-        // Same content, but Identifiable ids are still independent (UUID per instance).
         #expect(a.id != b.id)
     }
 }

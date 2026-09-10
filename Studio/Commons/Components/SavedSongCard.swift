@@ -4,7 +4,6 @@ struct SavedSongCard: View {
     let song: Song
     var body: some View {
         HStack(spacing: 12) {
-            // Album image: remote or local
             if let urlStr = song.imageURL, let url = URL(string: urlStr) {
                 AsyncImage(url: url) { phase in
                     switch phase {
@@ -23,24 +22,26 @@ struct SavedSongCard: View {
                 }
                 .frame(width: 55, height: 55)
                 .clipShape(Circle())
-            } else {
-                Image(song.imageName)
+            } else if let uiImage = UIImage(named: song.imageName) {
+                Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 55, height: 55)
                     .clipShape(Circle())
+            } else {
+                songPlaceholder   // ← guaranteed fallback, same fixed 55x55 frame every time
             }
             VStack(alignment: .leading, spacing: 4) {
                 Text(song.title)
                     .font(.headline)
                     .bold()
                     .foregroundColor(.white)
-                    .lineLimit(1)
+                    .lineLimit(nil)
                 Text(song.artist)
                     .font(.subheadline)
                     .bold()
                     .foregroundColor(.white.opacity(0.5))
-                    .lineLimit(1)
+                    .lineLimit(nil)
             }
             Spacer()
             Image(systemName: "arrow.up.forward")
@@ -55,19 +56,9 @@ struct SavedSongCard: View {
             Circle()
                 .fill(Color(red: 0.15, green: 0.12, blue: 0.25))
             Image(systemName: "music.note")
-                .font(.system(size: 20))
+                .font(.body)
                 .foregroundStyle(.white.opacity(0.4))
         }
         .frame(width: 55, height: 55)
     }
-}
-
-#Preview {
-    VStack(spacing: 16) {
-        ForEach(SampleData.songs) { song in
-            SavedSongCard(song: song)
-        }
-    }
-    .padding()
-    .background(Color.black)
 }

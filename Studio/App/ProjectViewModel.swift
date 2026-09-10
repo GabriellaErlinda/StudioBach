@@ -1,11 +1,14 @@
 import Combine
 import Foundation
 import Models
+import Observation
 import Services
 import SwiftUI
 
-class ProjectViewModel: ObservableObject {
-    @Published var projects: [ProjectCardModel] = [
+@Observable
+@MainActor
+class ProjectViewModel {
+    var projects: [ProjectCardModel] = [
         ProjectCardModel(
             title: "PROJECT 3",
             recentSongs: [
@@ -28,24 +31,24 @@ class ProjectViewModel: ObservableObject {
             ]
         )
     ]
-
     private let audioSearchService: AudioSearchServiceProtocol
-
     // Dependency Injection Seam
     init(audioSearchService: AudioSearchServiceProtocol = AudioSearchService()) {
         self.audioSearchService = audioSearchService
     }
-
+    // Default to system behavior, but allow injection for tests
+    var currentDateProvider: () -> Date = { Date() }
+    var randomEmotionProvider: ([SongEmotion]) -> SongEmotion? = { $0.randomElement() }
     private func analyzeEmotion(from audioRecord: Any?) -> SongEmotion {
         let detectedEmotions: [SongEmotion] = [.joyful, .sadness, .nostalgic, .energetic, .calm]
-        return detectedEmotions.randomElement() ?? .unknown
+        return randomEmotionProvider(detectedEmotions) ?? .calm
     }
-
     func saveSongToNewProject(title: String, coverImage: String, recordedAudio: Any?) {
+        let currentDate = currentDateProvider()
         let detectedEmotion = analyzeEmotion(from: recordedAudio)
         let newSong = RecentSongModel(
             imageName: coverImage,
-            dateSaved: Date(),
+            dateSaved: currentDate,
             emotion: detectedEmotion
         )
         let newProject = ProjectCardModel(

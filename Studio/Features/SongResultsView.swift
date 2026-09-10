@@ -60,11 +60,11 @@ struct SongResultsView: View {
 
             VStack(spacing: 8) {
                 Text("Analyzing your recording...")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.body.bold())
                     .foregroundStyle(.white)
 
                 Text("Finding songs that match your melody.\nThis may take up to a minute.")
-                    .font(.system(size: 14))
+                    .font(.subheadline)
                     .foregroundStyle(.gray)
                     .multilineTextAlignment(.center)
             }
@@ -76,15 +76,15 @@ struct SongResultsView: View {
     private func errorView(_ message: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 40))
+                .font(.largeTitle)
                 .foregroundStyle(.orange)
 
             Text("Something went wrong")
-                .font(.system(size: 20, weight: .bold))
+                .font(.subheadline.bold())
                 .foregroundStyle(.white)
 
             Text(message)
-                .font(.system(size: 14))
+                .font(.subheadline)
                 .foregroundStyle(.gray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
@@ -111,7 +111,7 @@ struct SongResultsView: View {
                     Text("Your reference songs are here. ")
                         .fontWeight(.bold)
                 }
-                .font(.system(size: 24))
+                .font(.title2)
                 .foregroundStyle(.white)
 
                 VStack {
@@ -173,9 +173,9 @@ struct SongResultsView: View {
                     }
 
                     Text("Now Playing: \(songs[currentIndex].title)")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.caption)
                         .foregroundStyle(.white.opacity(0.6))
-                        .lineLimit(1)
+                        .lineLimit(nil)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
@@ -235,11 +235,11 @@ struct ShowMoreCard: View {
         Button(action: action) {
             VStack(spacing: 15) {
                 Image(systemName: "plus.circle.fill")
-                    .font(.system(size: 60))
+                    .font(.largeTitle)
                     .foregroundStyle(.white)
 
                 Text("SHOW MORE")
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.footnote.bold())
                     .foregroundStyle(.white)
             }
             .frame(width: 280, height: 373)

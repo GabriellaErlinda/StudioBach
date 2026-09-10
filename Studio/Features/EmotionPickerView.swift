@@ -1,10 +1,3 @@
-//
-//  EmotionPickerView.swift
-//  Studio
-//
-//  Created by Gabriella Erlinda on 04/05/26.
-//
-
 import SwiftUI
 
 struct EmotionPickerView: View {
@@ -23,10 +16,10 @@ struct EmotionPickerView: View {
                     // Header Texts
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Current State")
-                            .font(.custom("Urbanist", size: 24).weight(.semibold))
+                            .font(.headline.bold())
                             .foregroundColor(Color(red: 0.89, green: 0.89, blue: 0.89))
                         Text("Select the term that best describes your\nprimary emotion right now. \n\(selectedEmotionIDs.count)/3 selected")
-                            .font(.custom("Urbanist", size: 16).weight(.medium))
+                            .font(.subheadline.bold())
                             .lineSpacing(6)
                             .foregroundColor(Color(red: 0.89, green: 0.89, blue: 0.89))
                     }
@@ -74,7 +67,7 @@ struct EmotionPickerView: View {
                             SongResultsView(recordedAudioURL: recordedAudioURL).studioNavbar()
                         } label: {
                             Text("Continue")
-                                .font(.custom("SF Pro", size: 17).weight(.medium))
+                                .font(.body)
                                 .foregroundColor(.white)
                                 .padding(.vertical, 16)
                                 .padding(.horizontal, 40)

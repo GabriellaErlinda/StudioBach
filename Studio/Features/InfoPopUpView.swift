@@ -1,10 +1,3 @@
-//
-//  InfoPopUpView.swift
-//  BachStudio
-//
-//  Created by Gabriella Erlinda on 06/05/26.
-//
-
 import SwiftUI
 
 struct InfoPopUpView: View {
@@ -26,7 +19,7 @@ struct InfoPopUpView: View {
             Button(action: { withAnimation(.easeOut) { isPresented = false } },
                    label: {
                 Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 20))
+                    .font(.title3)
                     .foregroundColor(.white.opacity(0.4))
             }
             )
@@ -43,12 +36,12 @@ struct InfoPopUpView: View {
     private var headerText: some View {
         VStack(spacing: 8) {
             Text("Get in Composing")
-                .font(.custom("Urbanist-Bold", size: 20))
+                .font(.subheadline.bold())
                 .tracking(-0.15)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .center)
             Text("All you need for fast accurate chords and melody")
-                .font(.custom("Urbanist-Regular", size: 11))
+                .font(.caption)
                 .tracking(-0.16)
                 .foregroundColor(.white.opacity(0.5))
                 .multilineTextAlignment(.center)
@@ -61,7 +54,6 @@ struct InfoPopUpView: View {
             FeatureRow(
                 icon: "music.note",
                 label: "Get your suggested music\nbased on your melody",
-                labelWidth: 90
             )
         }
     }
@@ -70,7 +62,7 @@ struct InfoPopUpView: View {
                 action: { isPresented = false },
                 label: {
                     Text("Get Started")
-                        .font(.custom("Urbanist-Bold", size: 12))
+                        .font(.caption.bold())
                         .padding(.horizontal, 24)
                         .padding(.vertical, 8)
                         .background(
@@ -85,17 +77,11 @@ struct InfoPopUpView: View {
             )
             .accessibilityIdentifier("infoPopUpGetStartedButton")
         }
-    
     private var cardShape: RoundedRectangle {
         RoundedRectangle(cornerRadius: 24)
     }
-    // Frosted glass card: blur backdrop + semi-transparent gradient tint
     private var glassCard: some View {
         ZStack {
-            // Backdrop blur — recreates CSS backdrop-filter: blur()
-            //            Color.clear
-            //                .background(.ultraThinMaterial)
-            // Gradient tint on top of the blur
             LinearGradient(
                 stops: [
                     .init(color: Color("blue-ribbon-800").opacity(0.5), location: 0),
@@ -112,7 +98,6 @@ struct InfoPopUpView: View {
 private struct FeatureRow: View {
     let icon: String
     let label: String
-    var labelWidth: CGFloat?
     var body: some View {
         HStack(spacing: 8) {
             ZStack {
@@ -120,17 +105,17 @@ private struct FeatureRow: View {
                     .fill(Color(red: 13/255, green: 0, blue: 80/255))
                     .blendMode(.screen)
                 Image(systemName: icon)
-                    .font(.system(size: 7, weight: .regular))
+                    .font(.caption2)
                     .foregroundColor(Color(red: 181/255, green: 198/255, blue: 255/255))
             }
             .frame(width: 20, height: 20)
             .drawingGroup()
             Text(label)
-                .font(.custom("Urbanist-Bold", size: 8))
+                .font(.caption2.bold())
                 .tracking(-0.16)
                 .foregroundColor(.white)
                 .lineSpacing(1)
-                .frame(width: labelWidth, alignment: .leading)
+                .frame(alignment: .leading)
         }
     }
 }

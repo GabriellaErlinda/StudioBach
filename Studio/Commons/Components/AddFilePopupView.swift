@@ -18,17 +18,18 @@ struct AddFilePopupView: View {
             VStack(spacing: 24) {
                 // Icon
                 Image(systemName: "music.note.list")
-                    .font(.system(size: 48))
+                    .font(.largeTitle)
+                    .bold()
                     .foregroundColor(Color("blue-ribbon-500"))
                     .shadow(color: Color("blue-ribbon-400").opacity(0.5), radius: 10, x: 0, y: 5)
                 // Texts
                 VStack(spacing: 8) {
                     Text("Import Audio File")
-                        .font(.system(size: 22, weight: .bold))
+                        .font(.title2)
                         .foregroundColor(.white)
                     Text("Select an audio file from your device to use in this project.")
-                        .font(.system(size: 14))
-                        .foregroundColor(.white.opacity(0.7))
+                        .font(.body)
+                        .foregroundColor(.white.opacity(1))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                 }
@@ -40,7 +41,7 @@ struct AddFilePopupView: View {
                         },
                         label: {
                             Text("Browse Files")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(.body).bold()
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 14)
@@ -57,8 +58,8 @@ struct AddFilePopupView: View {
                         },
                         label: {
                             Text("Cancel")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white.opacity(0.8))
+                                .font(.body).bold()
+                                .foregroundColor(.white.opacity(1))
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 14)
                                 .background(Capsule().fill(Color.white.opacity(0.1)))

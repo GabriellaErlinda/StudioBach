@@ -19,7 +19,7 @@ struct RecordHistoryCard: View {
                         // .glassEffect(.clear, in: .circle)
                         Image(systemName: "play.fill")
                             .foregroundColor(Color("blue-ribbon-200"))
-                            .font(.system(size: 20))
+                            .font(.title3)
                     }
                 }
             )
@@ -27,10 +27,10 @@ struct RecordHistoryCard: View {
             // Text details
             VStack(alignment: .leading, spacing: 4) {
                 Text(model.title)
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.caption.bold())
                     .foregroundColor(.white)
                 Text(model.subtitle)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.caption)
                     .foregroundColor(Color("primary-400"))
             }
             Spacer()
@@ -41,7 +41,7 @@ struct RecordHistoryCard: View {
                 },
                 label: {
                     Image(systemName: "square.and.arrow.down")
-                        .font(.system(size: 20, weight: .regular))
+                        .font(.title3)
                         .foregroundColor(.white)
                 }
             )

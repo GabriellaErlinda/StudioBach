@@ -1,0 +1,53 @@
+# Paths to include or exclude during linting
+included:
+  - App
+  - Commons
+  - Features
+  - Models
+  - Root
+
+excluded:
+  - Carthage
+  - Pods
+  - Source/ExcludedFolder
+  - .build
+
+# Rule Configurations
+disabled_rules:
+  - todo # Allows TODO and FIXME comments during development
+
+opt_in_rules:
+  - empty_count
+  - explicit_init
+  - fatal_error_message
+  - first_where
+  - modifier_order
+  - redundant_nil_coalescing
+  - return_arrow_whitespace
+  - sorted_imports
+  - vertical_whitespace
+
+# Customizations
+line_length:
+  warning: 160
+  error: 180
+
+file_length:
+  warning: 500
+  error: 1000
+
+type_body_length:
+  warning: 300
+  error: 500
+
+function_body_length:
+  warning: 60
+  error: 100
+
+type_name:
+  min_length: 3
+  max_length: 40
+  
+identifier_name:
+  min_length: 1
+  max_length: 40

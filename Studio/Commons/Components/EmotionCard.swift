@@ -105,13 +105,13 @@ struct LargeEmotionCard: View {
                 Spacer()
 
                 Text(emotion.name)
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.title2.bold())
                     .foregroundStyle(.white)
 
                 Spacer().frame(height: 18)
 
                 Image(systemName: emotion.icon)
-                    .font(.system(size: 64, weight: .regular))
+                    .font(.largeTitle.bold())
                     .foregroundStyle(.white)
                     .shadow(color: .white.opacity(0.3), radius: 10, x: 0, y: 4)
 
@@ -129,7 +129,7 @@ struct LargeEmotionCard: View {
                         )
                     if isMarked {
                         Image(systemName: "checkmark")
-                            .font(.system(size: 12, weight: .bold))
+                            .font(.footnote.bold())
                             .foregroundColor(.white)
                     }
                 }

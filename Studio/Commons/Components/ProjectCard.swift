@@ -1,34 +1,27 @@
-//
-//  ProjectCard.swift
-//  Studio
-//
-//  Created by Gabriella Erlinda on 04/05/26.
-//
-
 import Models
 import Services
 import SwiftUI
 
 struct ProjectCard: View {
     let project: ProjectCardModel
-    let themeColor = Color(red: 135/255, green: 153/255, blue: 239/255) // #8799EF
-    let cardBackgroundColor = Color(red: 0.08, green: 0.07, blue: 0.13) // Dark purple-black
+    let themeColor = Color(red: 135/255, green: 153/255, blue: 239/255)
+    let cardBackgroundColor = Color(red: 0.08, green: 0.07, blue: 0.13)
     var body: some View {
         HStack {
             // Sisi Kiri: Teks
             VStack(alignment: .leading, spacing: 4) {
                 Text(project.title)
-                    .font(.system(size: 16, weight: .bold))
+                    .font(.footnote.bold())
                     .foregroundColor(.white)
                 Text(project.subtitle)
-                    .font(.system(size: 14))
+                    .font(.callout)
                     .foregroundColor(themeColor)
             }
             Spacer()
             // Sisi Kanan: Logika Stack Gambar (Max 3, numpuk)
             RecentSongsStack(recentSongs: project.recentSongs)
             Image(systemName: "chevron.right")
-                .font(.system(size: 20, weight: .light))
+                .font(.title3)
                 .foregroundColor(.white)
                 .padding(.leading, 8)
         }

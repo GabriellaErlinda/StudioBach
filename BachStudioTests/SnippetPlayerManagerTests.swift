@@ -37,19 +37,12 @@ struct SnippetPlayerManagerFormatTimeTests {
 
     @Test("does not clamp values over an hour to hh:mm:ss — flagging as current behavior, not a spec")
     func noHourFormatting() {
-        // 3661s = 1h 1m 1s. Current implementation has no hour bucket, so this
-        // renders as "61:01" rather than "1:01:01". Locking in today's behavior;
-        // if you want hh:mm:ss for long recordings, formatTime needs a change.
         let manager = SnippetPlayerManager()
         #expect(manager.formatTime(3661.0) == "61:01")
     }
 
     @Test("negative input produces a malformed string — documenting a real edge case")
     func negativeInputIsMalformed() {
-        // currentTime should never legitimately go negative in production use,
-        // but formatTime has no guard for it. -5 seconds currently formats as
-        // "0:-5", not a crash, but not a sane display value either. Worth a
-        // defensive `max(0, time)` guard in formatTime if this is reachable.
         let manager = SnippetPlayerManager()
         #expect(manager.formatTime(-5.0) == "0:-5")
     }
@@ -80,8 +73,6 @@ struct SnippetPlayerManagerInitialStateTests {
     func toggleWithNoPlayerDoesNothing() {
         let manager = SnippetPlayerManager()
         manager.togglePlayPause()
-        // Guarded by `guard let player = player else { return }` — isPlaying
-        // must stay false rather than flipping to true with nothing to play.
         #expect(manager.isPlaying == false)
     }
 
@@ -127,13 +118,8 @@ struct SnippetPlayerManagerFailedLoadTests {
 
         manager.play(url: missingFile, songId: "missing-song")
 
-        // currentSongId is set synchronously before the async load attempt.
         #expect(manager.currentSongId == "missing-song")
 
-        // Poll briefly for AVPlayerItem to report .failed. This is a real,
-        // deterministic failure (no such file), not a network call, so it
-        // should resolve quickly — but AVFoundation's failure timing isn't
-        // instant, hence the short poll instead of a single synchronous check.
         var stayedFalse = true
         for _ in 0..<20 { // up to ~2s
             if manager.isPlaying {

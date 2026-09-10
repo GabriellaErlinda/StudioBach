@@ -11,7 +11,7 @@ struct ChordCard: View {
             .padding()
             .frame(width: 75, height: 75)
             .foregroundStyle(.white)
-            .fontWeight(.bold)
+            .bold()
             .background(Color("blue-ribbon-300"))
             .clipShape(RoundedRectangle(cornerRadius: 20))
     }
